@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.showDeviceDataButton</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>showDeviceDataButton</name>
+        <script><![CDATA[var showDeviceDataButton = Class.create();
+showDeviceDataButton.prototype = {
+    initialize: function() {},
+    shouldDisplayUIAction: function(inc_sys_id, domain, typeBtn) {
+        var ui_display_preferences = "native_incident";
+        var display_mode = "embedded_tabs";
+        var domainseperated = gs.getProperty("glide.sys.domain.partitioning", "");
+        var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+        gr_account.addQuery("active", true);
+        if (domainseperated == "true")
+            gr_account.addQuery("sys_domain", domain);
+        gr_account.query();
+        if (gr_account.next()) {
+            if ((gr_account.device_overview == false) && (gr_account.device_health_data == false) && (gr_account.software_changes_data == false))
+                return false;
+            //check state of the interaction	
+            if ((typeBtn == "native_interaction")&&(gr_account.aternity_tabs_are_needed)) {
+                return this.checkstate_interaction(inc_sys_id);
+            }
+
+            //check state of the incident	
+            if (!this.checkstate(inc_sys_id, gr_account.state_relevant_with_aternity_tabs) && (gr_account.state_relevant_with_aternity_tabs != "")) {
+                if (typeBtn == "tabs") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            ///check roles
+            if (this.checkroles(gr_account.roles_required) == false)
+                return false;
+
+
+            //check if ci or user and if there is data
+            if (this.checkincidnetfield(inc_sys_id, gr_account.select_connection, gr_account.ci_select_field, gr_account.user_field_in_servicenow, gr_account.computer_ci_types_in_servicenow) == false)
+                return false;
+
+            //check setting
+            if (gr_account.ui_display_preferences != "")
+                ui_display_preferences = gr_account.ui_display_preferences;
+            if (gr_account.display_mode != "")
+                display_mode = gr_account.display_mode;
+            if (typeBtn != "tabs")
+                return this.checkaccountbuttonsetting(ui_display_preferences, display_mode, typeBtn);
+            if (typeBtn == "tabs")
+                return this.checkaccountbuttonsetting_tabs(ui_display_preferences, display_mode, typeBtn);
+        } else
+            return false;
+
+    },
+    checkstate_interaction: function(inter_sys_id) {
+        var inter = new GlideRecordSecure('interaction');
+        inter.addQuery("sys_id", inter_sys_id);
+        inter.addQuery("active", true);
+        inter.query();
+        if (inter.next()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    },
+    checkstate: function(inc_sys_id, states) {
+        var inc = new GlideRecordSecure('incident');
+        inc.addQuery("sys_id", inc_sys_id);
+        inc.addQuery("state", "IN", states);
+        inc.query();
+        if (inc.next()) {
+            return false;
+        } else {
+            return true;
+        }
+
+    },
+    checkaccountbuttonsetting_tabs: function(ui_display_preferences, display_mode, typeBtn) {
+        if (typeBtn == "tabs") {
+            if (ui_display_preferences == "native_incident") {
+                if (display_mode != "new_tab")
+                    return false;
+                else
+                    return true;
+            }
+            if (ui_display_preferences == "both") {
+                if ((display_mode == "popup_sow_emb_tabs") || (display_mode == "sow_tab_inc_emb_tab"))
+                    return false;
+                else
+                    return true;
+            }
+
+        }
+        return true;
+    },
+    checkaccountbuttonsetting: function(ui_display_preferences, display_mode, typeBtn) {
+        if (typeBtn == "native_incident") {
+            if (ui_display_preferences == "native_incident") {
+                if (display_mode == "new_tab")
+                    return true;
+                else
+                    return false;
+            }
+            if (ui_display_preferences == "both") {
+                if ((display_mode == "new_tab") || (display_mode == "popup_sow_new_tab"))
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+        if (typeBtn == "sow") {
+            if ((ui_display_preferences == "sow") || (ui_display_preferences == "both"))
+                return true;
+            else
+                return false;
+        }
+        return false;
+    },
+    checkincidnetfield: function(inc_sys_id, select_connection, ci_select_field, user_field_in_servicenow, computer_ci_types_in_servicenow) {
+        var inc = new GlideRecordSecure('incident');
+        inc.addQuery("sys_id", inc_sys_id);
+        inc.addEncodedQuery("correlation_display=aternity.sda^correlation_idISNOTEMPTY");
+        inc.query();
+        if (inc.next()) {
+            var inc_correlation_id = inc.getValue('correlation_id');
+            var ex_info = new GlideRecord('x_atern_incident_additional_info');
+            ex_info.addQuery('correlation_id', inc_correlation_id);
+            ex_info.query();
+            if (ex_info.next()) {
+                return true;
+            }
+        }
+        if (select_connection == 1) { // cmdb ci
+            var inc_ci = new GlideRecordSecure('incident');
+            inc_ci.addQuery("sys_id", inc_sys_id);
+            inc_ci.addNotNullQuery(ci_select_field.element);
+            inc_ci.query();
+            if (inc_ci.next()) {
+                var tableNames = [];
+                var gr_tableNames = new GlideRecord('sys_db_object');
+                gr_tableNames.addQuery('sys_id', 'IN', computer_ci_types_in_servicenow);
+                gr_tableNames.query();
+                while (gr_tableNames.next()) {
+                    tableNames.push(gr_tableNames.getValue('name'));
+                }
+                var refQual = 'sys_class_nameIN' + tableNames.join(',');
+                var device_name = inc_ci.getValue(ci_select_field.element);
+                var grci = new GlideRecord("cmdb_ci");
+                grci.addQuery("sys_id", device_name);
+                grci.addEncodedQuery(refQual);
+                grci.query();
+                if (grci.next())
+                    return true;
+                else
+                    return false;
+            } else
+                return false;
+
+        }
+        if (select_connection == 2) { // user field
+            var inc_user = new GlideRecordSecure('incident');
+            inc_user.addQuery("sys_id", inc_sys_id);
+            inc_user.addNotNullQuery(user_field_in_servicenow.element);
+            inc_user.query();
+            if (inc_user.next())
+                return true;
+            else
+                return false;
+
+        }
+        return false;
+
+    },
+    checkroles: function(requiredRoles) {
+        if (requiredRoles == '') {
+            return true;
+        } else {
+            var ls = requiredRoles.toString();
+            var grRolesTabs = new GlideRecord("sys_user_role");
+            grRolesTabs.addQuery("sys_id", "IN", ls);
+            grRolesTabs.query();
+            while (grRolesTabs.next()) {
+                if (gs.hasRole(grRolesTabs.name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
+    type: 'showDeviceDataButton'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-11-04 17:40:12</sys_created_on>
+        <sys_id>d1f2e8f91b9231102a67cbbf034bcb73</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>showDeviceDataButton</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_d1f2e8f91b9231102a67cbbf034bcb73</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-08 13:18:16</sys_updated_on>
+    </sys_script_include>
+</record_update>

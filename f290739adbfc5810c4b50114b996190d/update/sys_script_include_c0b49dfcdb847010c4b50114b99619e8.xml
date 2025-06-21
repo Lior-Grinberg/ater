@@ -1,0 +1,2394 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.Aternity_meta</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Aternity_meta</name>
+        <script><![CDATA[var Aternity_meta = Class.create();
+Aternity_meta.prototype = {
+    initialize: function(type, domain_value) {
+        this.system = "";
+        this.account_id = "";
+        this.device_overview = false;
+        this.device_health_data = false;
+        this.software_changes_data = false;
+        this.show_remediation_action = false;
+        this.user_name = "";
+        this.password = "";
+        this.debug_mode = false;
+        this.ci_select_field = "";
+        this.select_connection = "1";
+        this.u_select_field = "";
+        this.match_by = "";
+        this.cmdb_ci_name = "";
+        this.cmdb_ci_sys = "";
+        this.user_field_in_servicenow = "";
+        this.encodedQuery = "";
+        this.api_timeout = gs.getProperty("x_atern_incident.api_timeout");
+        this.domainseperated = gs.getProperty("glide.sys.domain.partitioning", "");
+        this.domain = "";
+        this.view_tabs = "";
+        this.computer_field = "";
+        this.incident_user_device = "";
+        this.by_correlation_id = false;
+        this.user_attribute_number = "";
+        this.authentication_type = 'Basic';
+        this.authentication_type_data = 'Basic';
+        this.oauth_profile = '';
+        this.oauth_profile_data = '';
+        this.empty_remediation_action = false;
+        this.not_default_match = false;
+        this.device_attribute_visible = '';
+        //this.match_to_device_attribute_in_aternity = '';
+        this.remediation_groups_collapsed = false;
+        this.teststr = "";
+        this.section_ui = "";
+        this.device_attributeArray = "";
+
+        if (type == "domain") {
+            if (this.domainseperated == "true")
+                this.domain = gs.getSession().getCurrentDomainID();
+        }
+        if (type == "record") {
+            if (this.domainseperated == "true")
+                this.domain = domain_value;
+        }
+
+        var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+        gr_account.addQuery("active", true);
+        if (this.domainseperated == "true")
+            gr_account.addQuery("sys_domain", this.domain);
+        gr_account.query();
+        if (gr_account.next()) {
+            this.system = gr_account.url;
+            this.account_id = gr_account.account_id;
+            this.device_overview = gr_account.device_overview;
+            this.device_health_data = gr_account.device_health_data;
+            this.software_changes_data = gr_account.software_changes_data;
+            this.user_name = gr_account.user_name;
+            this.password = gr_account.password.getDecryptedValue();
+            this.debug_mode = gr_account.debug_mode;
+            this.authentication_type = gr_account.authentication_type;
+            this.authentication_type_data = gr_account.authentication_type_data;
+            this.oauth_profile = gr_account.oauth_profile;
+            this.oauth_profile_data = gr_account.oauth_profile_data;
+            this.device_attribute_visible = gr_account.device_attribute_visible;
+            //this.match_to_device_attribute_in_aternity = gr_account.match_to_device_attribute_in_aternity;
+            this.debug_record = "";
+            var flag = true;
+            this.select_connection = gr_account.select_connection;
+            this.ci_select_field = gr_account.ci_select_field;
+            this.remediation_groups_collapsed = gr_account.remediation_groups_collapsed_by_default;
+            if (gr_account.ci_select_field == "") {
+                var grdict = new GlideRecord("sys_dictionary");
+                grdict.addEncodedQuery("name=task^element=cmdb_ci");
+                grdict.query();
+                if (grdict.next()) {
+                    this.ci_select_field = grdict.sys_id;
+                }
+            }
+
+            this.u_select_field = gr_account.u_select_field;
+            this.match_by = gr_account.match_by;
+            this.user_field_in_servicenow = gr_account.user_field_in_servicenow;
+            this.computer_field = gr_account.select_the_computer_field.element;
+            this.user_attribute_number = gr_account.user_attribute_number;
+            if (gr_account.remediation_roles != "") {
+                this.empty_remediation_action = true;
+            }
+
+            ///////////////////////////////////////////////
+            var requiredRoles = '';
+            requiredRoles = gr_account.roles_required;
+            if (requiredRoles == '') {
+                this.view_tabs = true;
+            } else {
+                this.view_tabs = false;
+                var ls = gr_account.roles_required.toString();
+                var grRolesTabs = new GlideRecord("sys_user_role");
+                grRolesTabs.addQuery("sys_id", "IN", ls);
+                grRolesTabs.query();
+                while (grRolesTabs.next()) {
+                    if (gs.hasRole(grRolesTabs.name)) {
+                        this.view_tabs = true;
+                        break;
+                    }
+                }
+            }
+            var tableSysIds = gr_account.computer_ci_types_in_servicenow;
+            var tableNames = [];
+
+            var gr_tableNames = new GlideRecord('sys_db_object');
+            gr_tableNames.addQuery('sys_id', 'IN', tableSysIds);
+            gr_tableNames.query();
+            while (gr_tableNames.next()) {
+                tableNames.push(gr_tableNames.getValue('name'));
+            }
+            var refQual = 'sys_class_nameIN' + tableNames.join(',');
+
+            this.encodedQuery = refQual;
+
+            /////////////////////////////////////////////////
+            if (gr_account.remediation_roles.toString().length > 0) {
+                var overrideRolesRequired = gr_account.remediation_roles;
+                var requiredRoles = overrideRolesRequired.split(',');
+                this.not_default_match = this.hasAllRoles(requiredRoles);
+                var grRoles = new GlideRecord("sys_user_role");
+                grRoles.addQuery("sys_id", "IN", gr_account.remediation_roles);
+                grRoles.query();
+                while ((grRoles.next()) && flag) {
+                    if (gs.hasRole(grRoles.name)) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+
+                    var gr_remediation_list_configuration = new GlideRecord("x_atern_incident_remediation_list_configuration");
+                    gr_remediation_list_configuration.addQuery("visible", true);
+                    if (this.domainseperated == "true") {
+                        gr_remediation_list_configuration.addQuery("sys_domain", this.domain);
+                    }
+                    gr_remediation_list_configuration.query();
+                    while (gr_remediation_list_configuration.next()) {
+                        var overrideRolesRequired = gr_remediation_list_configuration.override_roles_required;
+                        if (!gs.nil(overrideRolesRequired)) {
+                            var requiredRoles = overrideRolesRequired.split(',');
+                            var hasRequiredRole = this.hasAllRoles(requiredRoles);
+                            if (hasRequiredRole) {
+                                flag = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!gr_remediation_list_configuration.hasNext()) {
+                        flag = true;
+                    }
+
+                }
+            } else
+                flag = false;
+            this.show_remediation_action = gr_account.show_remediation_action && !flag;
+            if (this.debug_mode) {
+                var gr_support = new GlideRecord("x_atern_incident_support");
+                gr_support.initialize();
+                var user = gs.getUser();
+                gr_support.company = user.getCompanyID();
+                gr_support.sys_domain = this.domain;
+                gr_support.insert();
+                this.debug_record = gr_support;
+            }
+
+        }
+    },
+    get_sections: function() {
+        var obj = {};
+        obj.device_overview = this.device_overview;
+        obj.device_health_data = this.device_health_data;
+        obj.software_changes_data = this.software_changes_data;
+        if ((this.device_health_data) || (this.software_changes_data))
+            obj.device_events = true;
+        else
+            obj.device_events = false;
+        return obj;
+    },
+    getcomputer_class: function(class_name) {
+        var gr_tableNames = new GlideRecord('sys_db_object');
+        gr_tableNames.addQuery('name', class_name);
+        gr_tableNames.query();
+        if (gr_tableNames.next()) {
+            return gr_tableNames.sys_id;
+        }
+    },
+    check_user_device_by_field: function(sys_id, tablename) {
+        var url = this.system;
+        var account_id = this.account_id;
+        var user_name = this.user_name;
+        var password = this.password;
+        var user_choice_specific_field = this.u_select_field.element; // the field from inc
+        var user_specific_field = this.user_field_in_servicenow.element; // the user field from sys_user
+        var user_choice = "";
+
+        var inc = new GlideRecordSecure(tablename);
+        inc.addQuery("sys_id", sys_id);
+        if (tablename == "interaction")
+            inc.addNotNullQuery("opened_for");
+        else
+            inc.addNotNullQuery(user_choice_specific_field);
+        inc.query();
+        if (inc.next()) {
+            if (tablename == "interaction") {
+                user_choice = inc.getValue("opened_for");
+            }
+            if (tablename == "incident")
+                user_choice = inc.getValue(user_choice_specific_field); // the field from inc
+            if (inc.x_atern_incident_user_device != "") {
+                this.incident_user_device = inc.x_atern_incident_user_device.toString();
+            }
+            var sysUser = new GlideRecord("sys_user");
+            sysUser.addQuery("sys_id", user_choice);
+            sysUser.query();
+            if (sysUser.next()) {
+                var userData = sysUser.getValue(user_specific_field);
+                if (this.match_by == 1) { // username
+                    url = url + "/DEVICE_USERS_ACCESS?$filter=account_id eq " + account_id + " and username eq '" + userData + "' and relative_time(last_7_days)&$select=ACCOUNT_ID,ACCOUNT_NAME,TIME_LAST_ACCESSED,DEVICE_NAME,USER_EMAIL_ADDRESS,USER_FULL_NAME,USERNAME&$orderby=TIME_LAST_ACCESSED desc&$report_tags=Snow_inc:device_users";
+
+
+                } else if (this.match_by == 2) { // email address
+                    url = url + "/DEVICE_USERS_ACCESS?$filter=account_id eq " + account_id + " and user_email_address eq '" + userData + "' and relative_time(last_7_days)&$select=ACCOUNT_ID,ACCOUNT_NAME,TIME_LAST_ACCESSED,DEVICE_NAME,USER_EMAIL_ADDRESS,USER_FULL_NAME,USERNAME&$orderby=TIME_LAST_ACCESSED desc&$report_tags=Snow_inc:device_users";
+
+                } else if (this.match_by == 3) { // full name
+                    url = url + "/DEVICE_USERS_ACCESS?$filter=account_id eq " + account_id + " and user_full_name eq '" + userData + "' and relative_time(last_7_days)&$select=ACCOUNT_ID,ACCOUNT_NAME,TIME_LAST_ACCESSED,DEVICE_NAME,USER_EMAIL_ADDRESS,USER_FULL_NAME,USERNAME&$orderby=TIME_LAST_ACCESSED desc&$report_tags=Snow_inc:device_users";
+
+                } else if (this.match_by == 4) { // user_attribute
+                    var attribute_number = this.user_attribute_number;
+                    url = url + "/DEVICE_USERS_ACCESS?$filter=account_id eq " + account_id + " and custom_user_attribute_" + attribute_number + " eq '" + userData + "' and relative_time(last_7_days)&$select=ACCOUNT_ID,ACCOUNT_NAME,TIME_LAST_ACCESSED,DEVICE_NAME,USER_EMAIL_ADDRESS,USER_FULL_NAME,USERNAME&$orderby=TIME_LAST_ACCESSED desc&$report_tags=Snow_inc:device_users";
+
+                } //&$top=1
+
+                try {
+                    url = encodeURI(url);
+                    if (this.authentication_type_data == "Oauth 2.0") {
+                        var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                        r.setHttpMethod("get");
+                        r.setStringParameterNoEscape('url', url);
+                        r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                        r.setHttpTimeout(this.api_timeout);
+                    } else {
+                        var r = new sn_ws.RESTMessageV2();
+                        r.setHttpMethod("get");
+                        r.setEndpoint(url);
+                        r.setBasicAuth(user_name, password);
+                        r.setHttpTimeout(this.api_timeout);
+                    }
+
+                    var response = r.execute(); //  execute
+                    var responseBody = response.getBody();
+                    var httpStatus = response.getStatusCode();
+
+                    var obj = JSON.parse(responseBody);
+
+                    if (obj.value.length > 0) {
+
+                        var deviceDataJSON = obj.value.map(function(device) {
+                            return {
+                                DEVICE_NAME: device.DEVICE_NAME,
+                                TIME_LAST_ACCESSED: device.TIME_LAST_ACCESSED
+                            };
+                        });
+                        var cmdb_name_user = null;
+
+
+                        if (this.incident_user_device == '' || deviceDataJSON.length == 1) {
+                            cmdb_name_user = deviceDataJSON[0].DEVICE_NAME;
+
+                        } else {
+                            var valueToCheck = this.incident_user_device;
+                            for (var i = 0; i < deviceDataJSON.length; i++) {
+                                if (deviceDataJSON[i].DEVICE_NAME === valueToCheck) {
+                                    cmdb_name_user = deviceDataJSON[i].DEVICE_NAME;
+                                    break;
+                                }
+                            }
+                        }
+                        //var cmdb_name_user = deviceDataJSON[0].DEVICE_NAME;
+                        this.cmdb_ci_name = cmdb_name_user;
+                        if (this.debug_mode) {
+                            this.debug_record.device_name = cmdb_name_user;
+                            this.debug_record.user_data_in_aternity = "httpStatus " + httpStatus + " responseBody " + responseBody;
+                            this.debug_record.update();
+                        }
+
+                        var deviceDataJS = JSON.stringify(deviceDataJSON);
+                        return deviceDataJS;
+                        //return cmdb_name_user.toString();
+                    } else {
+                        inc.setValue("x_atern_incident_user_device", "");
+                        inc.update();
+                        return false;
+                    }
+                } catch (ex) {
+                    responseBody = ex.getMessage();
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else
+            return false;
+    },
+    get_device_from_user: function(inc_sysid, tablename) {
+        var url = this.system;
+        var account_id = this.account_id;
+        var user_name = this.user_name;
+        var password = this.password;
+        if (this.view_tabs != true) {
+            return false;
+        }
+        ///
+        if (tablename == "interaction") { // user field
+            return this.check_user_device_by_field(inc_sysid, tablename);
+        }
+
+
+        /// incident table
+        var inc = new GlideRecordSecure(tablename);
+        inc.addQuery("sys_id", inc_sysid);
+        inc.addEncodedQuery("correlation_display=aternity.sda^correlation_idISNOTEMPTY");
+        inc.query();
+        if (inc.next()) {
+            var inc_correlation_id = inc.getValue('correlation_id');
+            var ex_info = new GlideRecord('x_atern_incident_additional_info');
+            ex_info.addQuery('correlation_id', inc_correlation_id);
+            ex_info.query();
+            if (ex_info.next()) {
+                var jsonString = ex_info.getValue('links');
+                var Jdata = JSON.parse(jsonString);
+                var JdeviceHealth = Jdata["Device Health"];
+                var indeX = JdeviceHealth.lastIndexOf("=");
+                var corre_result = JdeviceHealth.substring(indeX + 1);
+                var cmdb_name_user1 = corre_result;
+                this.cmdb_ci_name = cmdb_name_user1;
+                this.by_correlation_id = true;
+                return cmdb_name_user1.toString();
+
+            }
+        }
+
+        if (this.select_connection == 1) { // cmdb ci
+            var specific_field = this.ci_select_field.element;
+            var inc = new GlideRecordSecure('incident');
+            inc.addQuery("sys_id", inc_sysid);
+            inc.addNotNullQuery(specific_field);
+            inc.query();
+            if (inc.next()) {
+                var device_name = inc.getValue(specific_field);
+                var gr = new GlideRecord("cmdb_ci");
+                gr.addQuery("sys_id", device_name);
+                gr.addEncodedQuery(this.encodedQuery);
+                gr.query();
+                if (gr.next()) {
+                    this.cmdb_ci_sys = gr.sys_id;
+
+                    var string_f = this.computer_field;
+                    this.cmdb_ci_name = gr[string_f];
+
+                    return gr[string_f].toString();
+
+                } else
+                    return false;
+            } else
+                return false;
+        }
+        if (this.select_connection == 2) { // user field
+            return this.check_user_device_by_field(inc_sysid, tablename);
+        } else
+            return false;
+
+    },
+    connection_test: function(url, user_name, password, account_id) {
+        var url_test = url + "/connection_test?$select=connection_status&$report_tags=Snow_inc:conn_test";
+        url_test = encodeURI(url_test);
+        if (this.authentication_type_data == "Oauth 2.0") {
+            try {
+                var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                r.setHttpMethod("get");
+                r.setStringParameterNoEscape('url', url_test);
+                r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                var response = r.execute(); // executeAsync  execute
+                var httpStatus = response.getStatusCode();
+                var responseBody = response.getBody();
+            } catch (ex) {
+                responseBody = ex.getMessage();
+                return "Error in Oauth 2.0 profile";
+            }
+
+        } else {
+            var r = new sn_ws.RESTMessageV2();
+            r.setHttpMethod("get");
+            r.setEndpoint(url_test);
+            r.setBasicAuth(user_name, password.getDecryptedValue());
+            var response = r.execute(); //executeAsync   execute
+            var responseBody = response.getBody();
+            var httpStatus = response.getStatusCode();
+        }
+
+
+        if (this.debug_mode) {
+            this.debug_record.connection_test = "httpStatus " + httpStatus + " responseBody " + responseBody;
+            this.debug_record.update();
+        }
+
+        if (httpStatus === 0) {
+            return "Please check the URL";
+        }
+        if (httpStatus == "200") {
+            var obj = JSON.parse(responseBody);
+            var result = this.test_auth(url, user_name, password, account_id, obj.value[0].connection_status.toString());
+            return result;
+        } else
+            return responseBody;
+
+    },
+
+    test_auth: function(url, user_name, password, account_id, message) {
+        var url_test = url + "/DEVICE_INVENTORY?$filter=account_id eq " + account_id + "&$top=0&$report_tags=Snow_inc:conn_test_auth";
+        url_test = encodeURI(url_test);
+        if (this.authentication_type_data == "Oauth 2.0") {
+            try {
+                var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                r.setHttpMethod("get");
+                r.setStringParameterNoEscape('url', url_test);
+                r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                var response = r.execute(); // executeAsync  execute
+                var httpStatus = response.getStatusCode();
+                var responseBody = response.getBody();
+            } catch (ex) {
+                responseBody = ex.getMessage();
+                return "Error in Oauth 2.0 profile";
+            }
+        } else {
+            var r = new sn_ws.RESTMessageV2();
+            r.setHttpMethod("get");
+            r.setEndpoint(url_test);
+            r.setBasicAuth(user_name, password.getDecryptedValue());
+            var response = r.execute(); //executeAsync  execute
+            var responseBody = response.getBody();
+            var httpStatus = response.getStatusCode();
+        }
+
+
+        if (this.debug_mode) {
+            this.debug_record.connection_test = "httpStatus " + httpStatus + " responseBody " + responseBody;
+            this.debug_record.update();
+        }
+        if (httpStatus == "200") {
+            return message;
+        } else
+            return responseBody;
+
+    },
+    remediation_connection_test: function(url, user_name, password, account_id) {
+        var domain = this.getdomainname();
+        if (this.authentication_type == "Oauth 2.0") {
+            try {
+                var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+                var url_test = domain + "/component/remediation/external/executeCommand?accountId=" + account_id;
+                url_test = encodeURI(url_test);
+                r.setHttpMethod("post");
+                r.setStringParameterNoEscape('url', url_test);
+                r.setAuthenticationProfile('oauth2', this.oauth_profile);
+                var response = r.execute();
+                var httpStatus = response.getStatusCode();
+                var responseBody = response.getBody();
+                if (this.debug_mode) {
+                    this.debug_record.remediation_connection_test = "httpStatus " + httpStatus + " responseBody " + responseBody;
+                    this.debug_record.update();
+                }
+            } catch (ex) {
+                responseBody = ex.getMessage();
+                return "404";
+            }
+            return httpStatus;
+        }
+        var r = new sn_ws.RESTMessageV2();
+        var url_test = domain + "/component/remediation/external/executeCommand?accountId=" + account_id;
+        url_test = encodeURI(url_test);
+        r.setHttpMethod("post");
+        r.setEndpoint(url_test);
+        r.setBasicAuth(user_name, password.getDecryptedValue());
+        var response = r.execute(); // executeAsync  execute
+        var httpStatus = response.getStatusCode();
+        var responseBody = response.getBody();
+        if (this.debug_mode) {
+            this.debug_record.remediation_connection_test = "httpStatus " + httpStatus + " responseBody " + responseBody;
+            this.debug_record.update();
+        }
+        return httpStatus;
+
+    },
+    get_html_device_events: function(inc_sysid, os_family, score, ci_name, section, tablename) {
+        this.section_ui = section;
+        var html = "";
+        var res = {};
+        var cmdb_ci = ci_name;
+        var DEVICE_OVERALL_SCORE = score;
+        var OS_FAMILY = os_family;
+        if ((this.device_health_data == true) || (this.software_changes_data == true)) {
+            if (ci_name == "") { //|| this.device_overview == false
+
+                var device_from_obj = this.get_device_from_user(inc_sysid, tablename);
+                if (device_from_obj == false) {
+                    cmdb_ci == false;
+                } else if (this.select_connection == 1 || this.by_correlation_id == true) {
+                    cmdb_ci = device_from_obj;
+                } else {
+                    var deviceDataJSON = JSON.parse(device_from_obj);
+                    if (this.incident_user_device == '' || deviceDataJSON.length == 1) {
+                        cmdb_ci = deviceDataJSON[0].DEVICE_NAME;
+                    } else {
+                        var valueToCheck = this.incident_user_device;
+                        for (var i = 0; i < deviceDataJSON.length; i++) {
+                            if (deviceDataJSON[i].DEVICE_NAME === valueToCheck) {
+                                cmdb_ci = deviceDataJSON[i].DEVICE_NAME;
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                cmdb_ci = ci_name;
+            }
+            if (cmdb_ci != false) {
+                var flag = false;
+                if (this.device_overview == false) {
+
+                    var res = this.get_device(cmdb_ci);
+                    DEVICE_OVERALL_SCORE = res.DEVICE_OVERALL_SCORE;
+                    OS_FAMILY = res.OS_FAMILY.toString();
+                    if (res.result == true) {
+                        flag = true;
+                        var obj = JSON.parse(res.responseBody);
+                        cmdb_ci = obj.value[0].DEVICE_NAME.toString();
+
+
+                    } else {
+                        html = null;
+                        return html;
+                    }
+                } else {
+                    flag = true;
+                    DEVICE_OVERALL_SCORE = score;
+                    OS_FAMILY = os_family;
+                }
+                if (flag) {
+                    var DEVICE_OVERALL_SCORE_number = parseFloat(DEVICE_OVERALL_SCORE);
+                    DEVICE_OVERALL_SCORE_number = DEVICE_OVERALL_SCORE_number.toFixed(1);
+                    if (DEVICE_OVERALL_SCORE) {
+                        html = "<style> .circle {border-radius: 80px;width: 24px;height: 18px;padding: 5px; display: block; float: left; width: 38px; height: 22px;";
+                        if (DEVICE_OVERALL_SCORE_number < 4) {
+                            html = html + "background: #E6354A;";
+                        } else if (DEVICE_OVERALL_SCORE_number < 5.5) {
+                            html = html + "background: #ff8B45;;";
+                        } else if (DEVICE_OVERALL_SCORE_number < 7) {
+                            html = html + "background: #FFB81D;";
+                        } else if (DEVICE_OVERALL_SCORE_number <= 10) {
+                            html = html + "background: #1fa641;";
+                        }
+                        html = html + "color: #FDFEFE;text-align: left;}</style> <table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:90%; text-align: left; margin: 0 auto;'><tr><td <div style= 'clear:both'> <div class='circle' style='margin-left: 1%;'><h1 style='font-weight: bold; text-align: center; font-size: 15px; margin-top: 0; line-height: 11px;'>" + DEVICE_OVERALL_SCORE_number + "</h1></div>";
+                        html = html + "<h2 style = 'padding-left:5px;font-weight: light; text-align: left; font-size: 18px; margin: 0 0 25px 0;'> Device: " + cmdb_ci + " </h2></div></td><td style = 'text-align: left;  width: 2%;'><a href='https://www.riverbed.com/' rel='noopener noreferrer nofollow' target='_blank'><img src='poweredby-riverbed_aternity.svg' width=160px height=58px style='position:relative;top:-9px;margin-top:0px;margin-left:11px;'></a></td></tr>"; //</table>";
+                    } else {
+                        //html = "<style>";
+                        html = html + "</style><table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:90%; text-align: left; margin: 0 auto;'><tr><td <div style= 'clear:both'><tr><td <div></h1></div>";
+                        html = html + "<h2 style = 'font-weight: light; text-align: left; font-size: 18px; margin: 0 0 25px 0;'><img src='grey.svg' width='38' height='22'/> Device: " + cmdb_ci + " </h2></div></td><td style = 'text-align: left;  width: 2%;'><a href='https://www.riverbed.com/' rel='noopener noreferrer nofollow' target='_blank'><img src='poweredby-riverbed_aternity.svg' width=160px height=58px style='position:relative;top:-9px;margin-top:0px;margin-left:11px;'></a></td> </tr>"; //</table>";
+                    }
+                    //html = html + "<table  cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:90%; text-align: center; margin: 0 auto; '><tr><td style = 'text-align: left; display: inline;' >";
+                    html = html + "<tr><td style = 'text-align: left; display: inline;' >";
+
+                    var responseBody1 = this.get_device_health_data(cmdb_ci);
+                    if (responseBody1 == false)
+                        responseBody1 = false;
+                    else {
+                        var obj1 = JSON.parse(responseBody1);
+                        if (obj1.value.length == 0) {
+                            responseBody1 = false;
+                        }
+                    }
+
+
+
+
+
+                    var responseBody2 = this.get_device_software_data(cmdb_ci);
+                    if (responseBody2 == false)
+                        responseBody2 = false;
+                    else {
+                        var obj2 = JSON.parse(responseBody2);
+                        if (obj2.value.length == 0) {
+                            responseBody2 = false;
+                        }
+                    }
+
+
+
+                    var result = false;
+                    if ((responseBody2) || (responseBody1)) {
+                        result = this.get_health_data_and_software_changes(responseBody1, responseBody2);
+
+
+                    } else {
+                        html = null;
+                        return html;
+                    }
+
+                    if (result != false) {
+                        html = html + result;
+                        html = html + "</br>";
+                    }
+                    health_result = this.get_device_health(cmdb_ci, responseBody1);
+                    if (health_result != false) {
+                        html = html + health_result;
+                        html = html + "</br>";
+                    }
+
+                    software_result = this.get_device_software(cmdb_ci, responseBody2);
+                    if (software_result != false) {
+                        html = html + software_result;
+                    }
+
+                    html = html + "</td><td style = 'vertical-align: top; text-align: left; border-left: 1px #d2d5d7 solid; width: 23%; padding-left: 1%' >";
+                    if (this.show_remediation_action)
+                        html = html + this.getLinks(cmdb_ci) + this.getActions(cmdb_ci, OS_FAMILY, "content_Events") + "</td></tr>";
+                    else
+                        html = html + this.getLinks(cmdb_ci) + "</td></tr>";
+
+
+                    return html;
+                } else
+                    return html;
+            } else
+                return html;
+        } else
+            return html;
+
+    },
+    get_device_health_data: function(device_name) {
+        if (this.device_health_data == true) {
+            try {
+                var url = this.system + "/device_health_raw?$filter=relative_time(last_7_days) and device_name eq '" + device_name + "' and account_id eq " + this.account_id + "&$select=HEALTH_EVENT_CATEGORY,HEALTH_EVENT_COMPONENT,HEALTH_EVENT_COMPONENT_AND_VERSION,HEALTH_EVENT_COMPONENT_TYPE,HEALTH_EVENT_COMPONENT_VERSION,HEALTH_EVENT_DETAILS,HEALTH_EVENT_ERROR,HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP,HEALTH_EVENT_LAST_OCCURRENCE_TIMESTAMP,HEALTH_EVENT_LAST_TIMESTAMP,HEALTH_EVENT_NAME,HEALTH_EVENT_SEVERITY,HEALTH_EVENT_SUB_CATEGORY,HEALTH_EVENT_SUB_COMPONENT,HEALTH_EVENT_SUB_COMPONENT_AND_VERSION,HEALTH_EVENT_SUB_COMPONENT_TYPE,HEALTH_EVENT_SUB_COMPONENT_VERSION,HEALTH_EVENT_VOLUME,TIMEFRAME,UNIQUE_HOURLY_EVENTS&$orderby=HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP desc&$report_tags=Snow_inc:HE&$top=300&$force_case_sensitive_comparison=true";
+                url = encodeURI(url);
+                if (this.authentication_type_data == "Oauth 2.0") {
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                    r.setHttpMethod("get");
+                    r.setStringParameterNoEscape('url', url);
+                    r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                    r.setHttpTimeout(this.api_timeout);
+                } else {
+                    var r = new sn_ws.RESTMessageV2();
+                    r.setHttpMethod("get");
+                    r.setEndpoint(url);
+                    r.setBasicAuth(this.user_name, this.password);
+                    r.setHttpTimeout(this.api_timeout);
+                }
+                var response = r.execute();
+
+                var responseBody = response.getBody();
+
+                var httpStatus = response.getStatusCode();
+                if (this.debug_mode) {
+                    this.debug_record.device_name = device_name;
+                    this.debug_record.health_data = responseBody;
+                    this.debug_record.update();
+                }
+
+                return responseBody;
+            } catch (ex) {
+                return false;
+            }
+        }
+        return false;
+    },
+    get_device_software_data: function(device_name) {
+        if (this.software_changes_data == true) {
+            try {
+                var url = this.system + "/INSTALLED_SOFTWARE_CHANGE_LOG?$filter=relative_time(last_7_days) and device_name eq '" + device_name + "' and account_id eq " + this.account_id + "&$orderby=INSTALLED_SW_CHANGE_TIMESTAMP desc&$report_tags=Snow_inc:SWC&$force_case_sensitive_comparison=true";
+                url = encodeURI(url);
+                if (this.authentication_type_data == "Oauth 2.0") {
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                    r.setHttpMethod("get");
+                    r.setStringParameterNoEscape('url', url);
+                    r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                    r.setHttpTimeout(this.api_timeout);
+                } else {
+                    var r = new sn_ws.RESTMessageV2();
+                    r.setHttpMethod("get");
+                    r.setEndpoint(url);
+                    r.setBasicAuth(this.user_name, this.password);
+                    r.setHttpTimeout(this.api_timeout);
+                }
+                var response = r.execute();
+                var responseBody = response.getBody();
+                var httpStatus = response.getStatusCode();
+                if (this.debug_mode) {
+                    this.debug_record.device_name = device_name;
+                    this.debug_record.software_data = responseBody;
+                    this.debug_record.update();
+                }
+
+                return responseBody;
+            } catch (ex) {
+                return false;
+            }
+        }
+        return false;
+    },
+    get_health_data_and_software_changes: function(responseBody1, responseBody2) {
+        //Health data
+        var html = "<table style='width: 98%; text-align: left; margin: 0px auto; height: 88px;' border='0' cellspacing='0' cellpadding='0'><tbody><tr style='height: 30px;'><td colspan='55'><h1 style='font-weight: bold; text-align: left; font-size: 16px;'><img src='calendar-range.svg' width='24' height='24' /> Events in the last 7 days</h1></td></tr>";
+        var hours = 0;
+        if (this.device_health_data == true) {
+            if (responseBody1 != false) {
+                html = html + "<tr style='height: 20px; border-bottom: 1px solid #e4e4e4; border-top: 1px solid #e4e4e4;'><th style='padding-left: 5px; text-align: left; font-size: 12px;font-weight: 400; height: 20px; width: 120px;'>Health Event <img src='info.svg' style='position: relative; top: -4px;' width='12' height='12' title='To see all health events from the last 7 days, please refer to the Health Events list below. In this view, you see only a single health event per hour - the most severe and the latest out of several.' /></th>";
+                var currentdate = new GlideDate();
+                currentdate.addDaysLocalTime(-7);
+                var events_obj = this.get_events(responseBody1);
+                var obj = JSON.parse(responseBody1);
+
+                if (events_obj != false) {
+                    var p = events_obj.myarray.length - 1;
+                    var o = events_obj.myarray[p].o;
+                    var date = obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                    var hour = this.get_event_hour(obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                    var severity = obj.value[o].HEALTH_EVENT_SEVERITY.toString();
+                    for (var d = 0; d < 8; d++) {
+                        if (currentdate != date) {
+                            for (var c = 0; c < 24; c++) {
+                                html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                            }
+                        } else {
+                            while (hour != hours) {
+                                html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                                hours++;
+                            }
+                            while (date == currentdate && p >= 0) {
+                                while ((hour != hours) && (hours < 24)) {
+                                    html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                                    hours++;
+                                }
+                                if (severity == 'Major') {
+                                    html = html + "<td style='column-width: 5px;padding-top: 7.5px;text-align: left;'><svg width='5px' height='5px'><circle cx='2' cy='2' r='2' fill='#ff8B45'/><title>" + this.get_tooltip(obj, o) + "</title></svg></td>";
+                                    hours++;
+                                } else if (severity == 'Minor') {
+                                    html = html + "<td style='column-width: 5px;padding-top: 7.5px;text-align: left;'><svg width='5px' height='5px'><circle cx='2' cy='2' r='2' fill='#FFB81D'/><title>" + this.get_tooltip(obj, o) + "</title></svg></td>";
+                                    hours++;
+                                } else {
+                                    html = html + "<td style='column-width: 5px;padding-top: 7.5px;text-align: left;'><svg width='5px' height='5px'><circle cx='2' cy='2' r='2' fill='#E6354A'/><title>" + this.get_tooltip(obj, o) + "</title></svg></td>";
+                                    hours++;
+                                }
+                                p--;
+                                if (p >= 0) {
+                                    o = events_obj.myarray[p].o;
+                                    date = obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                                    hour = this.get_event_hour(obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                                    severity = obj.value[o].HEALTH_EVENT_SEVERITY.toString();
+                                }
+                            }
+                            while ((hours != 24) && (hours < 24)) {
+                                html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                                hours++;
+                            }
+                        }
+                        currentdate.addDaysLocalTime(1);
+                        hours = 0;
+                    }
+                }
+            }
+        }
+
+        if (this.software_changes_data == true) {
+            if (responseBody2 != false) {
+                var obj2 = JSON.parse(responseBody2);
+                if (obj2.value.length > 0) {
+                    html = html + "<tr style='height: 20px; border-bottom: 1px solid #e4e4e4; border-top: 1px solid #e4e4e4;'><th style='padding-left: 5px; text-align: left; font-size: 12px; font-weight: 400;height: 20px; width: 120px;'>Software Change <img src='info.svg' style='position: relative; top: -4px;' width='12' height='12' title='To see all software changes from the last 7 days, please refer to the Software Changes list below. In this view, you see only a single event per hour.' /></th>";
+                    var currentSdate = new GlideDate();
+                    currentSdate.addDaysLocalTime(-7);
+                    var h = obj2.value.length - 1;
+                    var Sdate = obj2.value[h].INSTALLED_SW_CHANGE_TIMESTAMP.toString().split('T', 1).toString();
+                    var newShour = this.get_event_hour(obj2.value[h].INSTALLED_SW_CHANGE_TIMESTAMP.toString());
+                    var nextSdate = Sdate;
+                    var nextShour = newShour;
+                    hours = 0;
+                    for (var d2 = 0; d2 < 8; d2++) {
+                        if (currentSdate != Sdate) {
+                            for (var c2 = 0; c2 < 24; c2++) {
+                                html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                            }
+                        } else {
+                            while (Sdate == currentSdate && h >= 0) {
+                                while (newShour != hours) {
+                                    html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                                    hours++;
+                                }
+                                html = html + "<td style='column-width: 5px;padding-top: 5px;text-align: left;'><svg width='5px' height='5px'><circle cx='2' cy='2' r='2' fill='#0F5959 '/><title><p style='font-weight: bold; font-size: 13px; text-align: left;'>Changed on: " + this.format_date(this.adjust_time(obj2.value[h].INSTALLED_SW_CHANGE_TIMESTAMP.toString())) + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Change: " + obj2.value[h].INSTALLED_SW_CHANGE_TYPE.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Name: " + obj2.value[h].INSTALLED_SW_NAME.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Version: " + obj2.value[h].INSTALLED_SW_VERSION.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Scope: " + obj2.value[h].INSTALLED_SW_SCOPE.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Type: " + obj2.value[h].INSTALLED_SW_TYPE.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Related to: " + obj2.value[h].INSTALLED_SW_RELATED_TO.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Vendor: " + obj2.value[h].INSTALLED_SW_VENDOR.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Version before change: " + obj2.value[h].INSTALLED_SW_VERSION_BEFORE_CHANGE.toString() + "</p></title></svg></td>";
+                                hours++;
+                                if (h - 1 >= 0) {
+                                    nextSdate = obj2.value[h - 1].INSTALLED_SW_CHANGE_TIMESTAMP.toString().split('T', 1).toString();
+                                    nextShour = this.get_event_hour(obj2.value[h - 1].INSTALLED_SW_CHANGE_TIMESTAMP.toString());
+                                    if (Sdate == nextSdate && newShour == nextShour) {
+                                        while (Sdate == nextSdate && newShour == nextShour && h - 1 >= 0) {
+                                            h--;
+                                            if (h - 1 >= 0) {
+                                                nextSdate = obj2.value[h - 1].INSTALLED_SW_CHANGE_TIMESTAMP.toString().split('T', 1).toString();
+                                                nextShour = this.get_event_hour(obj2.value[h - 1].INSTALLED_SW_CHANGE_TIMESTAMP.toString());
+                                            }
+                                        }
+                                    }
+                                }
+                                h--;
+                                if (h >= 0) {
+                                    Sdate = obj2.value[h].INSTALLED_SW_CHANGE_TIMESTAMP.toString().split('T', 1).toString();
+                                    newShour = this.get_event_hour(obj2.value[h].INSTALLED_SW_CHANGE_TIMESTAMP.toString());
+                                }
+                            }
+                            while (hours != 24) {
+                                html = html + "<td style='column-width: 5px;text-align: left;'></td>";
+                                hours++;
+                            }
+                        }
+                        currentSdate.addDaysLocalTime(1);
+                        hours = 0;
+                    }
+                    html = html + "</tr>";
+                }
+            }
+        }
+
+        if (this.software_changes_data == true || this.device_health_data == true) {
+            var current = new GlideDate();
+            current.addDaysLocalTime(-7);
+            html = html + "<tr style='height: 20px; border-bottom: 1px solid #e4e4e4; border-top: 1px solid #e4e4e4;'><th style='column-width: 15px; padding-left: 5px; text-align: left; font-size: 12px;font-weight: 400; height: 37px; width: 120px;'>Date</th>";
+            for (var d3 = 0; d3 < 8; d3++) {
+                var day = current.toString().split('-', 3);
+                day = day[2];
+                html = html + "<td colspan='24' style = 'column-width: 120px;vertical-align: center; text-align: center'>" + current.getByFormat('MMMM').substring(0, 3) + " " + day + "</td>";
+                current.addDaysLocalTime(+1);
+            }
+            html = html + "</tr></tbody></table>";
+        }
+        return html;
+    },
+
+    get_device_health: function(device_name, responseBody) {
+        if (this.device_health_data == true) {
+            if (responseBody != false) {
+                var obj = JSON.parse(responseBody);
+                if (obj.value.length > 0) {
+                    var i = 0;
+                    var title = "";
+                    if (obj.value.length == 300)
+                        title = "latest 300";
+                    else
+                        title = obj.value.length;
+                    html = "<table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:98%;  text-align: center; margin: 30px auto 10px auto;'><tr><td colspan='3'><h1 style = 'font-weight: bold; text-align: left; font-size: 16px; margin: 0 0 20px 0;' ><img src='heart-pulse.svg' width='22' height='22'> Health Events (" + title + ") in the last 7 days</h1></td></tr></tr>";
+                    //
+                    html = html + "<tr h2 style='font-weight: bold; font-size: 13px; text-align: left; margin-bottom: 7px; background-color: #f2f4f5; background-color: #f2f4f5; line-height: 26px; width: 95%; padding-left: 10px;'><td class='category-header' style='padding: 0 0 0 10px;'>Recorded at</td><td class='category-header' style='padding: 0 0 0 10px;'>Event</td><td class='category-header' style='padding: 0 0 0 10px;'>Severity</td><td class='category-header' style='padding: 0 0 0 10px;'>Details</td><td class='category-header' style='padding: 0 10px; line-height: 16px;'>Component and Version</td></tr>";
+                    while (i < obj.value.length) {
+                        var row_id = "hidden_rowhealth" + i;
+                        var onclick = "showHideRow('" + row_id + "')";
+                        html = html + "<tr onclick=" + onclick + " style='border-bottom: 1px solid #e4e4e4;' ><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px; cursor: pointer;'><span><svg style='margin-top: 1px; vertical-align: middle;' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='14' height='14' viewBox='0 0 24 24'><path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' fill='currentColor'/></svg></span>" + this.format_date(this.adjust_time(obj.value[i].HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP.toString())) + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;' >" + obj.value[i].HEALTH_EVENT_NAME.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + obj.value[i].HEALTH_EVENT_SEVERITY.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + obj.value[i].HEALTH_EVENT_DETAILS.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;' >" + obj.value[i].HEALTH_EVENT_COMPONENT_AND_VERSION.toString() + "</td></tr><tr id='" + row_id + "' class='hidden_row' style='display: none;'><td  colspan='6' style='width: 28%; text-align: left; padding: 1px 30px 1px 10px; height: 24px; border-bottom: 1px solid #e4e4e4;'><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Category : " + obj.value[i].HEALTH_EVENT_CATEGORY.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Subcategory : " + obj.value[i].HEALTH_EVENT_SUB_CATEGORY.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Subcomponent name and version : " + obj.value[i].HEALTH_EVENT_SUB_COMPONENT_AND_VERSION.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>" + "Error: " + obj.value[i].HEALTH_EVENT_ERROR.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>" + "First occurrence : " + this.format_date(obj.value[i].HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP.toString()) + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Last occurrence: " + this.format_date(obj.value[i].HEALTH_EVENT_LAST_OCCURRENCE_TIMESTAMP.toString()) + "</p><p style='margin: 0 0 0 15px;'># of occurrences: " + obj.value[i].HEALTH_EVENT_VOLUME.toString() + "</p>" + "</td></tr>";
+                        i++;
+                    }
+                    html = html + "</table>";
+                    return html;
+                } else
+                    return false;
+            }
+            return false;
+        }
+        return false;
+    },
+    get_device_software: function(device_name, responseBody) {
+        if (this.software_changes_data == true) {
+
+            if (responseBody != false) {
+                var obj = JSON.parse(responseBody);
+                if (obj.value.length > 0) {
+                    html = "<table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:98%; text-align: center; margin: 0 auto;'><tr><td colspan='3'><h1 style = 'font-weight: bold; text-align: left; font-size: 16px; margin: 20px 0;' > <img src='history.svg' width='24' height='24'> Software Changes (" + obj.value.length + ") in the last 7 days </h1></td></tr></tr>";
+                    html = html + "<tr h2 style='font-weight: bold; font-size: 13px; text-align: left; margin-bottom: 7px; background-color: #f2f4f5; line-height: 26px; width: 95%; padding: 0 10px;' ><td class='category-header' style='padding: 0 0 0 10px;'>Changed on</td><td class='category-header' style='padding: 0 0 0 10px;'>Change</td><td class='category-header' style='padding: 0 0 0 10px;'>Name</td><td class='category-header' style='padding: 0 0 0 10px;'>Version</td><td class='category-header' style='padding: 0 10px;'>Scope</td></tr>";
+                    var i = 0;
+                    while (i < obj.value.length) {
+
+                        var row_id = "hidden_row" + i;
+                        var onclick = "showHideRow('" + row_id + "')";
+                        html = html + "<tr onclick=" + onclick + " style='border-bottom: 1px solid #e4e4e4;'><td style = 'vertical-align: middle; text-align: left; width: 29%; padding-left: 1%; cursor: pointer;'><span><svg style='margin-top: 1px; vertical-align: middle;' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='14' height='14' viewBox='0 0 24 24'><path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' fill='currentColor'/></svg></span>" + this.format_date(this.adjust_time(obj.value[i].INSTALLED_SW_CHANGE_TIMESTAMP.toString())) + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + obj.value[i].INSTALLED_SW_CHANGE_TYPE.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;' >" + obj.value[i].INSTALLED_SW_NAME.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + obj.value[i].INSTALLED_SW_VERSION.toString() + "</td><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;' >" + obj.value[i].INSTALLED_SW_SCOPE.toString() + "</td></tr><tr id='" + row_id + "' class='hidden_row' style='display: none;'><td  colspan='5' style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'><p  style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Type : " + obj.value[i].INSTALLED_SW_TYPE.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>" + "Related to: " + obj.value[i].INSTALLED_SW_RELATED_TO.toString() + "</p><p  style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>" + "Vendor : " + obj.value[i].INSTALLED_SW_VENDOR.toString() + "</p><p style='margin: 0 0 0 15px;border-bottom: 1px solid #e4e4e4; height: 24px;'>Version before change : " + obj.value[i].INSTALLED_SW_VERSION_BEFORE_CHANGE.toString() + "</p>" + "</td></tr>";
+                        i++;
+                    }
+                    html = html + "</table>";
+                    return html;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        }
+        return false;
+    },
+    adjust_time: function(time) {
+        //time = time.replace("T", " ");
+        return time;
+    },
+    get_html: function(inc_sysid, section, tablename) {
+        this.section_ui = section;
+        var obj_html = {};
+        var res = {};
+        var html = "";
+        var cmdb_ci = "";
+        var device_from_obj = this.get_device_from_user(inc_sysid, tablename);
+        if (device_from_obj == false) {
+            cmdb_ci == false
+        } else if (this.select_connection == 1 || this.by_correlation_id == true) {
+            cmdb_ci = device_from_obj;
+        } else {
+            var deviceDataJSON = JSON.parse(device_from_obj);
+            if (this.incident_user_device == '' || deviceDataJSON.length == 1) {
+                cmdb_ci = deviceDataJSON[0].DEVICE_NAME;
+            } else {
+                var valueToCheck = this.incident_user_device;
+                for (var i = 0; i < deviceDataJSON.length; i++) {
+                    if (deviceDataJSON[i].DEVICE_NAME === valueToCheck) {
+                        cmdb_ci = deviceDataJSON[i].DEVICE_NAME;
+                        break;
+                    }
+                }
+            }
+        }
+        obj_html.ci_name = cmdb_ci;
+        if (this.device_overview == true) {
+            if (cmdb_ci != false) {
+                res = this.get_device(cmdb_ci);
+                if (res.result == true) {
+                    var obj = JSON.parse(res.responseBody);
+                    obj_html.ci_name = obj.value[0].DEVICE_NAME.toString();
+                    html = "<style> .circle {border-radius: 80px;width: 24px;height: 18px;padding: 5px; display: block; float: left; width: 38px; height: 22px;";
+                    if (obj.value[0].DEVICE_OVERALL_SCORE) {
+                        if (obj.value[0].DEVICE_OVERALL_SCORE.toFixed(1) < 4) {
+                            html = html + "background: #E6354A;";
+                        } else if (obj.value[0].DEVICE_OVERALL_SCORE.toFixed(1) < 5.5) {
+                            html = html + "background: #ff8B45;";
+                        } else if (obj.value[0].DEVICE_OVERALL_SCORE.toFixed(1) < 7) {
+                            html = html + "background: #FFB81D;";
+                        } else if (obj.value[0].DEVICE_OVERALL_SCORE.toFixed(1) <= 10) {
+                            html = html + "background: #1fa641;";
+                        }
+
+                        html = html + "color: #FDFEFE;text-align: left;font-size: 5px;}.circle, h2,span.a {display: inline-block;}</style> <table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:85%;padding-left: 0%; text-align: left; margin: 0 auto;'><tr><td style = 'text-align: left; width: 78%;padding-left: 0%'><table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' text-align: left; margin: 0 auto; style = 'text-align: left;  width: 100%; margin-top: -15px;'><tr><td><div style= 'clear:left'> <div class='circle'><h1 style='font-weight: bold; text-align: center; font-size: 15px; margin-top: 0; line-height: 11px;'>" + obj.value[0].DEVICE_OVERALL_SCORE.toFixed(1) + "</h1></div><h2 style = 'padding-left:5px;font-weight: light; text-align: left; font-size: 18px; margin-top: 0;'> Device name: " + obj_html.ci_name + " </h2></td><td><div style='display: flex;float: right;padding: 0px 50px 0px 50px; margin-top: 12px;'>";
+                    } else {
+                        html = html + "color: #FDFEFE;text-align: left;font-size: 5px;}.circle, h2,span.a {display: inline-block;}</style> <table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' style='width:85%;padding-left: 0%; text-align: left; margin: 0 auto;'><tr><td style = 'text-align: left; width: 78%;padding-left: 0%'><table cellpadding='0' cellspacing='0' border='0' border-collapse ='collapse' text-align: left; margin: 0 auto; style = 'text-align: left;  width: 100%; margin-top: -15px;'><tr><td><div style= 'clear:left'><img src='grey-score.svg' width='38' height='22'/><h2 style = 'padding-left:5px;font-weight: light; text-align: left; font-size: 18px; margin-top: 0;'> Device name: " + cmdb_ci + " </h2></td><td><div style='display: flex;float: right;padding: 0px 50px 0px 50px; margin-top: 12px;'>";
+                    }
+                    if (obj.value[0].DEVICE_HEALTH_SCORE != null) {
+                        if (obj.value[0].DEVICE_HEALTH_SCORE <= 4) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='red.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  HEALTH</span></div>";
+                        } else if (obj.value[0].DEVICE_HEALTH_SCORE <= 5.5) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='orange.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  HEALTH</span></div>";
+                        } else if (obj.value[0].DEVICE_HEALTH_SCORE <= 7) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='yellow.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  HEALTH</span></div>";
+                        } else {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='green.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  HEALTH</span></div>";
+                        }
+                    } else {
+                        html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='newgrey.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';> HEALTH </span></div>";
+                    }
+                    if (obj.value[0].DEVICE_BOOT_SCORE != null) {
+                        if (obj.value[0].DEVICE_BOOT_SCORE <= 4) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='red.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  BOOT</span></div>";
+                        } else if (obj.value[0].DEVICE_BOOT_SCORE <= 5.5) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='orange.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  BOOT</span></div>";
+                        } else if (obj.value[0].DEVICE_BOOT_SCORE <= 7) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='yellow.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  BOOT</span></div>";
+                        } else {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='green.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  BOOT</span></div>";
+                        }
+                    } else {
+                        html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='newgrey.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';> BOOT </span></div>";
+                    }
+                    if (obj.value[0].DEVICE_PERFORMANCE_SCORE) {
+                        if (obj.value[0].DEVICE_PERFORMANCE_SCORE <= 4) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='red.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  PERFORMANCE</span></div>";
+                        } else if (obj.value[0].DEVICE_PERFORMANCE_SCORE <= 5.5) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='orange.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  PERFORMANCE</span></div>";
+                        } else if (obj.value[0].DEVICE_PERFORMANCE_SCORE <= 7) {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='yellow.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  PERFORMANCE</span></div>";
+                        } else {
+                            html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='green.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>  PERFORMANCE</span></div>";
+                        }
+                    } else {
+                        html = html + "<div style='padding: 15px 10px 30px 10px;'><span class='a'><img src='newgrey.svg' width='16' height='16' style='display: inline-block; float: left; margin: 0 5px;';>PERFORMANCE</span></div>";
+                    }
+                    html = html + "</div></div></td></tr></table></td><td style = 'text-align: left;  width: 2%;'><a href='https://www.riverbed.com/' target='_blank'><img src='poweredby-riverbed_aternity.svg' width=160px height=58px style='top:-9px;right:-170px;margin-top:0px;margin-left:11px;'></a></td> </tr><tr> <td style = 'text-align: left;display: inline; width: 78%;padding-left: 0%;'><table width='95%' style='padding-left: 0%;text-align: left;'><col style='width:10%;height:10px;vertical-align: top;'><col style='width:10%;'><col style='width:11%;'><col style='width:14%;'><col style='width:16%;'><col style='width:18%;'><col style='width:30%;'><tr>";
+                    if (!obj.value[0].DEVICE_TYPE) {
+                        html = html + "";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Laptop') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> LAPTOP</p> <img id='Laptop' src='laptop.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Desktop') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> DESKTOP </p> <img id='Desktop' src='desktop-mac.svg' style=' width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Tablet') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> TABLET </p> <img id='Tablet' src='tablet-android.svg' style=' width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Virtual Desktop') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> VIRTUAL DESKTOP </p> <img id='Virtual Desktop' src='Desktop.svg' style=' width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Virtual App Server') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> VIRTUAL APP SERVER </p> <img id='Virtual App Server' src='type-desktop.svg' style=' width:50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_TYPE.toString() == 'Smartphone') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> SMARTPHONE </p> <img id='Smartphone' src='cellphone.svg' style=' width: 50px;height:80%;padding-left: 10px;'></td>";
+                    }
+                    if (!obj.value[0].DEVICE_NETWORK_TYPE) {
+                        html = html + "";
+                    } else if (obj.value[0].DEVICE_NETWORK_TYPE.toString() == 'WiFi') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> WIFI </p> <img id='myWifi' src='wifi.svg' style='width:50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].DEVICE_NETWORK_TYPE.toString() == 'LAN') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> LAN </p> <img id='Lan' src='lan.svg' style='width:50px;height:80%;padding-left: 10px;'></td>";
+                    }
+                    if (!obj.value[0].OS_FAMILY) {
+                        html = html + "";
+                    } else if (obj.value[0].OS_FAMILY.toString() == 'MS Windows') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> WINDOWS </p> <img id='myOS' src='microsoft-windows.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].OS_FAMILY.toString() == 'macOS') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> MAC OS </p> <img id='macOS' src='macOS.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].OS_FAMILY.toString() == 'MS Windows Server') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> MS WINDOWS SERVER </p> <img id='MS Windows Server' src='microsoft-windows.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].OS_FAMILY.toString() == 'iOS') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> iOS </p> <img id='iOS' src='ios.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].OS_FAMILY.toString() == 'Android') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> ANDROID </p> <img id='Android' src='android.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    }
+                    if (!obj.value[0].AGENT_CURRENT_STATUS) {
+                        html = html + "";
+                    } else if (obj.value[0].AGENT_CURRENT_STATUS.toString() == 'Reporting') {
+                        html = html + "<td style='height: 70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> REPORTING </p> <img id='Reporting' src='agent_reporting.svg' style='width: 50px;height:80%;padding-left: 10px;'></td>";
+                    } else if (obj.value[0].AGENT_CURRENT_STATUS.toString() == 'Disconnected') {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;width:20%'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> DISCONNECTED </p> <img id='Disconnected' src='agent_reporting-disconnected.svg' style='width: 45px; padding-left: 10px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> Last Reporting Time: " + this.format_date(obj.value[0].TIME_LAST_REPORTING.toString()) + "</p></td>";
+                    } else if (obj.value[0].AGENT_CURRENT_STATUS.toString() == 'Stopped') {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;width:20%'><p style= 'text-align:left;padding-top:10px;padding-left: 10px;'> STOPPED </p> <img id='Stopped' src='agent_stopped.svg' style='width: 45px;padding-left: 10px;'><p style= 'text-align:left;padding-left: 10px; font-size: 12px; color: #818181;'> Last Reporting Time: " + this.format_date(obj.value[0].TIME_LAST_REPORTING.toString()) + "</p></td>";
+                    }
+                    if (obj.value[0].USERNAME.toString() != null && obj.value[0].USER_DEPARTMENT.toString() != null) {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;padding-left: 10px;'><p style='font-size: 12px; margin:0; color: #818181;'>CONNECTED USER</p>" + obj.value[0].USERNAME.toString() + "<br><br> <p style='font-size: 12px;margin:0; color: #818181;'>DEPARTMENT</p>" + obj.value[0].USER_DEPARTMENT.toString() + "</td>";
+                    }
+                    if (obj.value[0].BUSINESS_LOCATION != null || obj.value[0].USER_ROLE != null) {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;padding-left: 10px;'>";
+                    }
+                    if (obj.value[0].USER_ROLE != null) {
+                        html = html + "<p style='font-size: 12px;margin:0; color: #818181;'>TITLE</p>" + obj.value[0].USER_ROLE.toString() + "<br><br>";
+                    }
+                    if (obj.value[0].BUSINESS_LOCATION != null) {
+                        html = html + "<p style='font-size: 12px;margin:0; color: #818181;'>BUSINESS LOCATION</p>" + obj.value[0].BUSINESS_LOCATION.toString() + "</td>";
+                    }
+                    if (obj.value[0].BOOT_LAST_TIMESTAMP != null) {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;padding-left: 10px;'><p style='font-size: 12px;margin:0; color: #818181;'>LAST BOOT</p>" + this.format_date(obj.value[0].BOOT_LAST_TIMESTAMP.toString()) + "<br><br></td></tr></tbody></table>";
+                    } else {
+                        html = html + "<td style='height:70px; border-left: solid 1px #aaaaaa;vertical-align: top; padding-top: 8px;padding-left: 10px;'><p style='font-size: 12px;margin:0; color: #818181;'></p><br><br></td></tr></tbody></table>";
+                    }
+
+
+                    ///new section
+
+                    ///////////////////////			
+                    var device_attribute = this.bindByAttribute();
+                    this.device_attributeArray = device_attribute;
+
+                    var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+                    gr_incident_section.addQuery("visible", true);
+                    gr_incident_section.addQuery("type", "Category");
+                    gr_incident_section.orderBy("order");
+                    if (this.domainseperated == "true")
+                        gr_incident_section.addQuery("sys_domain", this.domain);
+                    gr_incident_section.query();
+                    while (gr_incident_section.next()) {
+                        html = html + this.getcategoryHtml(gr_incident_section.sys_id, gr_incident_section.label, obj);
+                    }
+                    html = html + "</td><td style = 'vertical-align: top;  text-align: left; border-left: 1px #d2d5d7 solid; width: 26%; padding-left: 1%;padding-right: 0% ' >";
+
+                    if (this.show_remediation_action)
+                        html = html + this.getLinks(obj_html.ci_name) + this.getActions(cmdb_ci, obj.value[0].OS_FAMILY.toString(), "content_device") + "</td></tr>";
+                    else
+                        html = html + this.getLinks(obj_html.ci_name) + "</td></tr>";
+                    obj_html.html = html;
+                    obj_html.DEVICE_OVERALL_SCORE = res.DEVICE_OVERALL_SCORE;
+                    obj_html.OS_FAMILY = res.OS_FAMILY;
+                    obj_html.result = res.result;
+
+                } else {
+                    obj_html.html = html;
+                    obj_html.DEVICE_OVERALL_SCORE = res.DEVICE_OVERALL_SCORE;
+                    obj_html.OS_FAMILY = res.OS_FAMILY;
+                    obj_html.result = res.result;
+                    return obj_html;
+                }
+
+            }
+            obj_html.html = html;
+            return obj_html;
+        } else {
+            obj_html.ci_name = cmdb_ci;
+            obj_html.html = html;
+            obj_html.DEVICE_OVERALL_SCORE = "";
+            obj_html.OS_FAMILY = "";
+            obj_html.result = false;
+            return obj_html;
+        }
+
+    },
+    hasAllRoles: function(requiredRoleSysIDs) {
+        var userID = gs.getUserID();
+        var gr = new GlideRecord('sys_user_has_role');
+        gr.addQuery('role', 'IN', requiredRoleSysIDs); // Find roles in the requiredRoleSysIDs array
+        gr.addQuery('user', userID); // Find roles for the current user
+        gr.query();
+        if (gr.next()) {
+            return true; // Return true if at least one role is found
+        }
+        return false; // Return false if no matching roles are found
+
+    },
+
+
+    generateUniqueId: function(prefix, display_name) {
+        return prefix + '_' + display_name;
+        //return prefix + '_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    },
+
+
+    getActions: function(deviceName, osFamily, tabId) {
+
+        var sectionId = this.section_ui;
+        var emptyRole = this.empty_remediation_action;
+        var otherActions = [];
+        var exist = false;
+        var isGroup = false;
+        var otherexist = false;
+        var collapsed = "";
+
+        var path = '<path d="M7.41,8.59L12,13.17L16.58,8.59L18,10L12,16L6,10L7.41,8.59Z" fill="currentColor"></path></svg>';
+
+
+        var actionArray = [];
+        var generateUniqueId = "";
+
+        if (this.remediation_groups_collapsed == false) {
+            collapsed = 'block';
+        } else {
+            collapsed = 'none';
+            path = '<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" fill="currentColor"></path></svg>';
+        }
+        var str = "<br><p style='font-weight: normal; font-size:15.7px; text-align: left;margin-top: 20px;'><img src='remediations.svg' width='16' height='16' style='position: relative; top: -2px;'/> Remediation Actions</p>" +
+            "<div style='position: relative; display: inline-block;'>" +
+            "<input type='text' id='actionSearch_" + sectionId + "' placeholder='Search...' oninput='filterActions(\"" + sectionId + "\")' autocomplete='off' style='text-align: left;'>" +
+            "<span id='clearSearch_" + sectionId + "' onclick='clearSearch(\"actionSearch_" + sectionId + "\")' style='display: none; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #999;'>&times;</span>" +
+            "</div>" +
+            "<div id='autocompleteResults_" + sectionId + "' style='border: 1px solid #ddd; display: none; position: absolute; background-color: white; z-index: 1000;'></div>" +
+            "<div id='actionList_" + sectionId + "' style='margin-top: 10px; display:block;'>";
+
+
+        var gr_remediation_group_list = new GlideRecord("x_atern_incident_remediation_group_list");
+        gr_remediation_group_list.orderBy("order");
+        if (this.domainseperated == "true")
+            gr_remediation_group_list.sys_domain = this.domain;
+        gr_remediation_group_list.query();
+
+        while (gr_remediation_group_list.next()) {
+            var j = 1;
+            var gr_remediation_list_configuration = new GlideRecord("x_atern_incident_remediation_list_configuration");
+            gr_remediation_list_configuration.addQuery("visible", true);
+            gr_remediation_list_configuration.addQuery("group", gr_remediation_group_list.sys_id);
+            gr_remediation_list_configuration.orderBy("order");
+            if (this.domainseperated == "true")
+                gr_remediation_list_configuration.addQuery("sys_domain", this.domain);
+            gr_remediation_list_configuration.query();
+
+            var i = gr_remediation_list_configuration.getRowCount();
+            var g = gr_remediation_group_list.getRowCount();
+            var groupStr = "";
+
+
+            var noGroupActions = [];
+
+            while (gr_remediation_list_configuration.next()) {
+                var overrideRolesRequired = gr_remediation_list_configuration.override_roles_required;
+                if (!gs.nil(overrideRolesRequired)) {
+                    var requiredRoles = overrideRolesRequired.split(',');
+                    var hasRequiredRole = this.hasAllRoles(requiredRoles);
+                    if (!hasRequiredRole) {
+                        continue;
+                    }
+                } else if (emptyRole == false) {
+                    continue;
+                } else if (!this.not_default_match) {
+                    continue;
+                }
+
+                if (gr_remediation_group_list.name != "Other") {
+                    exist = true;
+
+                    if (isGroup == false && exist == true) {
+                        if ((osFamily == 'MS Windows' && gr_remediation_list_configuration.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration.macos_support == true)) {
+                            groupStr += "<div class='group' id='group_" + gr_remediation_group_list.sys_id + "'>";
+                            groupStr += "<p style='font-weight: bold; font-size:13px; text-align: left;margin-left:10px; margin-top: 5px; display: inline-flex;' onclick='toggleGroup(\"group_" + gr_remediation_group_list.sys_id + "\", \"" + tabId + "\")'>" +
+                                "<svg id='group_" + gr_remediation_group_list.sys_id + "_icon' class='toggle-icon icon-open' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='14' height='14' viewBox='0 0 24 24'>" + path +
+                                //"<path d='M7.41,8.59L12,13.17L16.58,8.59L18,10L12,16L6,10L7.41,8.59Z'></path></svg>" +
+                                gr_remediation_group_list.name + "</p>";
+                            groupStr += "<div style='display:" + collapsed + ";' id='group_" + gr_remediation_group_list.sys_id + "_actions'>";
+                            isGroup = true;
+                        }
+                    }
+
+
+                    if (exist == true && ((osFamily == 'MS Windows' && gr_remediation_list_configuration.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration.macos_support == true))) {
+                        generateUniqueId = "";
+                        generateUniqueId = this.generateUniqueId('myLink', gr_remediation_list_configuration.display_name)
+                        actionArray.push({
+                            id: generateUniqueId,
+                            action_name: gr_remediation_list_configuration.action_name.toString(),
+                            text: gr_remediation_list_configuration.display_name.toString(),
+                            display_tooltip: gr_remediation_list_configuration.display_tooltip.toString(),
+                            group: gr_remediation_group_list.name.toString()
+                        });
+
+                        groupStr += "<a id='" + generateUniqueId + "' title=\"" + gr_remediation_list_configuration.display_tooltip + '"  href="#" style="font-weight:normal; margin-left: 20px;display: inline-table; " onclick="showuipage(&quot;' + gr_remediation_list_configuration.display_name + '&quot;,&quot;' + gr_remediation_list_configuration.action_name + '&quot,&quot;' + deviceName + '&quot,&quot;' + gr_remediation_list_configuration.action_parameter_is_mandatory + '&quot;,&quot;' + gr_remediation_list_configuration.action_parameter_is_used + '&quot;,&quot;' + gr_remediation_list_configuration.action_parameter_name + '&quot;,&quot;' + gr_remediation_list_configuration.action_parameter_description + '&quot;,&quot;' + gr_remediation_list_configuration.is_user_confirmation_required + '&quot;,&quot;' + gr_remediation_list_configuration.action_parameter_sample + '&quot;);">' + gr_remediation_list_configuration.display_name + "</a><br>";
+
+
+                    }
+
+
+                } else if (exist == true && gr_remediation_group_list.name == "Other") {
+
+                    if ((osFamily == 'MS Windows' && gr_remediation_list_configuration.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration.macos_support == true)) {
+                        otherexist = true;
+                        otherActions.push(gr_remediation_list_configuration.sys_id);
+                    }
+                }
+                j++;
+            }
+            // Close collaps
+            if (groupStr != "" && isGroup) {
+                groupStr += "</div></div>";
+            }
+
+            str += groupStr;
+            isGroup = false;
+        }
+        if (otherActions.length > 0) {
+            var otherGroupHtml = "<div class='group' id='group_other'>";
+            otherGroupHtml += "<p style='font-weight: bold; font-size:13px; text-align: left;margin-left:10px; margin-top: 5px;' onclick='toggleGroup(&quot;group_other&quot;, &quot;" + tabId + "&quot;)'>";
+            otherGroupHtml += "<svg id='group_other_icon' class='toggle-icon icon-open' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='14' height='14' viewBox='0 0 24 24'>" + +path;
+            otherGroupHtml += "Other</p>";
+            otherGroupHtml += "<div id='group_other_actions' style='margin-left: 20px; display:" + collapsed + ";'>";
+
+            for (var p = 0; p < otherActions.length; p++) {
+                var gr_remediation_list_configuration5 = new GlideRecord("x_atern_incident_remediation_list_configuration");
+                if (gr_remediation_list_configuration5.get(otherActions[p])) {
+
+                    generateUniqueId = "";
+                    generateUniqueId = this.generateUniqueId('myLink', gr_remediation_list_configuration5.display_name);
+                    actionArray.push({
+                        id: generateUniqueId,
+                        action_name: gr_remediation_list_configuration5.action_name.toString(),
+                        text: gr_remediation_list_configuration5.display_name.toString(),
+                        display_tooltip: gr_remediation_list_configuration5.display_tooltip.toString(),
+                        group: "Other"
+                    });
+
+                    otherGroupHtml += "<a id='" + generateUniqueId + "' title=\"" + gr_remediation_list_configuration5.display_tooltip + '"  href="#" style="font-weight:normal; margin-left: 20px;display: inline-table; " onclick="showuipage(&quot;' + gr_remediation_list_configuration5.display_name + '&quot;,&quot;' + gr_remediation_list_configuration5.action_name + '&quot,&quot;' + deviceName + '&quot,&quot;' + gr_remediation_list_configuration5.action_parameter_is_mandatory + '&quot;,&quot;' + gr_remediation_list_configuration5.action_parameter_is_used + '&quot;,&quot;' + gr_remediation_list_configuration5.action_parameter_name + '&quot;,&quot;' + gr_remediation_list_configuration5.action_parameter_description + '&quot;,&quot;' + gr_remediation_list_configuration5.is_user_confirmation_required + '&quot;,&quot;' + gr_remediation_list_configuration.action_parameter_sample + '&quot;);">' + gr_remediation_list_configuration5.display_name + "</a><br>";
+
+                }
+            }
+
+            var gr_remediation_list_configuration3 = new GlideRecord("x_atern_incident_remediation_list_configuration");
+            gr_remediation_list_configuration3.addQuery("visible", true);
+            gr_remediation_list_configuration3.addQuery("group", '');
+            gr_remediation_list_configuration3.orderBy("order");
+            if (this.domainseperated == "true")
+                gr_remediation_list_configuration3.addQuery("sys_domain", this.domain);
+            gr_remediation_list_configuration3.query();
+
+            while (gr_remediation_list_configuration3.next()) {
+                var overrideRolesRequired3 = gr_remediation_list_configuration3.override_roles_required;
+                if (!gs.nil(overrideRolesRequired3)) {
+                    var requiredRoles3 = overrideRolesRequired3.split(',');
+                    var hasRequiredRole3 = this.hasAllRoles(requiredRoles3);
+                    if (!hasRequiredRole3) {
+                        continue;
+                    }
+                } else if (emptyRole == false) { //&&  this.show_remediation_action
+                    continue;
+                } else if (!this.not_default_match) {
+                    continue;
+                }
+
+                if ((osFamily == 'MS Windows' && gr_remediation_list_configuration3.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration3.macos_support == true)) {
+
+                    generateUniqueId = "";
+                    generateUniqueId = this.generateUniqueId('myLink', gr_remediation_list_configuration3.display_name);
+                    actionArray.push({
+                        id: generateUniqueId,
+                        action_name: gr_remediation_list_configuration3.action_name.toString(),
+                        text: gr_remediation_list_configuration3.display_name.toString(),
+                        display_tooltip: gr_remediation_listgr_remediation_list_configuration3_configuration4.display_tooltip.toString(),
+                        group: "Other"
+                    });
+
+                    otherGroupHtml += "<a id='" + generateUniqueId + "' title=\"" + gr_remediation_list_configuration3.display_tooltip + '"  href="#" style="font-weight:normal;" onclick="showuipage(&quot;' + gr_remediation_list_configuration3.display_name + '&quot;,&quot;' + gr_remediation_list_configuration3.action_name + '&quot,&quot;' + deviceName + '&quot,&quot;' + gr_remediation_list_configuration3.action_parameter_is_mandatory + '&quot;,&quot;' + gr_remediation_list_configuration3.action_parameter_is_used + '&quot;,&quot;' + gr_remediation_list_configuration3.action_parameter_name + '&quot;,&quot;' + gr_remediation_list_configuration3.action_parameter_description + '&quot;,&quot;' + gr_remediation_list_configuration3.is_user_confirmation_required + '&quot;,&quot;' + gr_remediation_list_configuration3.action_parameter_sample + '&quot;);">' + gr_remediation_list_configuration3.display_name + "</a><br>";
+
+                }
+            }
+
+            otherGroupHtml += "</div></div>";
+            str += otherGroupHtml;
+        }
+
+
+        if (exist == true && otherexist == false) {
+            var gr_remediation_list_configuration4 = new GlideRecord("x_atern_incident_remediation_list_configuration");
+            gr_remediation_list_configuration4.addQuery("visible", true);
+            gr_remediation_list_configuration4.addQuery("group", '');
+            gr_remediation_list_configuration4.orderBy("order");
+            if (this.domainseperated == "true")
+                gr_remediation_list_configuration4.addQuery("sys_domain", this.domain);
+            gr_remediation_list_configuration4.query();
+            var ir = gr_remediation_list_configuration4.getRowCount();
+            if (ir > 0) {
+                var groupsHtml = "";
+                var hasActions = false;
+                groupsHtml += "<div class='group' id='group_other'>";
+                groupsHtml += "<p style='font-weight: bold; font-size:13px; text-align: left;margin-left:10px; margin-top: 5px;' onclick='toggleGroup(&quot;group_other&quot;, &quot;" + tabId + "&quot;)'>";
+                groupsHtml += "<svg id='group_other_icon' class='toggle-icon icon-open' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='14' height='14' viewBox='0 0 24 24'>" + path;
+                groupsHtml += "Other</p>";
+                groupsHtml += "<div id='group_other_actions' style='margin-left: 20px; display:" + collapsed + ";'>";
+
+            }
+            while (gr_remediation_list_configuration4.next()) {
+                var overrideRolesRequired4 = gr_remediation_list_configuration4.override_roles_required;
+                if (!gs.nil(overrideRolesRequired4)) {
+                    var requiredRoles4 = overrideRolesRequired4.split(',');
+                    var hasRequiredRole4 = this.hasAllRoles(requiredRoles4);
+                    if (!hasRequiredRole4) {
+                        continue;
+                    }
+                } else if (emptyRole == false) {
+                    continue;
+                } else if (!this.not_default_match) {
+                    continue;
+                }
+
+
+                if ((osFamily == 'MS Windows' && gr_remediation_list_configuration4.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration4.macos_support == true)) {
+                    hasActions = true;
+                    generateUniqueId = "";
+                    generateUniqueId = this.generateUniqueId('myLink', gr_remediation_list_configuration4.display_name);
+                    actionArray.push({
+                        id: generateUniqueId,
+                        action_name: gr_remediation_list_configuration4.action_name.toString(),
+                        text: gr_remediation_list_configuration4.display_name.toString(),
+                        display_tooltip: gr_remediation_list_configuration4.display_tooltip.toString(),
+                        group: "Other"
+                    });
+
+                    groupsHtml += '<a id="' + generateUniqueId + '" title="' +
+                        gr_remediation_list_configuration4.display_tooltip + '"  href="#" style="font-weight:normal;" onclick="showuipage(&quot;' + gr_remediation_list_configuration4.display_name + '&quot;,&quot;' + gr_remediation_list_configuration4.action_name + '&quot,&quot;' + deviceName + '&quot;,&quot;' + gr_remediation_list_configuration4.action_parameter_is_mandatory + '&quot;,&quot;' + gr_remediation_list_configuration4.action_parameter_is_used + '&quot;,&quot;' + gr_remediation_list_configuration4.action_parameter_name + '&quot;,&quot;' + gr_remediation_list_configuration4.action_parameter_description + '&quot;,&quot;' + gr_remediation_list_configuration4.is_user_confirmation_required + '&quot;,&quot;' + gr_remediation_list_configuration4.action_parameter_sample + '&quot;);">' + gr_remediation_list_configuration4.display_name + '</a><br>';
+                }
+            }
+            if (hasActions) {
+                groupsHtml += "</div></div>";
+                str += groupsHtml;
+            }
+        }
+        if (exist == false) {
+            var gr_remediation_list_configuration2 = new GlideRecord("x_atern_incident_remediation_list_configuration");
+            gr_remediation_list_configuration2.addQuery("visible", true);
+            gr_remediation_list_configuration2.orderBy("order");
+            if (this.domainseperated == "true")
+                gr_remediation_list_configuration2.addQuery("sys_domain", this.domain);
+            gr_remediation_list_configuration2.query();
+            while (gr_remediation_list_configuration2.next()) {
+                var overrideRolesRequired2 = gr_remediation_list_configuration2.override_roles_required;
+                if (!gs.nil(overrideRolesRequired2)) {
+                    var requiredRoles2 = overrideRolesRequired2.split(',');
+                    var hasRequiredRole2 = this.hasAllRoles(requiredRoles2);
+                    if (!hasRequiredRole2) {
+                        continue;
+                    }
+                } else if (emptyRole == false) {
+                    continue;
+                } else if (!this.not_default_match) {
+                    continue;
+                }
+                if ((osFamily == 'MS Windows' && gr_remediation_list_configuration2.windows_support == true) || (osFamily == 'macOS' && gr_remediation_list_configuration2.macos_support == true)) {
+
+                    generateUniqueId = "";
+                    generateUniqueId = this.generateUniqueId('myLink', gr_remediation_list_configuration2.display_name);
+                    actionArray.push({
+                        id: generateUniqueId,
+                        action_name: gr_remediation_list_configuration2.action_name.toString(),
+                        text: gr_remediation_list_configuration2.display_name.toString(),
+                        display_tooltip: gr_remediation_list_configuration2.display_tooltip.toString()
+                    });
+
+                    str += '<a id="' + generateUniqueId + '" title="' +
+                        gr_remediation_list_configuration2.display_tooltip + '"  href="#" style="font-weight:normal;margin-left:20px; display: inline-table;" onclick="showuipage(&quot;' + gr_remediation_list_configuration2.display_name + '&quot;,&quot;' + gr_remediation_list_configuration2.action_name + '&quot,&quot;' + deviceName + '&quot;,&quot;' + gr_remediation_list_configuration2.action_parameter_is_mandatory + '&quot;,&quot;' + gr_remediation_list_configuration2.action_parameter_is_used + '&quot;,&quot;' + gr_remediation_list_configuration2.action_parameter_name + '&quot;,&quot;' + gr_remediation_list_configuration2.action_parameter_description + '&quot;,&quot;' + gr_remediation_list_configuration2.is_user_confirmation_required + '&quot;,&quot;' + gr_remediation_list_configuration2.action_parameter_sample + '&quot;);">' + gr_remediation_list_configuration2.display_name + '</a><br>';
+                }
+            }
+        }
+
+        str = str + "</div>";
+
+        var jsonActionArray = JSON.stringify(actionArray);
+        var encodedJson = encodeURIComponent(jsonActionArray);
+
+        var fullyEncodedJson = encodedJson.replace(/'/g, '%27'); // Manually encoding single quotes
+        var arrData = "<input type='hidden' id='actionArrayData' value='" + fullyEncodedJson + "'>";
+        str = str + arrData;
+        var res1 = "<div id='search_" + sectionId + "_results' style='margin-top: 10px; display: none;'></div>";
+        str = str + res1;
+
+        return str;
+    },
+
+
+    getdomainname: function() {
+        var domain = this.system.replace("-odata", "");
+        var pos = domain.indexOf("/", 10);
+        domain = domain.substr(0, pos);
+        return domain;
+    },
+    getLinks: function(device_name) {
+        var domain = this.getdomainname();
+        var device_name_link = domain + "/api/ui-link/account/" + this.account_id + "/device/name/" + device_name + "/servicedesk";
+        var device_health_link = domain + "/api/snow/v1/" + this.account_id + "/desktophealth?globalSearchTypeParam=Device&globalSearchParam=" + device_name;
+        var advanced_troubleshooting_data_link = domain + "/api/snow/v1/" + this.account_id + "/troubleshoot/device/hostname/" + device_name + "?timeframe=TF_xx-xx-xx xx:xx:xx_xx-xx-xx xx:xx:xx_Last7Days";
+        advanced_troubleshooting_data_link = encodeURI(advanced_troubleshooting_data_link);
+        var str = "<div><h3 style='font-weight: normal; font-size:15.7px; text-align: left; margin-bottom: 15px; margin-top: 0;'><img src='troubleshooting.svg' width='15' height='15' style='position: relative; top: -2px;' /> Troubleshooting Dashboards</h3><a href=" + device_name_link + " target='_blank' style='margin-left:20px;'>Device Overview</a></br><a href=" + advanced_troubleshooting_data_link + " target='_blank' style='margin-left:20px;display: inline-table;'>Advanced Troubleshooting Data</a></br><a href=" + device_health_link + " target='_blank' style='margin-left:20px;'>Device Health</a></br></div>";
+
+        return str;
+    },
+    getcategoryHtml: function(category_sys_id, category_label, obj) {
+        var str = "<h2 class='category-header' style='font-weight: bold; font-size: 13px; text-align: left; margin-bottom: 7px; background-color: #f2f4f5; background-color: #f2f4f5; line-height: 26px; width: 95%; padding-left: 10px;'>" + category_label + "</h2><table cellpadding = '0' cellspacing = '0' border = '0'style = 'width: 95%;padding-left: 0%' > ";
+
+        var device_attribute = this.device_attributeArray;
+
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("category", category_sys_id);
+        gr_incident_section.addQuery("visible", true);
+        if (!device_attribute) {
+            gr_incident_section.addQuery("type", "!=", "Device_Attribute");
+        }
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.orderBy("order");
+        gr_incident_section.query();
+
+        while (gr_incident_section.next()) {
+            if (gr_incident_section.type == "Device_Attribute" && device_attribute) { // Object.keys(device_attribute).length > 0 Object.keys(obj).length === 0
+
+                var technicalName = gr_incident_section.technical_name.trim().toLowerCase();
+                var attributeValue = device_attribute[technicalName];
+                if (technicalName in device_attribute) { //attributeValue
+
+                    str = str + "<tr style='border-bottom: 1px solid #e4e4e4;'><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + gr_incident_section.label + "</td>";
+                    str = str + "<td style='text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + attributeValue + "</td></tr>";
+                }
+
+            } else {
+                str = str + "<tr style='border-bottom: 1px solid #e4e4e4;'><td style='width: 28%;text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + gr_incident_section.label + "</td>";
+                str = str + "<td style='text-align: left; padding: 1px 30px 1px 10px; height: 24px;'>" + this.getvaluefromjson(obj, gr_incident_section.technical_name, gr_incident_section.field_type) + "</td></tr>";
+            }
+
+        }
+        str = str + "</table></div>";
+        return str;
+    },
+    getvaluefromjson: function(obj, technical_name, field_type) {
+        if (obj.value[0][technical_name]) {
+            if (field_type == "DateTimeOffset")
+                return this.format_date(obj.value[0][technical_name].toString());
+            if (obj.value[0][technical_name])
+                return obj.value[0][technical_name].toString();
+            else
+                return "";
+        } else
+            return "";
+    },
+    get_device: function(cmdb_ci) {
+        var obj_res = {};
+        if (cmdb_ci != "") {
+            var device_name = encodeURI(cmdb_ci);
+            try {
+                var attNames = [
+                    'DEVICE_NAME', 'DEVICE_OVERALL_SCORE', 'DEVICE_HEALTH_SCORE', 'DEVICE_BOOT_SCORE',
+                    'DEVICE_PERFORMANCE_SCORE', 'DEVICE_TYPE', 'DEVICE_NETWORK_TYPE', 'OS_FAMILY',
+                    'AGENT_CURRENT_STATUS', 'TIME_LAST_REPORTING', 'USERNAME', 'USER_DEPARTMENT',
+                    'USER_ROLE', 'BUSINESS_LOCATION', 'BOOT_LAST_TIMESTAMP'
+                ];
+
+                var attributeNamesObj = [];
+                var gr = new GlideRecord("x_atern_incident_incident_section");
+                gr.addQuery("visible", true);
+                gr.addQuery('type', "Attribute");
+                if (this.domainseperated == "true") {
+                    gr.addQuery("sys_domain", this.domain);
+                }
+                gr.query();
+                while (gr.next()) {
+                    var attributeName = gr.getValue("technical_name");
+                    if (attNames.indexOf(attributeName) === -1) {
+                        attributeNamesObj.push(attributeName);
+                    }
+                }
+
+                var formattedAttributes = attributeNamesObj.join(',');
+
+                var url = this.system;
+                var modifiedUrl = url.replace(/\/latest$/, '/getAsPost/latest/device_inventory');
+                modifiedUrl = encodeURI(modifiedUrl);
+
+                var filter = "$filter=account_id eq " + this.account_id + " and device_name eq '" + device_name + "' ";
+                var select = "&$select=DEVICE_NAME,DEVICE_OVERALL_SCORE,DEVICE_HEALTH_SCORE,DEVICE_BOOT_SCORE,DEVICE_PERFORMANCE_SCORE,DEVICE_TYPE,DEVICE_NETWORK_TYPE,OS_FAMILY,AGENT_CURRENT_STATUS,TIME_LAST_REPORTING,USERNAME,USER_DEPARTMENT,USER_ROLE,BUSINESS_LOCATION,BOOT_LAST_TIMESTAMP";
+                var report_tags = "&$report_tags=Snow_inc:Overview"
+                if (formattedAttributes) {
+                    var requestBodyStr = filter + select + ',' + formattedAttributes + report_tags;
+                } else {
+                    var requestBodyStr = filter + select + report_tags;
+                }
+
+                if (this.authentication_type_data == "Oauth 2.0") {
+                    try {
+                        var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+                        r.setHttpMethod("post");
+                        r.setRequestHeader("Accept", "application/json");
+                        r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        r.setRequestBody(requestBodyStr);
+                        r.setStringParameterNoEscape('url', modifiedUrl);
+                        r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                        var response = r.execute();
+                        var httpStatus = response.getStatusCode();
+                        var responseBody = response.getBody();
+
+                    } catch (ex) {
+                        responseBody = ex.getMessage();
+                        return "";
+                    }
+                    if (httpStatus != "200") {
+                        return "";
+                    }
+
+                } else {
+
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+                    r.setEndpoint(modifiedUrl);
+                    r.setBasicAuth(this.user_name, this.password);
+                    r.setRequestHeader("Accept", "application/json");
+                    r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    r.setRequestBody(requestBodyStr);
+                    r.setHttpMethod('post');
+                    var response = r.execute();
+                    var responseBody = response.getBody();
+                    var httpStatus = response.getStatusCode();
+
+                }
+                if (this.debug_mode) {
+                    this.debug_record.device_name = device_name;
+                    this.debug_record.device_inventory = responseBody;
+                    this.debug_record.update();
+                }
+                if (httpStatus != "200") {
+                    return "";
+                }
+
+                var obj = JSON.parse(responseBody);
+                var str_obj = JSON.stringify(responseBody);
+
+
+                if (obj.value.length > 0) {
+                    if (obj.value[0].DEVICE_OVERALL_SCORE)
+                        obj_res.DEVICE_OVERALL_SCORE = obj.value[0].DEVICE_OVERALL_SCORE.toString();
+                    else
+                        obj_res.DEVICE_OVERALL_SCORE = "";
+                    if (obj.value[0].OS_FAMILY)
+                        obj_res.OS_FAMILY = obj.value[0].OS_FAMILY.toString();
+                    else
+                        obj_res.OS_FAMILY = "";
+                    obj_res.result = true;
+                    obj_res.responseBody = responseBody;
+                    return obj_res;
+                } else {
+                    obj_res.result = false;
+                    return obj_res;
+                }
+            } catch (ex) {
+                obj_res.result = false;
+                return obj_res;
+            }
+        }
+        obj_res.result = false;
+        return obj_res;
+    },
+    insert_field: function(techincal_name, cat_count, field_count) {
+        var cat_new_number = 0;
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("technical_name", techincal_name);
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.query();
+        if (!gr_incident_section.next()) {
+            cat_new_number = this.check_cat(techincal_name, cat_count);
+        }
+        return cat_new_number;
+    },
+    enter_tech_name: function(techincal_name, cat_count, field_count, field_type) {
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("technical_name", techincal_name);
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.query();
+        if (!gr_incident_section.next()) {
+            gr_incident_section.initialize();
+            if (this.domainseperated == "true")
+                gr_incident_section.sys_domain = this.domain;
+            gr_incident_section.field_type = field_type.replace("Edm.", "");
+            gr_incident_section.technical_name = techincal_name;
+            gr_incident_section.category = this.getCategory(techincal_name);
+            gr_incident_section.visible = this.get_visible(techincal_name);
+            techincal_name = techincal_name.toLowerCase().replaceAll("_", " ");
+            gr_incident_section.label = this.capitalize(techincal_name);
+            gr_incident_section.order = cat_count + field_count;
+            gr_incident_section.type = "Attribute";
+            gr_incident_section.insert();
+        }
+    },
+    getCategory: function(techincal_name) {
+        var get_cat_name = techincal_name.substr(0, techincal_name.indexOf("_"));
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("technical_name", get_cat_name);
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.query();
+        if (gr_incident_section.next()) {
+            return gr_incident_section.sys_id;
+        } else
+            return "";
+    },
+    check_cat: function(techincal_name, cat_count) {
+        var get_cat_name = techincal_name.substr(0, techincal_name.indexOf("_"));
+        if (get_cat_name != "") {
+            var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+            gr_incident_section.addQuery("technical_name", get_cat_name);
+            if (this.domainseperated == "true")
+                gr_incident_section.addQuery("sys_domain", this.domain);
+            gr_incident_section.query();
+            if (!gr_incident_section.next()) {
+                cat_count = cat_count + 100;
+                gr_incident_section.initialize();
+                gr_incident_section.technical_name = get_cat_name;
+                gr_incident_section.label = get_cat_name;
+                gr_incident_section.visible = this.get_visible(get_cat_name);
+                gr_incident_section.order = cat_count;
+                gr_incident_section.type = "Category";
+                gr_incident_section.insert();
+            }
+        }
+        return cat_count;
+    },
+    get_visible: function(techincal_name) {
+        if ((techincal_name == "DEVICE_BIOS_VERSION") || (techincal_name == "DEVICE_CPU_MODEL") || (techincal_name == "DEVICE_DOMAIN") || (techincal_name == "DEVICE_MANUFACTURER") || (techincal_name == "DEVICE_MODEL") || (techincal_name == "DEVICE_MEMORY") || (techincal_name == "DEVICE_SERIAL_NUMBER") || (techincal_name == "DEVICE_TYPE") || (techincal_name == "DEVICE_IP_ADDRESS") || (techincal_name == "DEVICE_SUBNET") || (techincal_name == "DEVICE_NETWORK_TYPE") || (techincal_name == "BOOT_LAST_TIMESTAMP") || (techincal_name == "BUSINESS_LOCATION") || (techincal_name == "LOCATION_ON_VPN") || (techincal_name == "OS_TOTAL_DISK_SPACE") || (techincal_name == "OS_FREE_DISK_SPACE") || (techincal_name == "OS_ARCHITECTURE") || (techincal_name == "OS_VERSION") || (techincal_name == "USERNAME") || (techincal_name == "DEVICE") || (techincal_name == "LOCATION") || (techincal_name == "OS") || (techincal_name == "USER"))
+            return true;
+        else
+            return false;
+    },
+    capitalize: function(str) {
+        var lower = str.toLowerCase();
+        return str.charAt(0).toUpperCase() + lower.slice(1);
+    },
+    updatefields: function() {
+        //set             Attribute BOOT_LAST_TIMESTAMP  to category Device
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("technical_name", "BOOT_LAST_TIMESTAMP");
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.query();
+        if (gr_incident_section.next()) {
+            this.deletecategory(gr_incident_section.category);
+            gr_incident_section.category = this.getcategory("DEVICE");
+            gr_incident_section.update();
+        }
+
+        //set Attribute USERNAME category to User
+        var gruser = new GlideRecord("x_atern_incident_incident_section");
+        if (this.domainseperated == "true")
+            gruser.addQuery("sys_domain", this.domain);
+        gruser.addQuery("technical_name", "USERNAME");
+        gruser.query();
+        if (gruser.next()) {
+            gr_incident_section.category = this.getcategory("USER");
+            gr_incident_section.update();
+        }
+        //set Attribute BUSINESS_LOCATION category to Location
+        var grbusiness = new GlideRecord("x_atern_incident_incident_section");
+        if (this.domainseperated == "true")
+            grbusiness.addQuery("sys_domain", this.domain);
+        grbusiness.addQuery("technical_name", "BUSINESS_LOCATION");
+        grbusiness.query();
+        if (grbusiness.next()) {
+            this.deletecategory(grbusiness.category);
+            grbusiness.category = this.getcategory("LOCATION");
+            grbusiness.update();
+        }
+    },
+    getcategory: function(category) {
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("technical_name", category);
+        gr_incident_section.addQuery("type", "Category");
+        if (this.domainseperated == "true")
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        gr_incident_section.query();
+        if (gr_incident_section.next()) {
+            return gr_incident_section.sys_id;
+        }
+    },
+    dateSpan: function(date) {
+        var newdate = date.split('T', 1);
+        var date2 = newdate.split('-');
+        var day = date2[2];
+        if (day.charAt(0) == '0') {
+            day = day.charAt(1);
+        }
+        var month = date2[1];
+        if (month.charAt(0) == '0') {
+            month = month.charAt(1);
+        }
+        var year = date2[0];
+
+        //Spit it out!
+        return month + "//" + day + "//" + year;
+    },
+    get_event_hour: function(timestamp) {
+        timestamp = timestamp.split("T");
+        var hour = timestamp[1].split(":", 1).toString();
+        if (hour.charAt(0) == '0')
+            hour = hour.charAt(1).toString();
+        return parseInt(hour, 10);
+    },
+    format_date: function(date) {
+        var newdate = "";
+        date = date.split('T');
+        var time = date[1].split(':');
+        var sign = time[2].substring(2, 3);
+        var zone = time[2].substring(3) + ":" + time[3];
+        time = time[0] + ":" + time[1] + ":" + time[2].substring(0, 2);
+        date = date[0].split('-');
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        var monthname = "";
+        switch (month) {
+            case '01':
+                monthname = 'Jan';
+                break;
+            case '02':
+                monthname = 'Feb';
+                break;
+            case '03':
+                monthname = 'Mar';
+                break;
+            case '04':
+                monthname = 'Apr';
+                break;
+            case '05':
+                monthname = 'May';
+                break;
+            case '06':
+                monthname = 'Jun';
+                break;
+            case '07':
+                monthname = 'Jul';
+                break;
+            case '08':
+                monthname = 'Aug';
+                break;
+            case '09':
+                monthname = 'Sep';
+                break;
+            case '10':
+                monthname = 'Oct';
+                break;
+            case '11':
+                monthname = 'Nov';
+                break;
+            case '12':
+                monthname = 'Dec';
+                break;
+        }
+        newdate = monthname + " " + day + " " + year + " " + time + " GMT " + sign + zone;
+        return newdate;
+
+    },
+    get_events: function(responseBody1) {
+        if (responseBody1 != false) {
+            var obj = JSON.parse(responseBody1);
+            if (obj.value.length > 0) {
+                var events_obj = {};
+                var events_list = [];
+                var o = 0;
+                var count = 1;
+                var date;
+                var hour;
+                var severity;
+                var nextdate;
+                var nexthour;
+                var nextseverity;
+                var bool = false;
+                while (o < obj.value.length) { //
+                    bool = false;
+                    count = 1;
+                    date = obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                    hour = this.get_event_hour(obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                    severity = obj.value[o].HEALTH_EVENT_SEVERITY.toString();
+                    if (severity == 'Critical') {
+                        var event = {};
+                        event.date = date;
+                        event.hour = hour;
+                        event.severity = severity;
+                        event.o = o;
+                        events_list.push(event);
+                        bool = true;
+                    } else if (o + 1 < obj.value.length) {
+                        nextdate = obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                        nexthour = this.get_event_hour(obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                        nextseverity = obj.value[o + 1].HEALTH_EVENT_SEVERITY.toString();
+                        if (date == nextdate && hour == nexthour) {
+                            while (!bool && date == nextdate && hour == nexthour && o + count < obj.value.length) {
+                                if (nextseverity == 'Critical') {
+                                    var event = {};
+                                    event.date = date;
+                                    event.hour = hour;
+                                    event.severity = severity;
+                                    event.o = o + count;
+                                    events_list.push(event);
+                                    bool = true;
+                                } else {
+                                    count++;
+                                    if (o + count < obj.value.length) {
+                                        nextdate = obj.value[o + count].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                                        nexthour = this.get_event_hour(obj.value[o + count].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                                        nextseverity = obj.value[o + count].HEALTH_EVENT_SEVERITY.toString();
+                                    }
+                                }
+                            }
+                            count = 0;
+                            nextdate = obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                            nexthour = this.get_event_hour(obj.value[o].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                            nextseverity = obj.value[o].HEALTH_EVENT_SEVERITY.toString();
+                            while (!bool && date == nextdate && hour == nexthour && o + count < obj.value.length) {
+                                if (nextseverity == 'Major') {
+                                    var event = {};
+                                    event.date = date;
+                                    event.hour = hour;
+                                    event.severity = severity;
+                                    event.o = o + count;
+                                    events_list.push(event);
+                                    bool = true;
+                                } else {
+                                    count++;
+                                    if (o + count < obj.value.length) {
+                                        nextdate = obj.value[o + count].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                                        nexthour = this.get_event_hour(obj.value[o + count].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                                        nextseverity = obj.value[o + count].HEALTH_EVENT_SEVERITY.toString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!bool) {
+                        var event = {};
+                        event.date = date;
+                        event.hour = hour;
+                        event.severity = severity;
+                        event.o = o;
+                        events_list.push(event);
+                        bool = true;
+                    }
+                    if (o + 1 < obj.value.length) {
+                        nextdate = obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                        nexthour = this.get_event_hour(obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                    }
+                    while (date == nextdate && hour == nexthour && o < obj.value.length) {
+                        o++;
+                        if (o + 1 < obj.value.length) {
+                            nextdate = obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString().split('T', 1).toString();
+                            nexthour = this.get_event_hour(obj.value[o + 1].HEALTH_EVENT_LAST_TIMESTAMP.toString());
+                        }
+                    }
+                    o++;
+                }
+                events_obj.myarray = events_list;
+                return events_obj;
+            } else
+                return false;
+        }
+    },
+    get_tooltip: function(obj, o) {
+        //health event tooltip
+        html = "<p style='font-weight: bold; font-size: 13px; text-align: left;'>Recorded at:" + this.format_date(this.adjust_time(obj.value[o].HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP.toString())) + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Event:" + obj.value[o].HEALTH_EVENT_NAME.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Severity:" + obj.value[o].HEALTH_EVENT_SEVERITY.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Details:" + obj.value[o].HEALTH_EVENT_DETAILS.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Component and Version:" + obj.value[o].HEALTH_EVENT_COMPONENT_AND_VERSION.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Category:" + obj.value[o].HEALTH_EVENT_CATEGORY.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Subcategory:" + obj.value[o].HEALTH_EVENT_SUB_CATEGORY.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Subcomponent name and version:" + obj.value[o].HEALTH_EVENT_SUB_COMPONENT_AND_VERSION.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Error:" + obj.value[o].HEALTH_EVENT_ERROR.toString() + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>First occurrence:" + this.format_date(obj.value[o].HEALTH_EVENT_FIRST_OCCURRENCE_TIMESTAMP.toString()) + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'>Last occurrence:" + this.format_date(obj.value[o].HEALTH_EVENT_LAST_OCCURRENCE_TIMESTAMP.toString()) + "</p>&#10;<p style='font-weight: bold; font-size: 13px; text-align: left;'># of occurrences:" + obj.value[o].HEALTH_EVENT_VOLUME.toString() + "</p>";
+        return html;
+    },
+
+    deletecategory: function(category_sys_id) {
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("sys_id", category_sys_id);
+        gr_incident_section.query();
+        if (gr_incident_section.next()) {
+            if ((gr_incident_section.technical_name == "BOOT") || (gr_incident_section.technical_name == "BUSINESS"))
+                gr_incident_section.deleteRecord();
+        }
+    },
+
+    getattributes: function() {
+
+        if (this.device_overview) { //Device Attribute
+            try {
+                var account_id = this.account_id;
+
+                //var urlattributes = this.system + "/device_attributes?$filter=account_id eq " + account_id + " &$select=attribute_name&$report_tags=Snow_inc:get_attr_list";
+                //with aggregate:
+                //var urlattributes = this.system + "/device_attributes?$filter=account_id eq " + account_id + " &$select=attribute_name&$report_tags=Snow_inc:get_attr_list&$aggregate=true";
+
+                var urlattributes = this.system + "/device_attributes_list?$filter=account_id eq " + account_id + " &$select=attribute_name&$report_tags=Snow_inc:get_attr_list";
+
+
+                urlattributes = encodeURI(urlattributes);
+
+                if (this.authentication_type_data == "Oauth 2.0") {
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                    r.setHttpMethod("get");
+                    r.setStringParameterNoEscape('url', urlattributes);
+                    r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                    r.setHttpTimeout(this.api_timeout);
+                } else {
+                    var r = new sn_ws.RESTMessageV2();
+                    r.setHttpMethod("get");
+                    r.setEndpoint(urlattributes);
+                    r.setBasicAuth(this.user_name, this.password);
+                }
+                var response = r.execute();
+                var responseBody = response.getBody();
+                var httpStatus = response.getStatusCode();
+                if (this.debug_mode) {
+                    this.debug_record.meta_data = responseBody;
+                    this.debug_record.update();
+                }
+
+                if (httpStatus != "200") {
+                    try {
+                        var responseJson = JSON.parse(responseBody);
+                        var errorMessage = responseJson.error && responseJson.error.message ?
+                            responseJson.error.message :
+                            "An error occurred, but no specific message was provided.";
+
+                        gs.addErrorMessage(errorMessage);
+                        return false;
+                    } catch (e) {
+                        gs.addErrorMessage("Failed to process the error response for status " + httpStatus + ". Error: " + e.message);
+                        return false;
+                    }
+                }
+
+
+                var str_obj = JSON.parse(responseBody).value;
+                var uniqueAttributesMap = {};
+                var uniqueAttributes = [];
+                var newOrder = 200;
+                var cat_sysid = this.getcategory("DEVICE");
+
+
+                if (Array.isArray(str_obj)) {
+                    for (var i = 0; i < str_obj.length; i++) {
+                        var attributeName = str_obj[i].ATTRIBUTE_NAME;
+                        newOrder = newOrder + i;
+                        if (!uniqueAttributesMap[attributeName]) {
+                            uniqueAttributesMap[attributeName] = true;
+                            uniqueAttributes.push(attributeName);
+
+                            var gr = new GlideRecord("x_atern_incident_incident_section");
+                            gr.addQuery('technical_name', attributeName);
+                            gr.addQuery('type', "Device_Attribute");
+                            if (this.domainseperated == "true") {
+                                gr.addQuery("sys_domain", this.domain);
+                            }
+                            gr.query();
+
+                            if (!gr.hasNext()) {
+
+                                var newRecord = new GlideRecord("x_atern_incident_incident_section");
+                                newRecord.initialize();
+                                if (this.domainseperated == "true") {
+                                    newRecord.sys_domain = this.domain;
+                                }
+                                newRecord.technical_name = attributeName;
+                                var label_name = attributeName.toLowerCase().replaceAll("_", " ");
+                                newRecord.label = this.capitalize(label_name);
+                                newRecord.category = cat_sysid;
+                                newRecord.visible = false;
+                                newRecord.type = "Device_Attribute";
+                                newRecord.field_type = "String";
+                                newRecord.order = this.getNewFieldOrder(attributeName, newOrder);
+                                newRecord.insert();
+                            }
+                        }
+                    }
+                }
+                gs.addInfoMessage("Operation successful");
+            } catch (ex) {
+                gs.addErrorMessage("The operation was unsuccessful. Error details: " + ex.message);
+            }
+        } else {
+            gs.addErrorMessage("Please active the record before pressing the button");
+        }
+    },
+    getNewFieldOrder: function(attributeName, newOrder) {
+        var newOrder = newOrder;
+        var orderGap = 5;
+        var lastOrder = 0;
+
+        var gr_incident_section = new GlideRecord("x_atern_incident_incident_section");
+        gr_incident_section.addQuery("type", "Device_Attribute");
+        if (this.domainseperated == "true") {
+            gr_incident_section.addQuery("sys_domain", this.domain);
+        }
+        gr_incident_section.orderBy("order"); // Order records by the ORDER field
+        gr_incident_section.query();
+
+        if (!gr_incident_section.hasNext()) {
+
+            return newOrder;
+        }
+
+        while (gr_incident_section.next()) {
+            var currentOrder = parseInt(gr_incident_section.getValue("order"));
+
+            if (attributeName.localeCompare(gr_incident_section.getValue("technical_name")) < 0) {
+                if (currentOrder - lastOrder > orderGap) {
+
+                    return lastOrder + orderGap;
+                }
+                break;
+            }
+
+            lastOrder = currentOrder;
+        }
+
+        return lastOrder + orderGap;
+    },
+    bindByAttribute: function() {
+
+        var attributeNames = ['attribute_name'];
+        var attributeNamesObj = [];
+        var recordCount = '0';
+        var attributeMap = {};
+
+        var gr = new GlideRecord("x_atern_incident_incident_section");
+        gr.addQuery("visible", true);
+        gr.addQuery('type', "Device_Attribute");
+        gr.orderBy("order");
+        if (this.domainseperated == "true") {
+            gr.addQuery("sys_domain", this.domain);
+        }
+        gr.query();
+        while (gr.next()) {
+            var attributeName = gr.getValue("technical_name");
+            var attributeNameKey = gr.getValue("technical_name").trim().toLowerCase();
+            // keyValueArray.push({
+            //     key: attributeName,
+            //     order: gr.getValue("order"),
+            //     attribute_value: ""
+            // })
+            attributeMap[attributeNameKey] = "";
+            attributeNamesObj.push(attributeName);
+            attributeNames.push("'" + attributeName + "'");
+        }
+
+        recordCount = gr.getRowCount();
+
+        if (recordCount == '0') {
+            return "";
+
+        } else {
+            var formattedAttributes = attributeNames.join(',');
+            var accountId = this.account_id;
+            var deviceName = this.cmdb_ci_name.toString();
+
+            var url = this.system;
+            var modifiedUrl = url.replace(/\/latest$/, '/getAsPost/latest/DEVICE_ATTRIBUTES_REALTIME_VALUES');
+
+            modifiedUrl = encodeURI(modifiedUrl);
+
+            var filter = "$filter=account_id eq " + accountId + " and device_name eq '" + deviceName + "' and in(" + formattedAttributes + ")";
+            var select = "&$select=attribute_name,attribute_value";
+            var report_tags = "&$report_tags=Snow_inc:Overview_attr"
+            var requestBodyStr = filter + select + report_tags;
+
+
+            if (this.authentication_type_data == "Oauth 2.0") {
+                try {
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+                    r.setHttpMethod("post");
+                    r.setRequestHeader("Accept", "application/json");
+                    r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    r.setRequestBody(requestBodyStr);
+                    r.setStringParameterNoEscape('url', modifiedUrl);
+                    r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                    var response = r.execute();
+                    var httpStatus = response.getStatusCode();
+                    var responseBody = response.getBody();
+
+                    if (httpStatus != "200") {
+                        return "";
+                    }
+
+                } catch (ex) {
+                    responseBody = ex.getMessage();
+                    return "";
+                }
+
+            } else {
+                var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+                r.setEndpoint(modifiedUrl);
+                r.setBasicAuth(this.user_name, this.password);
+                r.setRequestHeader("Accept", "application/json");
+                r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                r.setRequestBody(requestBodyStr);
+                r.setHttpMethod('post');
+                var response = r.execute();
+                var responseBody = response.getBody();
+                var httpStatus = response.getStatusCode();
+
+            }
+            if (this.debug_mode) {
+                this.debug_record.meta_data = responseBody;
+                this.debug_record.update();
+            }
+            if (httpStatus != "200") {
+                return "";
+            }
+
+            var parsedResponse = JSON.parse(responseBody);
+            var attributes = parsedResponse.value;
+
+            for (var i = 0; i < attributeNamesObj.length; i++) {
+                var attribute_Name = attributeNamesObj[i].trim().toLowerCase();
+                for (var j = 0; j < attributes.length; j++) {
+                    if (attributes[j].ATTRIBUTE_NAME.trim().toLowerCase() === attribute_Name) {
+                        attributeMap[attribute_Name] = attributes[j].ATTRIBUTE_VALUE;
+                        break;
+                    }
+                }
+            }
+
+            return attributeMap;
+
+        }
+    },
+
+    getmeta: function() {
+
+        if (this.device_overview) {
+            try {
+                var urlgetmeta = this.system + "/$metadata_1000000000000,device_inventory,0?$report_tags=Snow_inc:get_fields";
+                if (this.authentication_type_data == "Oauth 2.0") {
+                    var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+                    r.setHttpMethod("get");
+                    r.setStringParameterNoEscape('url', urlgetmeta);
+                    r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+                    r.setHttpTimeout(this.api_timeout);
+                } else {
+                    var r = new sn_ws.RESTMessageV2();
+                    r.setHttpMethod("get");
+                    r.setEndpoint(urlgetmeta);
+                    r.setBasicAuth(this.user_name, this.password);
+                }
+                var response = r.execute();
+                var responseBody = response.getBody();
+                var httpStatus = response.getStatusCode();
+                if (this.debug_mode) {
+                    this.debug_record.meta_data = responseBody;
+                    this.debug_record.update();
+                }
+
+                if (httpStatus != "200") {
+                    try {
+                        var responseJson = JSON.parse(responseBody);
+                        var errorMessage = responseJson.error && responseJson.error.message ?
+                            responseJson.error.message :
+                            "An error occurred, but no specific message was provided.";
+
+                        gs.addErrorMessage(errorMessage);
+                        return false;
+                    } catch (e) {
+                        gs.addErrorMessage("Failed to process the error response for status " + httpStatus + ". Error: " + e.message);
+                        return false;
+                    }
+                }
+                var jsonObject = gs.xmlToJSON(responseBody);
+                var str_obj = JSON.stringify(jsonObject);
+                var obj = JSON.parse(str_obj);
+                var cat_count = 0;
+                var oldcat_count = 0;
+                var field_count = 1;
+                var i = 0;
+                while (i < obj["edmx:Edmx"]["edmx:DataServices"].Schema.EntityType.Property.length) {
+                    var name = obj["edmx:Edmx"]["edmx:DataServices"].Schema.EntityType.Property[i].Name.toString();
+                    var field_type = obj["edmx:Edmx"]["edmx:DataServices"].Schema.EntityType.Property[i].Type.toString();
+                    if ((name != "ACCOUNT_ID") && (name != "ACCOUNT_NAME") && (name != "HEALTH_STATUS") && (name != "MOBILE_CARRIER") && (name != "DEVICE_ID_MOBILE_OR_MAC") && (name.indexOf("RAW_CUSTOM_ATTRIBUTE_") == -1) && (name.indexOf("VIRTUAL_APP_") == -1) && (name != "")) {
+                        cat_count = this.insert_field(name, cat_count, field_count);
+                        if (oldcat_count == cat_count)
+                            field_count++;
+                        else {
+                            field_count = 1;
+                            oldcat_count = cat_count;
+                        }
+                        this.enter_tech_name(name, cat_count, field_count, field_type);
+                    }
+                    i++;
+                }
+                this.updatefields();
+                gs.addInfoMessage("Operation successful");
+            } catch (ex) {
+                gs.addErrorMessage("The operation was unsuccessful. Error details: " + ex.message);
+            }
+        } else {
+            gs.addErrorMessage("Please active the record before pressing the button");
+        }
+
+    },
+    getremediation: function() {
+        var url = this.system + "/REMEDIATION_ACTIONS_INVENTORY?$filter=account_id eq " + this.account_id + "&$select=action_name,action_description,action_expiration_in_hours,Is_permitted_for_service_desk,is_user_confirmation_required,is_snooze_allowed,ACTION_PARAMETER_IS_USED,ACTION_PARAMETER_IS_MANDATORY,ACTION_PARAMETER_NAME,ACTION_PARAMETER_DESCRIPTION,ACTION_PARAMETER_SAMPLE,IS_SUPPORTED_MACOS,IS_SUPPORTED_WINDOWS&$orderby=action_name&$report_tags=Snow_inc:rem_list";
+        url = encodeURI(url);
+        if (this.authentication_type_data == "Oauth 2.0") {
+            var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+            r.setHttpMethod("get");
+            r.setStringParameterNoEscape('url', url);
+            r.setAuthenticationProfile('oauth2', this.oauth_profile_data);
+            r.setHttpTimeout(this.api_timeout);
+        } else {
+            var r = new sn_ws.RESTMessageV2();
+            r.setHttpMethod("get");
+            r.setBasicAuth(this.user_name, this.password);
+            r.setEndpoint(url);
+        }
+        var response = r.execute();
+        var responseBody = response.getBody();
+        var httpStatus = response.getStatusCode();
+
+        if (httpStatus == "200") {
+
+            var obj = JSON.parse(responseBody);
+            if (this.debug_mode) {
+                this.debug_record.remediation_actions_inventory = "httpStatus " + httpStatus + " responseBody " + responseBody;
+                this.debug_record.update();
+            }
+            var keep_actions = [];
+
+            for (var i = 0, counter = 10; i <= obj.value.length - 1; i++) {
+                var action_name = obj.value[i].ACTION_NAME.toString();
+                keep_actions.push(action_name);
+                var action_description = obj.value[i].ACTION_DESCRIPTION.toString();
+                var is_permitted_for_service_desk = obj.value[i].IS_PERMITTED_FOR_SERVICE_DESK.toLowerCase();
+                var is_user_confirmation_required = obj.value[i].IS_USER_CONFIRMATION_REQUIRED.toLowerCase();
+                var is_snooze_allowed = obj.value[i].IS_SNOOZE_ALLOWED.toLowerCase();
+                var action_parameter_is_used = obj.value[i].ACTION_PARAMETER_IS_USED.toLowerCase();
+                var action_parameter_is_mandatory = obj.value[i].ACTION_PARAMETER_IS_MANDATORY.toLowerCase();
+                var action_parameter_name = obj.value[i].ACTION_PARAMETER_NAME;
+                var action_expiration = obj.value[i].ACTION_EXPIRATION_IN_HOURS;
+                var macOS_support = obj.value[i].IS_SUPPORTED_MACOS.toLowerCase();
+                var windows_support = obj.value[i].IS_SUPPORTED_WINDOWS.toLowerCase();
+                var action_parameter_description = obj.value[i].ACTION_PARAMETER_DESCRIPTION;
+                var action_parameter_sample = obj.value[i].ACTION_PARAMETER_SAMPLE;
+                var order = counter;
+                counter += 10;
+                this.enter_remediation(action_name, action_description, is_permitted_for_service_desk, is_user_confirmation_required, is_snooze_allowed, action_parameter_is_used, action_parameter_is_mandatory, action_parameter_name, action_expiration, macOS_support, windows_support, order, action_parameter_description, action_parameter_sample);
+            }
+            this.delete_old_actions(keep_actions);
+            gs.addInfoMessage("Operation successful");
+        } else {
+            gs.addErrorMessage("The operation was unsuccessful.");
+        }
+    },
+    delete_old_actions: function(keep_actions) {
+        var gr1 = new GlideRecord('x_atern_incident_remediation_list_configuration');
+        keep_actions.forEach(function(action) {
+            gr1.addQuery('action_name', '!=', action);
+        });
+        if (this.domainseperated == "true")
+            gr1.addQuery("sys_domain", this.domain);
+        gr1.query();
+
+        while (gr1.next()) {
+            //Delete each record in the query result set
+            gr1.deleteRecord();
+        }
+    },
+    enter_remediation: function(action_name, action_description, is_permitted_for_service_desk, is_user_confirmation_required, is_snooze_allowed, action_parameter_is_used, action_parameter_is_mandatory, action_parameter_name, action_expiration, macOS_support, windows_support, order, action_parameter_description, action_parameter_sample) {
+        var gr = new GlideRecord('x_atern_incident_remediation_list_configuration');
+        gr.addQuery('action_name', action_name);
+        if (this.domainseperated == "true")
+            gr.addQuery("sys_domain", this.domain);
+        gr.query();
+        if (gr.next()) {
+            gr.is_snooze_allowed = is_snooze_allowed;
+            gr.action_name = action_name;
+            if (gr.action_description == gr.display_tooltip)
+                gr.display_tooltip = action_description;
+            gr.action_description = action_description;
+            if (gr.is_permitted_for_service_desk == gr.visible)
+                gr.visible = is_permitted_for_service_desk;
+            gr.is_permitted_for_service_desk = is_permitted_for_service_desk;
+            gr.action_parameter_name = action_parameter_name;
+            gr.action_parameter_sample = action_parameter_sample;
+            if (action_parameter_is_used == "false") {
+                action_parameter_is_mandatory == "false";
+                gr.action_parameter_is_mandatory = action_parameter_is_mandatory;
+                gr.action_parameter_is_used = action_parameter_is_used;
+            } else if (action_parameter_is_used == "true") {
+                gr.action_parameter_is_mandatory = action_parameter_is_mandatory;
+                gr.action_parameter_is_used = action_parameter_is_used;
+            }
+            gr.is_user_confirmation_required = is_user_confirmation_required;
+            gr.expiration_time = action_expiration;
+            gr.macos_support = macOS_support;
+            gr.windows_support = windows_support;
+            gr.action_parameter_description = action_parameter_description;
+            gr.update();
+        } else {
+            gr.initialize();
+            if (this.domainseperated == "true")
+                gr.sys_domain = this.domain;
+            gr.is_snooze_allowed = is_snooze_allowed;
+            gr.action_name = action_name;
+            gr.action_description = action_description;
+            gr.is_permitted_for_service_desk = is_permitted_for_service_desk;
+            gr.action_parameter_name = action_parameter_name;
+            gr.action_parameter_sample = action_parameter_sample;
+            if (action_parameter_is_used == "false") {
+                action_parameter_is_mandatory == "false";
+                gr.action_parameter_is_mandatory = action_parameter_is_mandatory;
+                gr.action_parameter_is_used = action_parameter_is_used;
+            } else if (action_parameter_is_used == "true") {
+                gr.action_parameter_is_mandatory = action_parameter_is_mandatory;
+                gr.action_parameter_is_used = action_parameter_is_used;
+            }
+            gr.is_user_confirmation_required = is_user_confirmation_required;
+            gr.display_name = action_name;
+            gr.visible = is_permitted_for_service_desk;
+            gr.display_tooltip = action_description;
+            gr.expiration_time = action_expiration;
+            gr.macos_support = macOS_support;
+            gr.windows_support = windows_support;
+            gr.order = order;
+            gr.action_parameter_description = action_parameter_description;
+            gr.insert();
+        }
+
+    },
+    type: 'Aternity_meta'
+
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-05-08 13:38:00</sys_created_on>
+        <sys_id>c0b49dfcdb847010c4b50114b99619e8</sys_id>
+        <sys_mod_count>2564</sys_mod_count>
+        <sys_name>Aternity_meta</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_c0b49dfcdb847010c4b50114b99619e8</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-08 14:55:37</sys_updated_on>
+    </sys_script_include>
+</record_update>

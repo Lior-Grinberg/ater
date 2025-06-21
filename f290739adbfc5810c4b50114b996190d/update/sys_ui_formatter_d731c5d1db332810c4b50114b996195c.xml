@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_formatter">
+    <sys_ui_formatter action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <angular_module/>
+        <formatter>Aternity_IncidentSection_UI.xml</formatter>
+        <name>Aternity Incident Section Formatter</name>
+        <seismic_component/>
+        <sys_class_name>sys_ui_formatter</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-04-27 15:13:39</sys_created_on>
+        <sys_id>d731c5d1db332810c4b50114b996195c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Aternity Incident Section Formatter</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_formatter_d731c5d1db332810c4b50114b996195c</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2021-04-27 15:13:39</sys_updated_on>
+        <table>incident</table>
+        <type>formatter</type>
+    </sys_ui_formatter>
+</record_update>

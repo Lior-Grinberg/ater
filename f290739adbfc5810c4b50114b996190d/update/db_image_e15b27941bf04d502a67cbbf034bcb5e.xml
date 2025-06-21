@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image>757beb541bf04d502a67cbbf034bcb0d</image>
+        <name>aternity-logo.svg</name>
+        <size_bytes>5192</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-12-29 14:17:02</sys_created_on>
+        <sys_id>e15b27941bf04d502a67cbbf034bcb5e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>aternity-logo.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_e15b27941bf04d502a67cbbf034bcb5e</sys_update_name>
+        <sys_updated_by>moran</sys_updated_by>
+        <sys_updated_on>2021-12-29 14:17:25</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>426afc051ebebe1952278f12898d4113f498133e76ee3efe6878149995cfa615</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>5192</size_bytes>
+        <size_compressed>2043</size_compressed>
+        <state>available</state>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-12-29 14:17:24</sys_created_on>
+        <sys_id>757beb541bf04d502a67cbbf034bcb0d</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-12-29 14:17:25</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>e15b27941bf04d502a67cbbf034bcb5e</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="757beb541bf04d502a67cbbf034bcb0d">757beb541bf04d502a67cbbf034bcb0d</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-12-29 14:17:24</sys_created_on>
+        <sys_id>b57beb541bf04d502a67cbbf034bcb0d</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>2712</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="757beb541bf04d502a67cbbf034bcb0d">757beb541bf04d502a67cbbf034bcb0d</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-12-29 14:17:24</sys_created_on>
+        <sys_id>397beb541bf04d502a67cbbf034bcb0d</sys_id>
+    </sys_attachment_doc>
+</record_update>

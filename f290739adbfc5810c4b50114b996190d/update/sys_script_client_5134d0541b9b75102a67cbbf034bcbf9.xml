@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field/>
+        <global>false</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Hide x_atern_incident_user_device</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+    var ga = new GlideAjax('x_atern_incident.DeviceDataButton');
+    ga.addParam('sysparm_name', 'show_user_device_field');
+    ga.addParam('sysparm_domain', g_form.getValue("sys_domain"));
+    ga.addParam('sysparm_incid', g_form.getUniqueValue());
+    ga.getXML(getAnswer);
+
+    function getAnswer(response) {
+        var answer = response.responseXML.documentElement.getAttribute('answer');
+
+        if (answer == 'false') {
+            // Hide field
+            g_form.setDisplay('x_atern_incident_user_device', false);
+        } else {
+            // Display field
+            g_form.setDisplay('x_atern_incident_user_device', true);
+            if (!g_form.getValue("x_atern_incident_user_device")) {
+                g_form.setValue("x_atern_incident_user_device", answer);
+            }
+        }
+    }
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>chiccom</sys_created_by>
+        <sys_created_on>2023-12-19 17:48:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5134d0541b9b75102a67cbbf034bcbf9</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Hide x_atern_incident_user_device</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_client_5134d0541b9b75102a67cbbf034bcbf9</sys_update_name>
+        <sys_updated_by>chiccom</sys_updated_by>
+        <sys_updated_on>2025-02-03 22:02:04</sys_updated_on>
+        <table>incident</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view>device_data</view>
+    </sys_script_client>
+</record_update>

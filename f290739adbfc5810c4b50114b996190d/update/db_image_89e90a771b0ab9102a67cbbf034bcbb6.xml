@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format>png</format>
+        <height>19</height>
+        <image>26f90a771b0ab9102a67cbbf034bcbc1</image>
+        <name>x_atern_incident.devices.png</name>
+        <size_bytes>993</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-10-29 20:01:58</sys_created_on>
+        <sys_id>89e90a771b0ab9102a67cbbf034bcbb6</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_atern_incident.devices.png</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_89e90a771b0ab9102a67cbbf034bcbb6</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2023-10-29 20:02:10</sys_updated_on>
+        <thumbnail/>
+        <width>19</width>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#323232</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <file_name>image</file_name>
+        <hash>29db4bf294d761f52320fd70fdf075e21a87f3584962bc5fa3ede11a481d553b</hash>
+        <image_height>19</image_height>
+        <image_width>19</image_width>
+        <size_bytes>993</size_bytes>
+        <size_compressed>663</size_compressed>
+        <state>available</state>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-10-29 20:02:09</sys_created_on>
+        <sys_id>26f90a771b0ab9102a67cbbf034bcbc1</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2023-10-29 20:02:10</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>89e90a771b0ab9102a67cbbf034bcbb6</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="26f90a771b0ab9102a67cbbf034bcbc1">26f90a771b0ab9102a67cbbf034bcbc1</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-10-29 20:02:09</sys_created_on>
+        <sys_id>66f90a771b0ab9102a67cbbf034bcbc1</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>fVPPa9RAFI4WREqLh1aoXhzSghXcTCb7I01oLGuzaxeasm5XuocqnU1mu7FNJiZTN+1BUXqwKIL+DR7EgzdPCh4UqSCIRwWPgjcV2ptQJ9vuKsJ2YGbee3zfmzdvvtkqz10a7D/dLwjCYGnGrPB9KJnHj/E1LOc+8O0UK9TYPG2wFg6JkHdonYCSh5dJhWBn/cZ7MikIfWfdao3VrFndpp6EE4wUe4GQjMmpOMD2CmGgTpZd3xB/vHwtAtcxxIWsJVvBNGm6Mxshmd+Yq9obK7bmiFMXwGSs8wQeYRjE3qof6bEhtvPq3E7CUARtCFsxxP2ialYZTNOQAE1CKVuWEVC5lckpE5qmqup5oMhKGso5qGRTSlrPqjrKgIMh8hNDp6FXzOLBedwzxCZjgQ5hq9WSWmmJhssQaZoGZQUqSoojUtG6z3Cc8qPRTgaTRHboBsylPkh8XKdrzBDFzjW8oJvWjw5axZsGYxxAJMnwH6BlHQ71vC46YhXSOBwdVdcDAiskomuhzR+vMZqQA306JJjRsErpaqeT5SZlNGrSACgZSQXjC67v0FZ0rk2wLL3kRwz7NimZhsgjkus6uqpqWiaXltVcVkaoUMgXUWECITldzJkZE6EO16T2mkd81uE6f7moJzfRwz6bhO5N4hRD6oH2nXW3Zy1KoXct+1ynZy1KsScX8mLgfy/dCXH5JGZXu9zpqp/4XPIh1/b3h/o3/i/KJTNfjb/Uf+/tTfW9EIb6Th65MmjfQTu7u/lh7VbjVfxLfIa3H4+N7Nxubn5+ioefpBc/WVv4wdjI9r2PcuXqzpmvS+8eXb4+cO2NcHRA2Jw9MX7/58Db5NOVCnPm84tLd/8A412cGOEDAAA=</data>
+        <length>872</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="26f90a771b0ab9102a67cbbf034bcbc1">26f90a771b0ab9102a67cbbf034bcbc1</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-10-29 20:02:09</sys_created_on>
+        <sys_id>e6f90a771b0ab9102a67cbbf034bcbc1</sys_id>
+    </sys_attachment_doc>
+</record_update>

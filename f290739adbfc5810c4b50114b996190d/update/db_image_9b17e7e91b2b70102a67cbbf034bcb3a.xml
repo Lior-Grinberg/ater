@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <format>png</format>
+        <height>17</height>
+        <image>4537e7251b2b70102a67cbbf034bcb65</image>
+        <name>aternity.png</name>
+        <size_bytes>1420</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-11-01 07:52:28</sys_created_on>
+        <sys_id>9b17e7e91b2b70102a67cbbf034bcb3a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>aternity.png</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_9b17e7e91b2b70102a67cbbf034bcb3a</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2021-11-01 07:52:43</sys_updated_on>
+        <thumbnail/>
+        <width>17</width>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#bbe1cc</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <file_name>image</file_name>
+        <hash>c40de52b40602f09d630727eee8ba62729e91197a3b40eebf32672acc15b88ff</hash>
+        <image_height>17</image_height>
+        <image_width>17</image_width>
+        <size_bytes>1420</size_bytes>
+        <size_compressed>1116</size_compressed>
+        <state>available</state>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-11-01 07:52:42</sys_created_on>
+        <sys_id>4537e7251b2b70102a67cbbf034bcb65</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2021-11-01 07:52:43</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>9b17e7e91b2b70102a67cbbf034bcb3a</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="4537e7251b2b70102a67cbbf034bcb65">4537e7251b2b70102a67cbbf034bcb65</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-11-01 07:52:42</sys_created_on>
+        <sys_id>8537e7251b2b70102a67cbbf034bcb65</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>nVR9TBtlGC8jOJwiI7As4JKdxxya0d4H/eAOaoEeSM1KsSXCH35wvXtLT+hduTtsqQ6Y4hQyheiyYfhjmqgYl5VBxaAwYFmcuI9iFE0295G4MWSbkP3hCAjUK1I0ZuEP3+T9eN77/Z7neZ+PaysvezppS8YWlUqVZCml7MqeEp2Jm5T1i+TvjytbulxcJTsEl+yjRaAqZAUngCweugbYAc021n8H8lWqeJmrqJKrrHtJRvBo6ChG4/d4VdGRb/J7aaYWyJAT1HC8EZ4bGoUhjjXClToravWagZsrDYjAESirYAK1DMHCpqegfD+pKPAAmYb8njpeIv1GeFUvqZyj1wgMrULkWiP8t1NV1nLILIgAMmhQNYOiKGQgNCztpBmnMxvCURxDUC2CadUoSuYQpFYLrQ1YMSeyLtJOlawZUyQj7JZlL4kgPp9P48vRCGINghEEgaA4guNqBaGWGnmZ9qt5KTOmgQISI3JemRN4KCrTTqFBNsJw7A0er9W6rpiX1iKlxAzx014E06CIx4PE0JJsB66N0VJFoxcgdiAJDSKjJMSV+S9TG1OjQMUb0iZySlboOkpgGjyAly2UEVa+aFiOJRlAECirZdSAwQg1odfmqmknwNQA5BB6nQFnnHo8pud+fB2mxYupIgLXlpRgWLGZoMy5ZkJH4Ki+CMMKqRjXwksyzTMgxuX+4eZuyCXNIqBlQawQhLpYGZS7BVmQ3IIXwnGNFnqikuNZwSc9Gc3RmqtA5F4BbIkoeKDVIJPcfRzAMUaHAz2q1htc0XrSokoEAKOmc5QVw/SYk3XBa3z2/wYPUZxC/lM5sSulHKPH9UZQhPVWArzSP6LSKIe6FvepVHFBC1VY4b/kXIpETPFtLQkdl09PIHnhYDVb7dbatk7dyHqmY+7wpe65nfHpz71HYrfC3vrdz2e8bMtucbdUvZ395gsTI1nTQ+HjrRIyetJWMDFvGi360hCXzou7P/i6qeDMzBHDg7+1Xb64+Md8MsQM1HjaD2d13r1zu9tnMl2fDC39vPJ7si0u/fEDH+04X9c7Mrq5P7Icab43pb4TeLE50nmi56FxdJtDGNi7CZ9MYB+zH7l69XQwy1sb39oXfvRs580ULO3ZB/DZptcOFNsW+oiel64sTYznnvuKOuhQafhdnz6yyzY8uD84PXmuOzXcuzxx/pCQtqN3dmnm2+n5a6aCj6ncgsW5fYF7U/O+NOOpXzIiIfxuX/3t/jaQjYSO3poJjV8TPvnzYmVN/raHm5cTisd+8iWncFnyqz8eO7pzJYRHhhcGf5V1HYmbt5uODZ9of6N9ABpKNOwxZWaWzrz7Vs+Fb3QfBvRX8sJjF876I/HXQ7aiz/tP3ZxtIoNn7ORWx/6y/vd/CCwsG/Ny9lCtKV3bgyPNXYMDjhtJ5nZzectIampm6srwWGnJSlwiqvIJn73Duk4mR/+PluIyKlhU/fpfx8jokowFAAA=</data>
+        <length>1476</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="4537e7251b2b70102a67cbbf034bcb65">4537e7251b2b70102a67cbbf034bcb65</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-11-01 07:52:42</sys_created_on>
+        <sys_id>0937e7251b2b70102a67cbbf034bcb65</sys_id>
+    </sys_attachment_doc>
+</record_update>

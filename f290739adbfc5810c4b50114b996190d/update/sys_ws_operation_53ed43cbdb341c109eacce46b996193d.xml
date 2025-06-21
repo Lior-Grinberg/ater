@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>478a4fc7db78d810c4b50114b99619b8</enforce_acl>
+        <http_method>POST</http_method>
+        <name>New Rule</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	try {
+		// implement resource here
+		var aternityConfig = new AternityConfig();
+
+		var ruleConfigurations = new GlideRecord("x_atern_incident_rule_configurations");
+		var queryParams = request.queryParams;
+		var correlation_display = queryParams.component[0];
+		var type = queryParams.eventType[0];
+		var rule_name = queryParams.ruleName[0];
+		ruleConfigurations.addQuery("correlation_display", correlation_display);
+		ruleConfigurations.addQuery("type", type);
+		ruleConfigurations.addQuery("rule_name", rule_name);
+		ruleConfigurations.query();
+		
+		if (!ruleConfigurations.next()){
+			ruleConfigurations.initialize();
+			ruleConfigurations.correlation_display = correlation_display;
+			ruleConfigurations.type = type;
+			ruleConfigurations.rule_name = rule_name;
+			ruleConfigurations.company = gs.getUser().getCompanyID();
+			ruleConfigurations.insert();
+		}
+	} catch (err) {
+		gs.error("Error adding rule config: " + err);
+	}
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_atern_incident/aternity_integration/new_rule</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/new_rule</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:38:45</sys_created_on>
+        <sys_id>53ed43cbdb341c109eacce46b996193d</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>New Rule</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ws_operation_53ed43cbdb341c109eacce46b996193d</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2024-01-14 14:43:26</sys_updated_on>
+        <web_service_definition display_value="Aternity Integration">73f987c7db78d810c4b50114b9961968</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

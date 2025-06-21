@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="ui_display_preferences" label="Display Preferences" language="en" table="x_atern_incident_integration_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>ui_display_preferences</element>
+            <help/>
+            <hint/>
+            <label>Display Preferences</label>
+            <language>en</language>
+            <name>x_atern_incident_integration_configuration</name>
+            <plural>Display Preferences</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2023-09-27 16:28:12</sys_created_on>
+            <sys_id>6c26e0691b2139102a67cbbf034bcbc7</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Display Preferences</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_integration_configuration_ui_display_preferences_en</sys_update_name>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2023-11-23 17:05:47</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

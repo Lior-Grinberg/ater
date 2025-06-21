@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="daa4d4e3dba80950d203ac1b1396198e" sys_domain="global" table="x_atern_incident_remediation_log" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>0</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>196230771bdad5102a67cbbf034bcb85</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number</element>
+            <position>1</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>996230771bdad5102a67cbbf034bcb85</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>2</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>1d6230771bdad5102a67cbbf034bcb85</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>reference_number</element>
+            <position>3</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>9d6230771bdad5102a67cbbf034bcb85</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>4</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>116230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_name</element>
+            <position>5</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>916230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>parameter</element>
+            <position>6</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>156230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>remediation_status</element>
+            <position>7</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>956230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>8</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>196230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>check_number</element>
+            <position>9</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>996230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>10</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>1d6230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>task</element>
+            <position>11</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>9d6230771bdad5102a67cbbf034bcb86</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>messages</element>
+            <position>12</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>116230771bdad5102a67cbbf034bcb87</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>activity.xml</element>
+            <position>13</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 07:32:54</sys_created_on>
+            <sys_id>916230771bdad5102a67cbbf034bcb87</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter display_value="Activities (filtered)">444ea5c6bf310100e628555b3f0739d6</sys_ui_formatter>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 07:32:54</sys_updated_on>
+            <sys_user/>
+            <type>formatter</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>account</element>
+            <position>14</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-10-09 08:20:12</sys_created_on>
+            <sys_id>963db8331b1ed5102a67cbbf034bcb12</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-10-09 08:20:12</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>interaction</element>
+            <position>15</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2025-06-06 18:19:33</sys_created_on>
+            <sys_id>0526a7d4930aa6100bfdfb4e1dba10fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_log" sys_domain="global" view="Default view">daa4d4e3dba80950d203ac1b1396198e</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2025-06-06 18:19:33</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_atern_incident_remediation_log</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2021-12-26 14:43:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>daa4d4e3dba80950d203ac1b1396198e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_atern_incident_remediation_log</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_daa4d4e3dba80950d203ac1b1396198e</sys_update_name>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2021-12-26 14:43:27</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>cms</category>
+        <format/>
+        <height/>
+        <image>1c51c8aedb880950c4b50114b99619aa</image>
+        <name>newgrey.svg</name>
+        <size_bytes>553</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-11-28 14:13:33</sys_created_on>
+        <sys_id>0b318caadb880950c4b50114b9961933</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>newgrey.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_0b318caadb880950c4b50114b9961933</sys_update_name>
+        <sys_updated_by>moran</sys_updated_by>
+        <sys_updated_on>2021-11-28 14:13:38</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>57e70e609d5d4a9a08dd05968a51df4559d99054c9abe4b1c85e7e16ebc622dd</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>553</size_bytes>
+        <size_compressed>376</size_compressed>
+        <state>available</state>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-11-28 14:13:38</sys_created_on>
+        <sys_id>1c51c8aedb880950c4b50114b99619aa</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-11-28 14:13:38</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>0b318caadb880950c4b50114b9961933</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="1c51c8aedb880950c4b50114b99619aa">1c51c8aedb880950c4b50114b99619aa</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-11-28 14:13:38</sys_created_on>
+        <sys_id>5c51c8aedb880950c4b50114b99619aa</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>bZBfS8MwFMWfHfgdrvFJaP50k9F1raJORVAQBnuVrs1qMSYlSddW8bubtENEJIGbnPPLSXKTy+5dwJ5rUymZopAwBFzmqqhkmaLG7nCELi+OJ8kJxnDPJdeZVTqGq0JtOTwI0Rg7SDCdE0bCANabe7jtaqUtPIumxA8SyCBuxkticCCD66YSBbAzAIx9vtmXv58RIqiKFD1mPdcvbuNeKU2KXq2tY0rbtiXtjChd0iljjLrDByTuRCXf/gPDxWJBB9ehKWJ1h6Af6/HkCPYVb6+VN4BBOHcTgbG94CniMtsKjrdZ/lZq1cgilryFH245XB2bOssdXGtuuN5zNHzKB4Dta2dY3lmaG+ONI2Is+9xVQsRSSb78GqVwlE5v7laL1cqrCR0ifFbpzyV1Zl8hF5lxzXAZCFyTnljAEPUM9dAfJhyZKGA3MzIPHBuMNTK+Rn6YCA9rHK3DKTn3ZsA+Dpmuua5+A09y3vMpAgAA</data>
+        <length>488</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="1c51c8aedb880950c4b50114b99619aa">1c51c8aedb880950c4b50114b99619aa</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-11-28 14:13:38</sys_created_on>
+        <sys_id>dc51c8aedb880950c4b50114b99619aa</sys_id>
+    </sys_attachment_doc>
+</record_update>

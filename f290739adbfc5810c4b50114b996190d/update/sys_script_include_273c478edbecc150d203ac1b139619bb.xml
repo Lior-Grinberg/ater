@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.Remidiation_AJAX</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>Remidiation_AJAX</name>
+        <script><![CDATA[var Remidiation_AJAX = Class.create();
+Remidiation_AJAX.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    GetParameters: function() {
+        this.domainseperated = gs.getProperty("glide.sys.domain.partitioning", "");
+        var inc_details = this.getParameter("sysparm_inc_details");
+        var tablename = this.getParameter("sysparm_tablename");
+
+        var gr = new GlideRecordSecure(tablename);
+        gr.addQuery("sys_id", inc_details);
+        gr.query();
+        if (gr.next()) {
+            gs.info("tablename " + tablename);
+            gs.info("inc_details " + inc_details);
+            this.account_id = "";
+            this.show_remediation_action = false;
+            this.remediation_user_name = "";
+            this.remediation_password = "";
+            this.account = "";
+            this.user_id = gs.getUserName();
+            this.device_from_user = "";
+            this.authentication_type = 'Basic';
+            this.oauth_profile = '';
+            var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+            gr_account.addQuery("active", true);
+            if (this.domainseperated == "true") {
+                gr_account.addQuery("sys_domain", gr.sys_domain);
+            }
+            gr_account.query();
+            if (gr_account.next()) {
+                this.account_id = gr_account.account_id;
+                this.remediation_user_name = gr_account.remediation_user_name;
+                this.remediation_password = gr_account.remediation_password.getDecryptedValue();
+                this.show_remediation_action = gr_account.show_remediation_action;
+                this.user_name = gr_account.user_name;
+                this.password = gr_account.password.getDecryptedValue();
+                this.url = gr_account.url;
+                this.account = gr_account.sys_id;
+                if (gr_account.authentication_type != "")
+                    this.authentication_type = gr_account.authentication_type;
+                this.oauth_profile = gr_account.oauth_profile;
+            }
+
+
+
+            var param = this.getParameter("sysparm_param");
+            var action_name = this.getParameter("sysparm_action_name");
+            var device_name = this.getParameter("sysparm_ater_device");
+            var action_tech = this.getParameter("sysparm_action_tech");
+
+            var inc_num = gr.number;
+            this.device_from_user = device_name;
+            gs.info("inc_num " + inc_num);
+			gs.info("device_name " + device_name);
+            this.postAction(inc_num, action_name, action_tech, device_name, inc_details, param, tablename);
+        }
+    },
+    getdomainname: function() {
+        var domain = this.url.replace("-odata", "");
+        var pos = domain.indexOf("/", 10);
+        domain = domain.substr(0, pos);
+        return domain;
+    },
+    postAction: function(inc_num, action_name, action_tech, device_name, inc_details, param, tablename) {
+        var domain = this.getdomainname();
+        action_name = action_name.replaceAll("+", ' ');
+        var errorCode = "";
+        var referenceId = "";
+        var work_notes = "";
+        var returned_value = "";
+        var url = domain + "/component/remediation/external/executeCommand?accountId=" + this.account_id + "&actionName=" + encodeURIComponent(action_tech) + "&deviceName=" + device_name + "&triggerBy=" + encodeURIComponent(this.user_id) + "&runDescription=" + inc_num + "&parameterValue1=" + param;
+        gs.info("url " + url);
+        if (this.authentication_type == "Oauth 2.0") {
+            var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'Post_details');
+            r.setHttpMethod("post");
+            r.setStringParameterNoEscape('url', url);
+            r.setAuthenticationProfile('oauth2', this.oauth_profile);
+            var response = r.execute(); // executeAsync  execute
+            var httpStatus = response.getStatusCode();
+            var responseBody = response.getBody();
+
+        } else {
+			gs.info("this.remediation_user_name " + this.remediation_user_name + " this.remediation_password "+this.remediation_password);
+            var rws = new sn_ws.RESTMessageV2();
+            rws.setHttpMethod("post");
+            rws.setBasicAuth(this.remediation_user_name, this.remediation_password);
+            rws.setEndpoint(url);
+            var response = rws.execute();
+            var responseBody = response.getBody();
+            gs.info("responseBody " + responseBody);
+            var httpStatus = response.getStatusCode();
+        }
+
+        if (httpStatus == "200") {
+            var obj = JSON.parse(responseBody);
+            var successful = obj.successful.toString();
+            var message = obj.message.toString();
+            if (successful == 'false') {
+                errorCode = obj.errorCode.toString();
+                var device_check = message.includes(device_name);
+                var action_check = message.includes(action_name);
+                if (device_check == true && action_check == true) {
+                    var bold_device = message.split('device', 2);
+                    var new_message = bold_device[1].replace(device_name, "");
+                    var bold_action = message.split('is', 2);
+                    var new_action = bold_action[0].replace(action_name, "");
+                    new_action = bold_action[0].replace('Action', "");
+                    var first_word = message.split(action_name, 2);
+                    var split1 = message.split(action_name, 2);
+                    var rest_message = split1[1].split(device_name, 2);
+                    work_notes = "Failed to trigger remediation " + "[code]<b>" + action_name + "</b> [/code]" + "." + " \n Error: " + first_word[0] + "[code]<b>" + new_action + "</b> [/code]" + rest_message[0] + new_message + "[code]<b>" + bold_device[1] + "</b> [/code]" + ".";
+                } else
+                    work_notes = "Failed to trigger remediation " + "[code]<b>" + action_name + "</b> [/code]" + "." + " \n Error: " + message + "";
+            }
+            if (successful == 'true') {
+                var nowdatetime = new GlideDateTime();
+                var mins = new GlideDateTime();
+                mins.addSeconds(60);
+                var ms = mins.getNumericValue() - nowdatetime.getNumericValue();
+                var m = ((ms / 1000) / 60);
+                referenceId = obj.referenceId.toString();
+                work_notes = "Remediation " + "[code]<b>" + action_name + "</b> [/code]" + " triggered successfully with the following information:  \n Device: " + device_name + "\n Reference ID: " + referenceId + "\n Message: " + message + "\n Please refer to the incident Notes (of type 'Remediation State Notes') to check its progress. Next progress update will be in " + m + " minutes.";
+            }
+        }
+        if (httpStatus == "403")
+            work_notes = "Failed to trigger remediation " + "[code]<b>" + action_name + "</b> [/code]" + ", Insufficient permissions for user: " + this.remediation_user_name;
+
+        if (httpStatus != "403" && httpStatus != "200")
+            work_notes = " Failed to trigger remediation " + "[code]<b>" + action_name + "</b> [/code]" + " \n Error Code: " + errorCode;
+
+        returned_value = work_notes.replace(/(?:\[\/?code\]|<\/?b>)/g, '');
+        this.getRootElement().setAttribute('groupinfo', returned_value);
+
+        var ingr = new GlideRecordSecure(tablename);
+        ingr.addQuery("number", inc_num);
+        ingr.query();
+        if (ingr.next()) {
+            ingr.work_notes = work_notes;
+            ingr.update();
+        }
+
+        var lggr = new GlideRecord("x_atern_incident_remediation_log");
+        lggr.initialize();
+        lggr.action_name = action_name;
+        lggr.check_number = "0";
+        lggr.parameter = param;
+        if (tablename == "incident")
+            lggr.task = inc_details;
+        if (tablename == "interaction")
+            lggr.interaction = inc_details;
+        lggr.account = this.account;
+        if (successful == "true") {
+            lggr.reference_number = referenceId;
+            lggr.remediation_status = "Remediation Action Triggered";
+            lggr.first_check = mins;
+        } else if (successful == "false") {
+            lggr.remediation_status = "Remediation Trigger Failed";
+            lggr.messages = responseBody;
+        } else if (httpStatus == "403") {
+            lggr.remediation_status = "Remediation Trigger Failed";
+            lggr.messages = responseBody;
+        } else {
+            lggr.remediation_status = "Remediation Trigger Failed";
+            lggr.messages = responseBody;
+        }
+
+        lggr.insert();
+
+    },
+
+
+    type: 'Remidiation_AJAX'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>rank</sys_created_by>
+        <sys_created_on>2021-12-22 12:17:17</sys_created_on>
+        <sys_id>273c478edbecc150d203ac1b139619bb</sys_id>
+        <sys_mod_count>380</sys_mod_count>
+        <sys_name>Remidiation_AJAX</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_273c478edbecc150d203ac1b139619bb</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-06 18:29:48</sys_updated_on>
+    </sys_script_include>
+</record_update>

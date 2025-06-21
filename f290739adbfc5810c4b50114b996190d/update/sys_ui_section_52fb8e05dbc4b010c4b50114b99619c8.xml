@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="52fb8e05dbc4b010c4b50114b99619c8" sys_domain="global" table="x_atern_incident_incident_section" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>0</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>164ef5731b537c502a67cbbf034bcb04</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>technical_name</element>
+            <position>1</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>9a4ef5731b537c502a67cbbf034bcb04</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>label</element>
+            <position>2</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>1e4ef5731b537c502a67cbbf034bcb04</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>3</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>9e4ef5731b537c502a67cbbf034bcb04</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>visible</element>
+            <position>4</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>124ef5731b537c502a67cbbf034bcb05</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>order</element>
+            <position>5</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>924ef5731b537c502a67cbbf034bcb05</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>6</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>164ef5731b537c502a67cbbf034bcb05</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>category</element>
+            <position>7</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>964ef5731b537c502a67cbbf034bcb05</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>type</element>
+            <position>8</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>1a4e31b31b537c502a67cbbf034bcb59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_domain</element>
+            <position>9</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>9a4e31b31b537c502a67cbbf034bcb59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>field_type</element>
+            <position>10</position>
+            <sys_created_by>moran</sys_created_by>
+            <sys_created_on>2021-10-26 13:44:56</sys_created_on>
+            <sys_id>1e4e31b31b537c502a67cbbf034bcb59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_incident_section" sys_domain="global" view="Default view">52fb8e05dbc4b010c4b50114b99619c8</sys_ui_section>
+            <sys_updated_by>moran</sys_updated_by>
+            <sys_updated_on>2021-10-26 13:44:56</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_atern_incident_incident_section</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2021-05-09 12:17:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>52fb8e05dbc4b010c4b50114b99619c8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_atern_incident_incident_section</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_52fb8e05dbc4b010c4b50114b99619c8</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2021-05-09 12:17:24</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

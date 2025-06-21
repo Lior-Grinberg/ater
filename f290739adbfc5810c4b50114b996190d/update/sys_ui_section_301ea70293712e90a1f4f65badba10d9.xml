@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Notes" section_id="301ea70293712e90a1f4f65badba10d9" sys_domain="global" table="interaction" version="3" view="device_data">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>work_notes</element>
+            <position>0</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2025-05-30 19:08:07</sys_created_on>
+            <sys_id>1c2e670293712e90a1f4f65badba100c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Notes" display_value="Notes" name="interaction" sys_domain="global" view="26d8282d1b2139102a67cbbf034bcbd9">301ea70293712e90a1f4f65badba10d9</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2025-05-30 19:08:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>activity.xml</element>
+            <position>1</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2025-05-30 19:08:07</sys_created_on>
+            <sys_id>182e670293712e90a1f4f65badba100d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter display_value="Activities (filtered)">444ea5c6bf310100e628555b3f0739d6</sys_ui_formatter>
+            <sys_ui_section caption="Notes" display_value="Notes" name="interaction" sys_domain="global" view="26d8282d1b2139102a67cbbf034bcbd9">301ea70293712e90a1f4f65badba10d9</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2025-05-30 19:08:07</sys_updated_on>
+            <sys_user/>
+            <type>formatter</type>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Notes</caption>
+            <header>false</header>
+            <name>interaction</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2025-05-30 19:07:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>301ea70293712e90a1f4f65badba10d9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>interaction</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_301ea70293712e90a1f4f65badba10d9</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2025-05-30 19:07:53</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Device Data" name="device_data">26d8282d1b2139102a67cbbf034bcbd9</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

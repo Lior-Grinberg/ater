@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>cms</category>
+        <format/>
+        <height/>
+        <image>e7babac1db837010c4b50114b99619ec</image>
+        <name>agent_reporting.svg</name>
+        <size_bytes>1414</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 18:50:00</sys_created_on>
+        <sys_id>2c9ab205db837010c4b50114b9961952</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>agent_reporting.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_2c9ab205db837010c4b50114b9961952</sys_update_name>
+        <sys_updated_by>moran</sys_updated_by>
+        <sys_updated_on>2021-10-05 18:50:05</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>4707ad049f83073035f763ce9911a222839fb6bcbd01cb2a156ad4f31a8804dc</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1414</size_bytes>
+        <size_compressed>709</size_compressed>
+        <state>available</state>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 18:50:05</sys_created_on>
+        <sys_id>e7babac1db837010c4b50114b99619ec</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-10-05 18:50:05</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>2c9ab205db837010c4b50114b9961952</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="e7babac1db837010c4b50114b99619ec">e7babac1db837010c4b50114b99619ec</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 18:50:05</sys_created_on>
+        <sys_id>2bbabac1db837010c4b50114b99619ec</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>fVRta9swEP6cQv+Dpn0a2LIkv2fJSltKW+igUOjXkSpqbObZxnKaZGP/fXeS7WRjNATd6XT3PHePZS8u9j8q8qY7Uzb1kgrGKdG1atZlvVnSbf/qZ/Tiy/nZ4oPvk1td627VN92cXK6bF03uq2prehsiUjKo9sjT8y252bdN15PHarvx72vCbPDZkcxJwjgnV9uyWhP+iRDfR3zztjltQ1DysjL6sWtey0ovKWxKRUm5XtKH1UF33wQ9P5sRaL42S1r0fTsPgt1ux3Yha7pNIDnnAWBSlzLfV2X9/X+JIs/zwJ5C6pLydk/JYbBvpd5dNRglnIgc/iPp3LQrBW21nTa6e9PUjtAfKk36QwsHvd73gTIGD2bM9PwXzFHNPyb29/m3i4ohKtPLm4RjdBFYFITbYKlbZ4t21RdEVSsD0wIaJSDEV8FZ6omEpcrnLPQ4rIldU48rX4ArWAarZJHHDWyicYMF0qZGY8F1BBEE8yI0GZoUuWeKe5wBmmezYU2LlEl1rB5Ir4VwEJknhIOaOvxJg/cGCQEJchNLFQMJ0olhLy1p6NsmWGRc70w4fiYKXxZ+cidZeBzLqRFhjZ0Bi7BADjZSKE5s9YDh/RC5IJ7biDiJTHiuzjgMbADRZSGLiGXPkmXK6TjK7HEnHuxDC4egMfrXGJH4ZIAutAOHLHzC8ew8XsRiheMDGp57QAr56IUsHyVCqa0HYxjLjLrbxrK7qIAuLH/lVItHJe0uHHycZvLRFmDvgOJfzXFS5RTAvRwUQRtVLh4XoNhwX+wjhOlsmrBpGVDFvm0FhVd8Uku6e/owXYLhriyCv9+Apjpsmvp4d+AT0TZl3cNGSFASVCMiPnUkOvLUAXaSo+pjIAFnNpsu53scGaRnI3Q8OumINDn5eDQ58F4cWdxY4wqfKLB/AG6Tff+GBQAA</data>
+        <length>932</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="e7babac1db837010c4b50114b99619ec">e7babac1db837010c4b50114b99619ec</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 18:50:05</sys_created_on>
+        <sys_id>abbabac1db837010c4b50114b99619ec</sys_id>
+    </sys_attachment_doc>
+</record_update>

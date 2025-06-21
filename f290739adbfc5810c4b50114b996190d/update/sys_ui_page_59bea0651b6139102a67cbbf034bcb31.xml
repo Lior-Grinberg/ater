@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var params = decodeURIComponent(window.location.toString()).split("ui_page.do?")[1];
+var incSysid = params.match("incidentid=(.*)")[1].slice(0, 32);
+
+var details_view = 'device_data';
+
+
+document.getElementById('dialog_frame1').src = '/incident.do?sys_id=' + incSysid + '&sysparm_view=device_data&sysparm_view_forced=true&sysparm_uipage=true';
+
+     
+
+
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_atern_incident_get_device.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<style type="text/css">
+        body {
+            margin: 0;
+            overflow: hidden;
+        }		
+        #container {
+        display: flex;
+        flex-direction: column; 
+        height: 100%;
+		width: 100%;  
+    	}	
+    	#dialog_frame {
+		flex: 1; 
+        height: 30%;
+		/*width: 100%;  */
+   		}
+    	#dialog_frame1 {
+		flex: 3; 
+        height: 100%; 
+		width: 100%; 		          
+    	}
+
+</style>
+
+    <body>
+		
+        <div id="container">			     															
+			<iframe style="height:700px; width:100%;" id="dialog_frame1" scrolling="no" frameBorder="0"></iframe>            
+        </div>
+
+    </body>
+
+</j:jelly>]]></html>
+        <name>get_device</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>chiccom</sys_created_by>
+        <sys_created_on>2023-09-27 17:08:56</sys_created_on>
+        <sys_id>59bea0651b6139102a67cbbf034bcb31</sys_id>
+        <sys_mod_count>35</sys_mod_count>
+        <sys_name>get_device</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_page_59bea0651b6139102a67cbbf034bcb31</sys_update_name>
+        <sys_updated_by>chiccom</sys_updated_by>
+        <sys_updated_on>2024-05-12 16:50:01</sys_updated_on>
+    </sys_ui_page>
+</record_update>

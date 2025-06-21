@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.Remidiation_Tracking</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Remidiation_Tracking</name>
+        <script><![CDATA[var Remidiation_Tracking = Class.create();
+Remidiation_Tracking.prototype = {
+    initialize: function() {},
+    tracking: function(gr_remediation_log, mins, end) {
+        var end = end;
+        var account_id = gr_remediation_log.account.account_id;
+        var user_name = gr_remediation_log.account.user_name;
+        var password = gr_remediation_log.account.password.getDecryptedValue();
+        var baseurl = gr_remediation_log.account.url;
+        var authentication_type_data = gr_remediation_log.account.authentication_type_data;
+        var oauth_profile_data = gr_remediation_log.account.oauth_profile_data;
+        var api_timeout = gs.getProperty("x_atern_incident.api_timeout");
+        if (authentication_type_data == "")
+            authentication_type_data = 'Basic';
+        mins = parseInt(mins);
+        var url = baseurl + "/REMEDIATION_ACTIONS_RUN_RAW?$filter=account_id eq " + account_id + " and ACTION_RUN_REFERENCE_ID eq " + gr_remediation_log.reference_number + "&$select=ACTION_OUTPUT_MESSAGE,action_state,ACTION_EXECUTION_STATUS,ACTION_LAST_UPDATE_TIMESTAMP,action_snooze_number&$report_tags=Snow_inc:rem_res";
+        url = encodeURI(url);
+        if (authentication_type_data == "Oauth 2.0") {
+            var r = new sn_ws.RESTMessageV2('x_atern_incident.Aternity', 'GET_details');
+            r.setHttpMethod("get");
+            r.setStringParameterNoEscape('url', url);
+            r.setAuthenticationProfile('oauth2', oauth_profile_data);
+            r.setHttpTimeout(api_timeout);
+            var response = r.executeAsync();
+            response.waitForResponse(60);
+        } else {
+            var qws = new sn_ws.RESTMessageV2();
+            qws.setHttpMethod("get");
+            qws.setBasicAuth(user_name, password);
+            qws.setEndpoint(url);
+            var response = qws.executeAsync();
+            response.waitForResponse(60);
+        }
+
+        var responseBody = response.getBody();
+        var obj = JSON.parse(responseBody);
+        var status = obj.value[0].ACTION_EXECUTION_STATUS;
+        var last_update = obj.value[0].ACTION_LAST_UPDATE_TIMESTAMP;
+        var output_message = obj.value[0].ACTION_OUTPUT_MESSAGE;
+        var snooze_number = obj.value[0].ACTION_SNOOZE_NUMBER;
+        var state = obj.value[0].ACTION_STATE;
+
+        /* ---- format last_update ---- */
+        var matches = last_update.match(/(\d{4})-(\d{2})-(\d{2})T((?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9])((?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9]))$/);
+        var date_and_time = gs.getMessage('{2}/{3}/{1} {4} Timezone: {5}', matches);
+        /*------------------------------*/
+
+        gr_remediation_log.messages = responseBody;
+        gr_remediation_log.update();
+        if (gr_remediation_log.task) {
+            var ingr = new GlideRecordSecure("incident");
+            ingr.addQuery("sys_id", gr_remediation_log.task);
+        }
+        if (gr_remediation_log.interaction) {
+            var ingr = new GlideRecordSecure("interaction");
+            ingr.addQuery("sys_id", gr_remediation_log.interaction);
+        }
+        ingr.query();
+        if (ingr.next()) {
+            if (status != "Completed") {
+                if (end == 555) {
+                    ingr.work_notes = "Remediation " + "[code]<b>" + gr_remediation_log.action_name + "</b> [/code]" + " " + "(" + gr_remediation_log.reference_number + ")" + " is still in progress. \n State: " + state + "\n Last updated: " + date_and_time + "\n No more progress updates.";
+                    ingr.update();
+                } else {
+                    ingr.x_atern_incident_remediation_state_notes = "Remediation " + "[code]<b>" + gr_remediation_log.action_name + "</b> [/code]" + " " + "(" + gr_remediation_log.reference_number + ")" + " is still in progress. \n State: " + state + "\n Last updated: " + date_and_time + "\n Next progress update in " + mins + " minutes.";
+                    ingr.update();
+                }
+
+
+            }
+            if (status == "Completed") {
+                if (state == "Completed successfully") {
+                    if (output_message != "") {
+                        ingr.work_notes = "Remediation " + "[code]<b>" + gr_remediation_log.action_name + "</b> [/code]" + " " + "(" + gr_remediation_log.reference_number + ")" + " " + state + "\n" + " Additional Information: " + output_message + "\n Last updated: " + date_and_time;
+                        ingr.update();
+                    } else {
+                        ingr.work_notes = "Remediation " + "[code]<b>" + gr_remediation_log.action_name + "</b> [/code]" + " " + "(" + gr_remediation_log.reference_number + ")" + " " + state + "\n Last updated: " + date_and_time;
+                        ingr.update();
+                    }
+                    gr_remediation_log.remediation_status = "Remediation Action Completed Successfully";
+                    gr_remediation_log.update();
+                } else if (state != "Completed successfully") {
+                    gr_remediation_log.remediation_status = "Remediation Action Completed Unsuccessfully";
+                    gr_remediation_log.update();
+                    ingr.work_notes = "Remediation " + "[code]<b>" + gr_remediation_log.action_name + "</b> [/code]" + " (" + gr_remediation_log.reference_number + ")" + " completed as " + state + "." + "\n Additional Information: " + output_message + ".";
+                    ingr.update();
+                }
+            }
+        }
+        return status;
+    },
+
+    type: 'Remidiation_Tracking'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>rank</sys_created_by>
+        <sys_created_on>2021-12-29 13:37:18</sys_created_on>
+        <sys_id>ee4027981bb04d502a67cbbf034bcbe3</sys_id>
+        <sys_mod_count>73</sys_mod_count>
+        <sys_name>Remidiation_Tracking</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_ee4027981bb04d502a67cbbf034bcbe3</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-07 05:50:42</sys_updated_on>
+    </sys_script_include>
+</record_update>

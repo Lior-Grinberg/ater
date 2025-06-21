@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_atern_incident_App_Privacy_Policy.do</endpoint>
+        <html><![CDATA[<html lang="en">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <title>Riverbed</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; font-weight: regular; }
+        .logo { margin-left: 30px; }
+        img { display: block; width: 340px; margin-bottom: 0; }
+        .cc-accent-line {
+            height: 5px;
+            width: 100%;
+            background: #FFF;
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.25);
+        }
+        h1, p { font-size: 14px; color: #545b5b; line-height: 1.5; margin-left: 30px; }
+        p { margin-top: 20px; } /* Space between line and text */
+        a { color: #2980bf; }
+        a:hover { color: #4c638c; }
+		    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      padding: 20px;
+      max-width: 700px;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #333;
+    }
+    p {
+      margin-bottom: 16px;
+    }
+    a {
+      color: #0072c6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="x_atern_incident.aternity-logo1.svg" />
+        <div class="cc-accent-line"></div> <!-- Line directly under image -->
+    </div>
+    <div class="container">
+    <p>
+      We are committed to maintaining the privacy of customer data in accordance with ServiceNow's guidelines.
+    </p>
+    <p>
+      This application only transmits data explicitly configured by the customer, in order to associate a ServiceNow incident with a device monitored by Riverbed Aternity (such as the computer CI name or the caller's email address).
+    </p>
+    <p>
+      For more information about Riverbed's privacy policy, please visit the 
+      <a href="https://www.riverbed.com/trust-center" target="_blank" rel="noopener noreferrer">$[SP]Riverbed Trust Center</a>.
+    </p>
+  </div>
+</body>
+</html>
+]]></html>
+        <name>App_Privacy_Policy</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-03-05 06:49:39</sys_created_on>
+        <sys_id>646cce5e93846e50a1f4f65badba1056</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>App_Privacy_Policy</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_page_646cce5e93846e50a1f4f65badba1056</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-04-14 14:32:45</sys_updated_on>
+    </sys_ui_page>
+</record_update>

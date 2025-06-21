@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[/*function myFunction() {
+   var value = document.getElementById("param_value").value;
+    //alert(value.length);
+}*/
+
+function go_ok() {
+    var gdw = GlideDialogWindow.get();
+    var action = gel("action").value;
+	var action_tech = gel("action_tech").value;
+    var device = gel("device").value;
+    var isParam = gel("isParam").value;
+    var useparam = gel("useparam").value;
+    if (useparam == "true")
+        var param_value = gel("param_value").value;
+    if (isParam == "true") {
+        var value = document.getElementById("param_value").value;
+        if (isParam == "true" && value.length <= 0) {
+            alert("Enter Parameter");
+            return false;
+        }
+    }
+
+
+    var ga = new GlideAjax('Remidiation_AJAX');
+    ga.addParam('sysparm_name', 'GetParameters');
+    ga.addParam('sysparm_inc_details', g_form.getUniqueValue());
+	ga.addParam('sysparm_tablename', g_form.getTableName());
+    ga.addParam('sysparm_param', param_value);
+    ga.addParam('sysparm_ater_device', device);
+    ga.addParam('sysparm_action_name', action);
+	ga.addParam('sysparm_action_tech', action_tech);
+    ga.getXML(AjaxAnswer);
+    GlideDialogWindow.get().destroy();
+    return true;
+}
+
+function AjaxAnswer(response) {
+    var answer = response.responseXML.documentElement.getAttribute("groupinfo");
+    alert(answer);
+}
+
+function goCancel() {
+
+    var gdw = GlideDialogWindow.get();
+    //alert("Cancel");
+    GlideDialogWindow.get().destroy();
+
+}
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_atern_incident_remediation_action.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<style> .btn{margin-right: 5px} </style>
+<g:evaluate var="jvar_action" expression="RP.getWindowProperties().action" />
+<g:evaluate var="jvar_action_tech" expression="RP.getWindowProperties().action_tech" />
+<g:evaluate var="jvar_device" expression="RP.getWindowProperties().device" />
+<g:evaluate var="jvar_param" expression="RP.getWindowProperties().isParam" />
+<g:evaluate var="jvar_paramName" expression="RP.getWindowProperties().param" />
+<g:evaluate var="jvar_description" expression="RP.getWindowProperties().description" />
+<g:evaluate var="jvar_useparam" expression="RP.getWindowProperties().useparam" />
+<g:evaluate var="jvar_isConfirm" expression="RP.getWindowProperties().isConfirm" />
+<g:evaluate var="jvar_sample" expression="RP.getWindowProperties().sample" />
+<input type="hidden" id="action" name="action" value="${HTML:jvar_action}" class="action" />
+<input type="hidden" id="action_tech" name="action_tech" value="${HTML:jvar_action_tech}" class="action_tech" />
+<input type="hidden" id="device" name="device" value="${HTML:jvar_device}" class="device" />
+<input type="hidden" id="isParam" name="isParam" value="${HTML:jvar_param}" class="isParam" />
+<input type="hidden" id="param" name="param" value="${HTML:jvar_paramName}" class="param" />
+<input type="hidden" id="description" name="description" value="${HTML:jvar_description}" class="description" />
+<input type="hidden" id="useparam" name="useparam" value="${HTML:jvar_useparam}" class="useparam" />
+<input type="hidden" id="isConfirm" name="isConfirm" value="${HTML:jvar_isConfirm}" class="isConfirm" />
+<input type="hidden" id="sample" name="sample" value="${HTML:jvar_sample}" class="sample" />
+<!-- <g:ui_form>-->
+<g:form_label>
+<br> $[SP] $[SP] $[SP] $[SP] Device name: $[SP] ${HTML:jvar_device}</br>
+<j:if test="${JS:jvar_useparam}">
+<j:if test="${JS:jvar_param}">
+	<br> $[SP] $[SP]  $[SP]  $[SP] Please provide the following for the remediation to run </br>
+	</j:if>
+<j:if test="${JS:!jvar_param}">
+	<br> $[SP] $[SP] $[SP] $[SP] Please provide the following for the remediation to run(optional) </br>
+	</j:if>
+	<br> $[SP] $[SP] $[SP] $[SP] ${HTML:jvar_paramName} <a id='myLink' title="${HTML:jvar_description}">?</a>$[SP] $[SP] $[SP] $[SP] 
+<input type="text" aria-label="enter value" name="param_value" id="param_value" placeholder="${HTML:jvar_sample}"/></br>
+	</j:if>
+	<br/>
+<j:if test="${JS:jvar_useparam}">
+	$[SP] $[SP] $[SP] $[SP] Clicking run will execute <b> ${HTML:jvar_action}</b> $[SP] with the provided 
+	<br> $[SP] $[SP] $[SP] $[SP] parameter on <b> ${HTML:jvar_device} </b></br>
+</j:if>
+<j:if test="${JS:!jvar_useparam}">
+	$[SP] $[SP] $[SP] $[SP] Clicking run will execute <b> ${HTML:jvar_action} </b> $[SP] on $[SP]<b> ${HTML:jvar_device} </b>
+</j:if>	
+<j:if test="${JS:jvar_isConfirm}">
+		
+		<br> $[SP] $[SP] $[SP] $[SP] The user will get a confirmation message.</br> 
+	</j:if>
+	<br></br>
+</g:form_label>
+	<br/>
+	<br></br>
+	  $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP]$[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP]$[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] <button id="cancelbnutton" type="button" class="bt" onclick="goCancel()">Cancel</button>
+	<button id="okbutton" type="button" class="btn btn-primary" onclick="go_ok()" >Run</button> $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] $[SP] 
+	<br></br>
+<!-- </g:ui_form>-->
+
+</j:jelly>]]></html>
+        <name>remediation_action</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-12-20 15:42:32</sys_created_on>
+        <sys_id>6328a5e5dbac4150d203ac1b13961999</sys_id>
+        <sys_mod_count>246</sys_mod_count>
+        <sys_name>remediation_action</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_page_6328a5e5dbac4150d203ac1b13961999</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-06 18:15:53</sys_updated_on>
+    </sys_ui_page>
+</record_update>

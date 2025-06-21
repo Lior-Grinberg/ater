@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Aternity_IncidentSection_UI</name>
+        <scoped_name>x_atern_incident_Aternity_IncidentSection_UI</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-04-27 15:03:56</sys_created_on>
+        <sys_id>c90f7451db332810c4b50114b99619f8</sys_id>
+        <sys_mod_count>766</sys_mod_count>
+        <sys_name>Aternity_IncidentSection_UI</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_macro_c90f7451db332810c4b50114b99619f8</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-06 18:27:27</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null" xmlns:html="jelly:html">
+
+<style>
+
+		.logo {
+		display: block;
+		height: 70px;
+		background-repeat: no-repeat;
+		margin-top: 25px;
+		a:https://www.riverbed.com/;		
+		}
+		
+		h1#x_atern_incident_remediation_action_header_contents{
+		font-size: 20px !important;
+    margin: 10px 19px 0px!important;
+		}
+		HTML[data-doctype=true] table.drag_section_picker tbody > tr > td > h1, HTML[data-doctype=true] table.drag_section_header tbody > tr > td > h1 {
+    font-size: 20px important!; margin-left:30px !important;  
+}
+		.loading-container {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 70%;
+		background-color: rgba(255, 255, 255, 0.7);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 9999;
+		}
+
+		.loading-spinner {
+			border: 4px solid rgba(0, 0, 0, 0.1);
+			border-left: 4px solid #000;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			animation: spin 1s linear infinite;
+		}
+		.loading-text {
+		font-size: 16px; 
+		color: #333;
+		margin-top: 10px; 
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
+		 .toggle-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            transition: transform 0.3s;
+        }
+
+        .group-actions {
+            display: block;
+        }
+
+        .group-actions.open {
+            display: block;
+        }
+
+	/* General Input Style */
+		input[id^="actionSearch_"] {
+			width: 100%;
+			//padding-left: 35px;
+			font-size: 16px;
+			border: 1px solid #ddd;
+			//border-radius: 4px;
+			outline: none;
+			padding-right: 60px;
+			//box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		input[id^="actionSearch_"]:focus {
+			border-color: #007bff;
+			box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+		}
+
+
+		div[id^="autocompleteResults_"] {
+			border: 1px solid #ddd;
+			background-color: white;
+			position: absolute;
+			width: 100%;
+			max-height: 200px;
+			overflow-y: auto;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			margin-top: 5px;
+			z-index: 1000;
+			max-width: 300px;
+		}
+
+		div[id^="autocompleteResults_"] div {
+			padding: 10px;
+			font-size: 14px;
+			color: #333;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			max-width: 300px;
+		}
+
+		div[id^="autocompleteResults_"] div:hover {
+			background-color: #f0f0f0;
+		} */
+
+
+
+		/* Styling for action items */
+ .result-item {
+    padding: 3px;
+    cursor: pointer;
+	margin-left: 20px;
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.result-item {
+    padding: 3px;
+    cursor: pointer;
+    //font-family: 'Arial', sans-serif; 
+    font-size: 14px;                 
+    font-weight: normal;             
+    color: #3c59e7;                     
+    text-align: left;                
+    line-height: 1.5;              
+    max-width: 80%;
+    overflow: auto;
+    //text-overflow: ellipsis;hidden
+    white-space: nowrap;
+	margin-left: 20px;
+	text-align: left; 
+}
+
+/* Hover effect */
+.result-item:hover {
+   // background-color: #e0f7fa; /* Highlight color */
+   // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	font-weight: normal;
+	//border-bottom: 1px solid #3c59e7;
+	color: RGB(var(--now-text-link--primary--color--hover, var(--now-color--link-3, 1, 104, 124)));
+    //display: block;
+}
+
+/* Styling for no results message */
+.no-results {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    margin-left: 20px;
+	display: flex;
+}
+.action-item {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 300px; /* Adjust as needed */
+    overflow: hidden; /* Prevent overflow of long text */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.group-container {
+    margin-bottom: 20px;
+}
+
+.group-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 13px;
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 5px;
+	display: inline-flex;
+
+}
+.category-header {
+  background-color: #f2f4f5;
+  color: #333333;
+}
+
+/* Dark mode support */
+.dark-theme .category-header, 
+[data-theme="dark"] .category-header, 
+.sn-stylize-dark .category-header {
+  background-color: #2d3339;
+  color: #ffffff;
+}
+
+</style>
+
+
+<div id="content_device"></div>
+<div class="loading-container">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Please wait..</div>
+
+    <!-- Autocomplete containers -->
+    <div id="autocompleteResults_event" style="display: none;"></div>
+    <div id="autocompleteResults_device" style="display: none;"></div>
+</div>
+
+	<body onload="getHtml()"> </body>
+<script>
+
+var getHtml = function() {
+    var viewName = g_form.getViewName();
+    g_form.setSectionDisplay("device_events", false);
+    g_form.setSectionDisplay("device_overview", false);
+    var loadingContainer = document.querySelector('.loading-container');
+    loadingContainer.style.display = 'none';
+    if (viewName != "device_data") {
+        
+		var ga_view = new GlideAjax('Aternity');
+        ga_view.addParam('sysparm_name', 'show_button');
+        ga_view.addParam('sysparm_inc_sys_id', g_form.getUniqueValue());
+        ga_view.getXML(show_button);
+
+        function show_button(response) {
+            var answer = response.responseXML.documentElement.getAttribute("answer");
+			if (answer == "false"){
+				getdata(viewName);
+			}      
+        }
+    } else {
+        g_form.setSectionDisplay("device_overview", true);
+        var loadingContainer = document.querySelector('.loading-container');
+        loadingContainer.style.display = 'flex';
+        getdata(viewName);
+    }
+}
+
+function getdata(viewName) {
+    var connection = "";
+    var incSysid = g_form.getUniqueValue();
+	var tablename=g_form.getTableName();
+	if(tablename!="interaction"){
+    var con = new GlideAjax('x_atern_incident.DeviceDataButton');
+    con.addParam('sysparm_name', 'show_user_device_msg');
+    con.addParam('sysparm_domain', g_form.getValue("sys_domain"));
+    con.addParam('sysparm_incid', incSysid);
+    con.getXML(getConnection);
+
+    function getConnection(response) {
+        var answer = response.responseXML.documentElement.getAttribute('answer');
+        if (answer == 'true') {
+            // by user
+            connection = 'No additional data available for this user';
+        } else {
+            connection = 'No additional data available for this device';
+        }
+    }
+	}
+    var ga = new GlideAjax('Aternity');
+    ga.addParam('sysparm_name', 'get_device_overview');
+    ga.addParam('sysparm_inc_sys_id', incSysid);
+	ga.addParam('sysparm_section', "device_section");
+	ga.addParam('sysparm_tablename', tablename);
+    ga.getXML(sethtml);
+
+    function sethtml(response) {
+		
+        if (viewName == "device_data") {
+            var loadingContainer = document.querySelector('.loading-container');
+            loadingContainer.style.display = 'none';
+            g_tabs2Sections.setActive(1);
+            g_form.setSectionDisplay("device_events", true);
+
+        } 
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        answer = JSON.parse(answer); 
+		//console.log('chicco str_obj:        ' + answer);
+        if ((answer.html_overview.html == "none") || (answer.html_overview.html === null)) {
+
+            if (viewName != "device_data") {
+                g_form.setSectionDisplay("device_overview", false);
+            } else {
+                document.getElementById("content_device").innerHTML = '<div style="background-color: #F5F5F5; color: #333; padding: 15px; font-size: 16px; text-align: center; border: 2px solid #c0b7b6cc; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">' + connection + '</div>';
+            }
+        } else {
+            g_form.setSectionDisplay("device_overview", true);
+            document.getElementById("content_device").innerHTML = answer.html_overview.html;
+        }
+        //events
+
+        if ((answer.sections.device_events == false) || (answer.html_overview.ci_name == false)) { //|| (answer.html_overview.result == false)
+            if (viewName != "device_data") {
+                g_form.setSectionDisplay("device_events", false);
+            } else {
+                document.getElementById("content_Events").innerHTML = '<div style="background-color: #F5F5F5; color: #333; padding: 15px; font-size: 16px; text-align: center; border: 2px solid #c0b7b6cc; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">' + connection + '</div>';
+            }
+
+        } else {
+            var ga1 = new GlideAjax('Aternity');
+            ga1.addParam('sysparm_name', 'get_device_health');
+            ga1.addParam('sysparm_inc_sys_id', incSysid);
+			ga1.addParam('sysparm_tablename', tablename);
+            ga1.addParam('sysparm_score', answer.html_overview.DEVICE_OVERALL_SCORE);
+            ga1.addParam('sysparm_os_family', answer.html_overview.OS_FAMILY);
+            ga1.addParam('sysparm_ci_name', answer.html_overview.ci_name);
+			ga1.addParam('sysparm_section', "event_section");
+            ga1.getXML(sethtmlEvents);
+
+            function sethtmlEvents(response) {
+                var answer = response.responseXML.documentElement.getAttribute("answer");
+				
+                var obj = JSON.parse(answer);
+                if ((obj.resultData == "none") || (obj.resultData === null)) {
+
+                    if (viewName != "device_data") {
+                        g_form.setSectionDisplay("device_events", false);
+                    } else {
+                        document.getElementById("content_Events").innerHTML = '<div style="background-color: #F5F5F5; color: #333; padding: 15px; font-size: 16px; text-align: center; border: 2px solid #c0b7b6cc; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">' + connection + '</div>';
+
+                    }
+                } else {
+                    g_form.setSectionDisplay("device_events", true);
+                    document.getElementById("content_Events").innerHTML = obj.resultData;
+                }
+            }
+        }
+    }
+
+}	
+</script>
+
+	<script>
+		
+		function showuipage(action_name,action_tech,deviceName,isParam,useparam,paramName,description,isConfirm,sample) {
+		var gdw = new GlideDialogWindow('x_atern_incident_remediation_action');
+		gdw.setPreference("action",action_name);
+		gdw.setPreference("action_tech",action_tech);
+		gdw.setPreference("device",deviceName);
+		gdw.setPreference("isParam",isParam);
+		gdw.setPreference("param",paramName);
+		gdw.setPreference("useparam",useparam);
+		gdw.setPreference("description",description);
+		gdw.setPreference("isConfirm",isConfirm);
+		gdw.setPreference("sample",sample);
+		gdw.setTitle("      Run "+ action_name );
+		gdw.setSize(500, 200);
+		gdw.adjustBodySize();
+		gdw.render();
+
+		}
+	</script>
+	
+<script>
+
+function toggleGroup(groupId, tabId) {
+
+	var groupActions = document.getElementById(tabId).querySelector("#" + groupId + "_actions");
+	var groupIcon = document.getElementById(tabId).querySelector("#" +groupId + "_icon");
+
+    if (groupActions.style.display === "none" || groupActions.style.display === "") {
+        groupActions.style.display = "block";
+		 groupIcon.innerHTML = '<path d="M7.41,8.59L12,13.17L16.58,8.59L18,10L12,16L6,10L7.41,8.59Z" fill="currentColor"></path>';
+
+    } else {
+        groupActions.style.display = "none";
+		groupIcon.innerHTML = '<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" fill="currentColor"></path>';
+
+    }
+}
+</script>
+
+
+<script>
+
+function clearSearch(inputId) {
+    //console.log("inputId is:", inputId); 
+	var clearElement;
+    var inputElement = document.getElementById(inputId);
+    if (inputElement) {
+        inputElement.value = ''; // Clear the input box
+
+        
+        var sectionType;
+        if (inputId === "actionSearch_event_section") {
+            sectionType = "event_section";
+			clearElement = document.getElementById("clearSearch_event_section");
+        } else if (inputId === "actionSearch_device_section") {
+            sectionType = "device_section";
+			clearElement = document.getElementById("clearSearch_device_section");
+        } else {
+            //console.error("Unknown section type:", inputId);
+            return; 
+        }
+
+        var sectionId = sectionType === "event_section" ? "actionList_event_section" : "actionList_device_section";
+        var resultSectionId = sectionType === "event_section" ? "search_event_section_results" : "search_device_section_results";
+
+        var sectionContainer = document.getElementById(sectionId);
+        var resultSection = document.getElementById(resultSectionId);
+
+        if (sectionContainer) {
+            if (resultSection) {
+                sectionContainer.style.display = "block"; 
+                resultSection.style.display = "none"; 
+				clearElement.style.display = "none"; 
+                resultSection.innerHTML = ''; 
+            }
+        }
+    }
+}
+
+
+function getActionArray() {
+	try {
+        var actionArrayData = document.getElementById('actionArrayData').value;
+		//console.log("decodedData" + jsonData);
+		// Decoding process
+        var restoredEncodedJson = actionArrayData.replace(/%27/g, "'"); // Reverse manual encoding
+        var decodedJson = decodeURIComponent(restoredEncodedJson);
+        var jsonData = JSON.parse(decodedJson);
+        //console.log(jsonData);
+        return jsonData;
+    } catch (error) {
+        //console.error("Error parsing action array data:", error);
+        return [];
+    }
+}
+
+function filterActions(sectionType) {
+    var searchQuery;
+    var sectionId;
+	var resultSectionId;
+	var clearElement;
+
+    // Determine which section is being filtered
+    if (sectionType === 'event_section') {
+        searchQuery = document.getElementById('actionSearch_event_section').value.toLowerCase();
+        sectionId = 'actionList_event_section';
+        resultSectionId = 'search_event_section_results';
+		clearElement = document.getElementById("clearSearch_event_section");
+    } else if (sectionType === 'device_section') {
+        searchQuery = document.getElementById('actionSearch_device_section').value.toLowerCase();
+        sectionId = 'actionList_device_section';
+        resultSectionId = 'search_device_section_results';
+		clearElement = document.getElementById("clearSearch_device_section");
+    } else {
+        //console.error('Unknown section type:', sectionType);
+        return;
+    }
+
+	clearElement.style.display = "block";
+    //console.log(`Filtering actions for ${sectionType} with query: ${searchQuery}`);
+
+    var actions = getActionArray();
+    filterAndDisplay(searchQuery, actions, sectionId, resultSectionId);
+}
+
+function filterAndDisplay(searchQuery, actions, sectionId, resultSectionId) {
+    var sectionContainer;
+    var resultSection;
+	var clearElement;
+
+    if (sectionId === "actionList_event_section") {
+        sectionContainer = document.getElementById("actionList_event_section");
+        resultSection = document.getElementById("search_event_section_results");
+		clearElement = document.getElementById("clearSearch_event_section");
+    } else if (sectionId === "actionList_device_section") {
+        sectionContainer = document.getElementById("actionList_device_section");
+        resultSection = document.getElementById("search_device_section_results");
+		clearElement = document.getElementById("clearSearch_device_section");
+    }
+
+    if (!sectionContainer || !resultSection) {
+        //console.error(`Section container or result section not found: ${sectionId}, ${resultSectionId}`);
+        return;
+    }
+
+    if (searchQuery) {
+        var filteredResults = actions.filter(action =>
+            action.text.toLowerCase().includes(searchQuery)
+        );
+
+        if (filteredResults.length > 0) {
+            sectionContainer.style.display = "none"; // Hide original content
+            resultSection.style.display = "block"; // Show result section
+            resultSection.style.visibility = "visible";
+
+            // Display results with group handling
+            displayResults(filteredResults, resultSection);
+        } else {
+            resultSection.innerHTML = '<div class="no-results">No results found</div>';
+            sectionContainer.style.display = "none";
+            resultSection.style.display = "block";
+        }
+    } else {
+        resultSection.style.display = "none";
+        sectionContainer.style.display = "block";
+		clearElement.style.display = "none"; 
+    }
+}
+
+function displayResults(results, resultSection) {
+    
+	// Clear the result section
+    resultSection.innerHTML = '';
+
+    // Group results by "group" 
+    var groupedResults = {};
+    for (var i = 0; i ${AMP}lt; results.length; i++) {
+        var action = results[i];
+        var group = action.group || 'ungrouped'; 
+        if (!groupedResults[group]) {
+            groupedResults[group] = [];
+        }
+        groupedResults[group].push(action);
+    }
+
+    // Display results
+    for (var groupName in groupedResults) {
+        if (groupedResults.hasOwnProperty(groupName)) {
+            var actions = groupedResults[groupName];
+
+            // Add group header only if groupName exists and is not 'ungrouped'
+            if (groupName !== 'ungrouped') {
+                var groupHeader = document.createElement('div');
+                groupHeader.className = 'group-header';
+                groupHeader.textContent = groupName; 
+				//console.log("resultSection:", resultSection);			
+                resultSection.appendChild(groupHeader);
+				
+            }
+
+            // Add actions for the group
+            for (var j = 0; j ${AMP}lt; actions.length; j++) {
+                var action = actions[j];
+                var resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                //resultItem.textContent = action.action_name;
+				resultItem.textContent = action.text;
+				resultItem.setAttribute('title', action.display_tooltip); // Add tooltip
+
+                // Add click functionality
+                (function (actionId) {
+                    resultItem.onclick = function () {
+						 var actionElement = document.getElementById(actionId);
+                            if (actionElement) {
+                                actionElement.click();
+                            } else {
+                                alert('Action not found.');
+                            }
+                    };
+                })(action.id);
+
+                resultSection.appendChild(resultItem);
+            }
+        }
+    }
+}
+
+</script>
+
+
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

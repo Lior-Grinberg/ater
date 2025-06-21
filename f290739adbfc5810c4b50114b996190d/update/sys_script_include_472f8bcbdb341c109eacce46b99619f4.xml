@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.AternityConfig</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>AternityConfig</name>
+        <script><![CDATA[var AternityConfig = Class.create();
+AternityConfig.prototype = {
+initialize: function() {},
+
+type: 'AternityConfig',
+
+getGlobalConfig: function(fieldName, map) {
+    map.logMessage = map.logMessage + "Looking for " + fieldName + " in global configuration; ";
+    var res = null;
+    try {
+        var globalConfigurations = new GlideRecord("x_atern_incident_global_configurations");
+        globalConfigurations.query();
+        if (globalConfigurations.next()) {
+            map.logMessage = map.logMessage + "Global configuration entry found: ";
+            var addComma = false;
+            for (var prop in globalConfigurations) {
+                if (addComma) {
+                    map.logMessage = map.logMessage + ", ";
+                } else {
+                    addComma = true;
+                }
+                map.logMessage = map.logMessage + prop + ":" + globalConfigurations[prop];
+            }
+            map.logMessage = map.logMessage + "; ";
+            res = globalConfigurations.getValue(fieldName);
+            if (res) {
+                map.logMessage = map.logMessage + "Requested field found: " + res + "; ";
+            } else {
+                map.logMessage = map.logMessage + "Requested field not found; ";
+            }
+        }
+    } catch (err) {
+        map.logMessage = map.logMessage + "Error getting global config. Error: " + err + "; ";
+        map.isError = true;
+    }
+    map.res = res;
+
+},
+
+getRuleConfig: function(component, type, rule, fieldName, map) {
+    var componentPrettyName = this.translateComponentNameToPretty(component);
+    map.logMessage = map.logMessage + "Looking based on correlation_display " + componentPrettyName + ", type " + type + " and rule_name " + rule + "; ";
+    var res = null;
+    try {
+        var ruleConfiguration = new GlideRecord("x_atern_incident_rule_configurations");
+        ruleConfiguration.addQuery("correlation_display", componentPrettyName);
+        ruleConfiguration.addQuery("type", type);
+        ruleConfiguration.addQuery("rule_name", rule);
+        ruleConfiguration.query();
+        if (ruleConfiguration.next()) {
+            map.logMessage = map.logMessage + "Rule configuration entry found: ";
+            var addComma = false;
+            for (var prop in ruleConfiguration) {
+                if (addComma) {
+                    map.logMessage = map.logMessage + ", ";
+                } else {
+                    addComma = true;
+                }
+                map.logMessage = map.logMessage + prop + ":" + ruleConfiguration[prop];
+            }
+            map.logMessage = map.logMessage + "; ";
+            if (ruleConfiguration.getValue(fieldName)) {
+                res = ruleConfiguration.getValue(fieldName);
+                map.logMessage = map.logMessage + "Requested field found: " + res + "; ";
+            } else {
+                map.logMessage = map.logMessage + "Requested field not found; ";
+            }
+        }
+    } catch (err) {
+        map.logMessage = map.logMessage + "Error getting rule config. Error: " + err + "; ";
+        map.isError = true;
+    }
+    map.res = res;
+},
+
+
+getSubcategoryValue: function(component, type, rule, fieldName) {
+        var map = {
+            logMessage: "Calculatiing the value for " + fieldName + "; ",
+            res: null,
+            isError: false
+        };
+
+        var category_rule_map = {
+            logMessage: "Getting value for category from rule; ",
+            res: null,
+            isError: false
+        };
+
+        try {
+            var globalFieldName = fieldName;
+            if (rule) {
+                this.getRuleConfig(component, type, rule, "category", category_rule_map);
+                map.logMessage = map.logMessage + category_rule_map.logMessage + " ; ";
+                this.getRuleConfig(component, type, rule, fieldName, map);
+            }
+            if (!category_rule_map.res) {
+                map.logMessage = map.logMessage + " Category value inside rule IS empty, using subcategory field value from Global Rule ; ";
+                globalFieldName = "default_" + fieldName;
+                this.getGlobalConfig(globalFieldName, map);
+            }
+        } catch (err) {
+            map.logMessage = map.logMessage + "Error getting config. Error: " + err + "; ";
+            map.isError = true;
+        }
+        if (map.isError) {
+            gs.error(map.logMessage);
+        } else {
+            gs.info(map.logMessage);
+        }
+        return map.res;
+    },
+
+    getConfigValue: function(component, type, rule, fieldName) {
+        var map = {
+            logMessage: "Looking for value of " + fieldName + "; ",
+            res: null,
+            isError: false
+        };
+        try {
+            var globalFieldName = fieldName;
+            if (rule) {
+                this.getRuleConfig(component, type, rule, fieldName, map);
+                globalFieldName = "default_" + fieldName;
+            }
+            if (!map.res) {
+                this.getGlobalConfig(globalFieldName, map);
+            }
+        } catch (err) {
+            map.logMessage = map.logMessage + "Error getting config. Error: " + err + "; ";
+            map.isError = true;
+        }
+        if (map.isError) {
+            gs.error(map.logMessage);
+        } else {
+            gs.info(map.logMessage);
+        }
+        return map.res;
+    },
+
+    getComputer: function(computerName) {
+        var logMessage = "Looking for computer " + computerName + "; ";
+        var isError = false;
+        var res = null;
+        try {
+            var gr_ci_computer = new GlideRecord("cmdb_ci_computer");
+            gr_ci_computer.addQuery("name", computerName);
+            gr_ci_computer.query();
+            if (gr_ci_computer.next()) {
+                res = gr_ci_computer;
+                logMessage = logMessage + "Computer found; ";
+            }
+            if (!res) {
+                logMessage = logMessage + "Computer not found; ";
+            }
+        } catch (err) {
+            logMessage = logMessage + "Error getting computer: " + computerName + " Error: " + err;
+            isError = true;
+        }
+        if (isError) {
+            gs.error(logMessage);
+        } else {
+            gs.info(logMessage);
+        }
+        return res;
+    },
+
+    getUser: function(userId, userEmail) {
+        var logMessage = "Looking for user " + userId + " with email " + userEmail + "; ";
+        var isError = false;
+        var res = null;
+        try {
+            var gr_user = new GlideRecord("sys_user");
+            gr_user.addQuery("user_name", userId);
+            gr_user.query();
+            logMessage = logMessage + "Searching by ID; ";
+            if (gr_user.next()) {
+                logMessage = logMessage + "User found; ";
+                res = gr_user;
+            }
+            if (!res) {
+                var gr_user_second = new GlideRecord("sys_user");
+                gr_user_second.addQuery("email", userEmail);
+                gr_user_second.query();
+                logMessage = logMessage + "Searching by email; ";
+                if (gr_user_second.next()) {
+                    res = gr_user_second;
+                    logMessage = logMessage + "User found; ";
+                }
+            }
+            if (!res) {
+                logMessage = logMessage + "User not found; ";
+            }
+        } catch (err) {
+            logMessage = logMessage + "Error getting user: " + userId + " With email: " + userEmail + " Error: " + err;
+            isError = true;
+        }
+        if (isError) {
+            gs.error(logMessage);
+        } else {
+            gs.info(logMessage);
+        }
+        return res;
+    },
+
+    translateComponentNameToPretty: function(component) {
+        if (component == "aternity.sda") {
+            return "Aternity Service Desk Alerts";
+        } else {
+            return component;
+        }
+    }
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:46:01</sys_created_on>
+        <sys_id>472f8bcbdb341c109eacce46b99619f4</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>AternityConfig</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_472f8bcbdb341c109eacce46b99619f4</sys_update_name>
+        <sys_updated_by>chiccom</sys_updated_by>
+        <sys_updated_on>2023-05-09 17:17:28</sys_updated_on>
+    </sys_script_include>
+</record_update>

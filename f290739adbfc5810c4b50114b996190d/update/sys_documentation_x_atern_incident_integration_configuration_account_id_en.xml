@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="account_id" label="Account ID" language="en" table="x_atern_incident_integration_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>account_id</element>
+            <help>Enter the ID of your Aternity account. Copy if from any URL while using Aternity console, as a numeric value that follows BACCT= (for example 21 in case of BACCT=21 without following characters).</help>
+            <hint>Enter the ID of your Aternity account. Copy if from any URL while using Aternity console, as a numeric value that follows BACCT= (for example 21 in case of BACCT=21 without following characters).</hint>
+            <label>Account ID</label>
+            <language>en</language>
+            <name>x_atern_incident_integration_configuration</name>
+            <plural>Account IDs</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2021-06-05 21:07:33</sys_created_on>
+            <sys_id>d3e0d99f1b7178102a67cbbf034bcb0c</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_name>Account ID</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_integration_configuration_account_id_en</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2021-06-05 21:14:57</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

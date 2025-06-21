@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_query_parameter">
+    <sys_ws_query_parameter action="INSERT_OR_UPDATE">
+        <example_value/>
+        <name>eventType</name>
+        <required>false</required>
+        <short_description/>
+        <sys_class_name>sys_ws_query_parameter</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:34:48</sys_created_on>
+        <sys_id>002dc38bdb341c109eacce46b99619d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>eventType</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ws_query_parameter_002dc38bdb341c109eacce46b99619d4</sys_update_name>
+        <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+        <sys_updated_on>2020-05-20 12:34:48</sys_updated_on>
+        <web_service_definition display_value="Aternity Integration">73f987c7db78d810c4b50114b9961968</web_service_definition>
+    </sys_ws_query_parameter>
+</record_update>

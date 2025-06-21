@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>match_by</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Show User attribute number</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue === '') {
+        return;
+    }
+    var interaction_tabs = g_form.getValue("aternity_tabs_are_needed");
+
+    if (newValue == "4") {
+        g_form.setDisplay("user_attribute_number", true);
+        g_form.setMandatory("user_attribute_number", true);
+    } else {
+        g_form.setMandatory("user_attribute_number", false);
+        g_form.setDisplay("user_attribute_number", false);
+    }
+	if(interaction_tabs=="true"){
+		g_form.setValue("match_by_int",newValue);
+	}
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-06-21 13:13:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ec4baf0d935aea50a1f4f65badba1049</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Show User attribute number</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_client_ec4baf0d935aea50a1f4f65badba1049</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-21 13:14:09</sys_updated_on>
+        <table>x_atern_incident_integration_configuration</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
