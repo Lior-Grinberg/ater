@@ -2,6 +2,7 @@
     <sys_ux_form_action_layout_item action="INSERT_OR_UPDATE">
         <action display_value="Device Data">ac9e2ce11b6139102a67cbbf034bcb98</action>
         <active>true</active>
+        <animate_icon>false</animate_icon>
         <color>secondary</color>
         <description/>
         <icon/>

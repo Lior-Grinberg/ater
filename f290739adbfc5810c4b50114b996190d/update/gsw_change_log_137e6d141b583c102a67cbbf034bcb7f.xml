@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="gsw_change_log">
     <gsw_change_log action="INSERT_OR_UPDATE">
         <change_date>2021-05-19 12:28:50</change_date>
-        <changed_by display_value="Revital Talmor">f5066556dbac1010c4b50114b99619da</changed_by>
+        <changed_by display_value="">f5066556dbac1010c4b50114b99619da</changed_by>
         <content display_value="System Configuration">cd27ed5c25513200964f48ca4b89e81d</content>
         <related_change_log_entry/>
         <related_task_entry/>

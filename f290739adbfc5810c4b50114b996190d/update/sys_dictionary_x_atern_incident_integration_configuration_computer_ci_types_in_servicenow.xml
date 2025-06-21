@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="computer_ci_types_in_servicenow" table="x_atern_incident_integration_configuration">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -34,7 +34,7 @@
         <function_field>false</function_field>
         <internal_type display_value="">glide_list</internal_type>
         <mandatory>false</mandatory>
-        <max_length>32</max_length>
+        <max_length>1024</max_length>
         <name>x_atern_incident_integration_configuration</name>
         <next_element/>
         <primary>false</primary>
@@ -53,7 +53,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>chiccom</sys_created_by>
         <sys_created_on>2023-05-07 19:29:04</sys_created_on>
-        <sys_id>a2227c2f1b6e61102a67cbbf034bcbc5</sys_id>
         <sys_name>Computer CI types in ServiceNow</sys_name>
         <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
         <sys_policy/>

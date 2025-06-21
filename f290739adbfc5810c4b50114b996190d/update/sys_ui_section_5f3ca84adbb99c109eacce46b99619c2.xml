@@ -8,7 +8,7 @@
             <sys_id>800f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -22,7 +22,7 @@
             <sys_id>040f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -36,7 +36,7 @@
             <sys_id>840f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -50,7 +50,7 @@
             <sys_id>080f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -64,7 +64,7 @@
             <sys_id>880f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -78,7 +78,7 @@
             <sys_id>0c0f2c0edbb99c109eacce46b99619b6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Attached Knowledge">cfa76e850a0a0b1f01446f67c8538d00</sys_ui_formatter>
-            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
+            <sys_ui_section caption="Related Records" display_value="Related Records" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">5f3ca84adbb99c109eacce46b99619c2</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:32:41</sys_updated_on>
             <sys_user/>
@@ -106,7 +106,7 @@
             <sys_updated_on>2020-07-05 15:20:36</sys_updated_on>
             <sys_user/>
             <title>false</title>
-            <view display_value="Aternity" name="aternity">3db8640adbb99c109eacce46b99619dc</view>
+            <view display_value="Aternity" name="aternity">9aa308d18396221053d1f696feaad3d1</view>
             <view_name/>
         </sys_ui_section>
     </sys_ui_section>

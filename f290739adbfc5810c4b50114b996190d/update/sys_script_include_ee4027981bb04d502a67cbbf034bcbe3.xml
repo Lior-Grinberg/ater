@@ -6,7 +6,9 @@
         <caller_access/>
         <client_callable>false</client_callable>
         <description/>
+        <mobile_callable>false</mobile_callable>
         <name>Remidiation_Tracking</name>
+        <sandbox_callable>false</sandbox_callable>
         <script><![CDATA[var Remidiation_Tracking = Class.create();
 Remidiation_Tracking.prototype = {
     initialize: function() {},

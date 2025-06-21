@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="sub_category" table="x_atern_incident_rule_configurations">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -52,7 +52,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>jrassolov@aternity.com</sys_created_by>
         <sys_created_on>2020-05-20 09:27:44</sys_created_on>
-        <sys_id>23e0d99f1b7178102a67cbbf034bcbf0</sys_id>
         <sys_name>Sub Category</sys_name>
         <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
         <sys_policy/>

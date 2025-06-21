@@ -52,7 +52,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>jrassolov@aternity.com</sys_created_by>
         <sys_created_on>2020-05-20 08:23:47</sys_created_on>
-        <sys_id>ffe01d9f1b7178102a67cbbf034bcb1b</sys_id>
         <sys_name>Business service</sys_name>
         <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
         <sys_policy/>

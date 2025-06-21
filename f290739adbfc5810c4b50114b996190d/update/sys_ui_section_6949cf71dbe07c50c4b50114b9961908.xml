@@ -4,22 +4,11 @@
             <is_plain_text>false</is_plain_text>
             <sys_created_by>liorg</sys_created_by>
             <sys_created_on>2025-06-17 19:34:00</sys_created_on>
-            <sys_id>76a0648893d22650a1f4f65badba1002</sys_id>
+            <sys_id>36a0648893d22650a1f4f65badba1003</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2025-06-17 19:34:00</sys_updated_on>
-            <text>Remediation</text>
-            <type display_value="Section Separator">443e806c0fd30000b12e6903cfe01281</type>
-        </sys_ui_annotation>
-        <sys_ui_annotation action="INSERT_OR_UPDATE">
-            <is_plain_text>false</is_plain_text>
-            <sys_created_by>liorg</sys_created_by>
-            <sys_created_on>2025-06-17 19:34:00</sys_created_on>
-            <sys_id>bea0648893d22650a1f4f65badba1002</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>liorg</sys_updated_by>
-            <sys_updated_on>2025-06-17 19:34:00</sys_updated_on>
-            <text>Bind Aternity Data to Incident</text>
+            <text>&lt;span type="text" id="annotationField" title="Use this setting to define how to display Aternity data on top of an Incident and in which ServiceNow module - when the incident is viewed in the Service Operations Workspace or the Incidents table or both."&gt;Display Aternity Data&lt;/span&gt;</text>
             <type display_value="Section Separator">443e806c0fd30000b12e6903cfe01281</type>
         </sys_ui_annotation>
         <sys_ui_annotation action="INSERT_OR_UPDATE">
@@ -37,11 +26,22 @@
             <is_plain_text>false</is_plain_text>
             <sys_created_by>liorg</sys_created_by>
             <sys_created_on>2025-06-17 19:34:00</sys_created_on>
-            <sys_id>36a0648893d22650a1f4f65badba1003</sys_id>
+            <sys_id>76a0648893d22650a1f4f65badba1002</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2025-06-17 19:34:00</sys_updated_on>
-            <text>&lt;span type="text" id="annotationField" title="Use this setting to define how to display Aternity data on top of an Incident and in which ServiceNow module - when the incident is viewed in the Service Operations Workspace or the Incidents table or both."&gt;Display Aternity Data&lt;/span&gt;</text>
+            <text>Remediation</text>
+            <type display_value="Section Separator">443e806c0fd30000b12e6903cfe01281</type>
+        </sys_ui_annotation>
+        <sys_ui_annotation action="INSERT_OR_UPDATE">
+            <is_plain_text>false</is_plain_text>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2025-06-17 19:34:00</sys_created_on>
+            <sys_id>bea0648893d22650a1f4f65badba1002</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2025-06-17 19:34:00</sys_updated_on>
+            <text>Bind Aternity Data to Incident</text>
             <type display_value="Section Separator">443e806c0fd30000b12e6903cfe01281</type>
         </sys_ui_annotation>
         <sys_ui_element action="INSERT_OR_UPDATE">

@@ -11,7 +11,6 @@
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>liorg</sys_created_by>
             <sys_created_on>2022-02-23 09:17:35</sys_created_on>
-            <sys_id>84ef761adb318510dfee96e5b99619a4</sys_id>
             <sys_mod_count>1</sys_mod_count>
             <sys_name>Default Remediation Roles</sys_name>
             <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>

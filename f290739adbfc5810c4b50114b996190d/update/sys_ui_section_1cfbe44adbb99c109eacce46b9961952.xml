@@ -8,7 +8,7 @@
             <sys_id>84df712cdbb21510dfee96e5b99619d4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -22,7 +22,7 @@
             <sys_id>4cdf712cdbb21510dfee96e5b99619d4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -36,7 +36,7 @@
             <sys_id>ccdf712cdbb21510dfee96e5b99619d4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -50,7 +50,7 @@
             <sys_id>40df712cdbb21510dfee96e5b99619d5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -64,7 +64,7 @@
             <sys_id>c0df712cdbb21510dfee96e5b99619d5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -78,7 +78,7 @@
             <sys_id>44df712cdbb21510dfee96e5b99619d5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -92,7 +92,7 @@
             <sys_id>c4df712cdbb21510dfee96e5b99619d5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Activities (filtered)">444ea5c6bf310100e628555b3f0739d6</sys_ui_formatter>
-            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
+            <sys_ui_section caption="Notes" display_value="Notes" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">1cfbe44adbb99c109eacce46b9961952</sys_ui_section>
             <sys_updated_by>liorg</sys_updated_by>
             <sys_updated_on>2022-10-24 07:22:16</sys_updated_on>
             <sys_user/>
@@ -120,7 +120,7 @@
             <sys_updated_on>2020-07-05 15:19:19</sys_updated_on>
             <sys_user/>
             <title>false</title>
-            <view display_value="Aternity" name="aternity">3db8640adbb99c109eacce46b99619dc</view>
+            <view display_value="Aternity" name="aternity">9aa308d18396221053d1f696feaad3d1</view>
             <view_name/>
         </sys_ui_section>
     </sys_ui_section>

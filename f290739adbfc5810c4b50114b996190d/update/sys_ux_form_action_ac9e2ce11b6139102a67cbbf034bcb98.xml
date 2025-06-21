@@ -21,4 +21,5 @@
         <table>incident</table>
         <ui_action display_value="Device Data">d16e28251b6139102a67cbbf034bcbc8</ui_action>
     </sys_ux_form_action>
+    <sys_translated_text action="delete_multiple" query="documentkey=ac9e2ce11b6139102a67cbbf034bcb98"/>
 </record_update>

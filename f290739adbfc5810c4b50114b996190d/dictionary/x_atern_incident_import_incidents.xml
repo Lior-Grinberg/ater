@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b1e25e03dbb01c109eacce46b99619e8" extends="sys_import_set_row" label="import_incidents" max_length="40" name="x_atern_incident_import_incidents" type="collection">
+        <element attributes="import_attribute_name=u_close_code,edge_encryption_enabled=true" label="Close code" max_length="40" name="u_close_code" type="string"/>
+        <element attributes="import_attribute_name=u_location,edge_encryption_enabled=true" label="Location" max_length="40" name="u_location" type="string"/>
+        <element attributes="import_attribute_name=u_urgency,edge_encryption_enabled=true" label="Urgency" max_length="40" name="u_urgency" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" max_length="32" name="company" reference="core_company" reference_qual="customer=true^EQ" reference_qual_condition="customer=true^EQ" type="reference"/>
+        <element attributes="import_attribute_name=u_cmdb_ci,edge_encryption_enabled=true" label="CMDB CI" max_length="40" name="u_cmdb_ci" type="string"/>
+        <element attributes="import_attribute_name=u_problem_id,edge_encryption_enabled=true" label="Problem ID" max_length="40" name="u_problem_id" type="string"/>
+        <element label="User" max_length="255" name="u_user_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <element attributes="import_attribute_name=u_correlation_display,edge_encryption_enabled=true" label="Correlation display" max_length="40" name="u_correlation_display" type="string"/>
+        <element attributes="import_attribute_name=u_resolved_by,edge_encryption_enabled=true" label="Resolved by" max_length="40" name="u_resolved_by" type="string"/>
+        <element attributes="import_attribute_name=u_aternity_event_type,edge_encryption_enabled=true" label="Aternity event type" max_length="100" name="u_aternity_event_type" type="string"/>
+        <element attributes="import_attribute_name=u_description,edge_encryption_enabled=true" label="Description" max_length="4000" name="u_description" type="string"/>
+        <element attributes="import_attribute_name=u_severity,edge_encryption_enabled=true" label="Severity" max_length="40" name="u_severity" type="string"/>
+        <element attributes="import_attribute_name=u_close_notes,edge_encryption_enabled=true" label="Close notes" max_length="40" name="u_close_notes" type="string"/>
+        <element attributes="import_attribute_name=u_opened_at,edge_encryption_enabled=true" label="Opened at" max_length="40" name="u_opened_at" type="string"/>
+        <element label="User email" max_length="255" name="u_user_email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Links" max_length="4000" name="links" type="simple_name_values"/>
+        <element attributes="import_attribute_name=u_contact_type,edge_encryption_enabled=true" label="Contact type" max_length="40" name="u_contact_type" type="string"/>
+        <element attributes="import_attribute_name=u_resolved_at,edge_encryption_enabled=true" label="Resolved at" max_length="40" name="u_resolved_at" type="string"/>
+        <element attributes="import_attribute_name=u_work_start,edge_encryption_enabled=true" label="Work start" max_length="40" name="u_work_start" type="string"/>
+        <element attributes="import_attribute_name=u_assignment_group,edge_encryption_enabled=true" label="Assignment group" max_length="40" name="u_assignment_group" type="string"/>
+        <element attributes="import_attribute_name=u_correlation_id,edge_encryption_enabled=true" label="Correlation ID" max_length="40" name="u_correlation_id" type="string"/>
+        <element attributes="import_attribute_name=u_rule_name,edge_encryption_enabled=true" label="Rule name" max_length="100" name="u_rule_name" type="string"/>
+        <element attributes="import_attribute_name=u_business_service,edge_encryption_enabled=true" label="Business service" max_length="40" name="u_business_service" type="string"/>
+        <element attributes="import_attribute_name=u_impact,edge_encryption_enabled=true" label="Impact" max_length="40" name="u_impact" type="string"/>
+        <element attributes="import_attribute_name=u_short_description,edge_encryption_enabled=true" label="Short description" max_length="160" name="u_short_description" type="string"/>
+        <index name="index">
+            <element name="company"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

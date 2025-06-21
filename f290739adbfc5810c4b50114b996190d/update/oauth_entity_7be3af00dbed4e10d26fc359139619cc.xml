@@ -8,10 +8,12 @@
         <certificate_url/>
         <client_id>&lt;Client ID&gt;</client_id>
         <client_secret>﷞﷟﷒ffee4dc81b0a2110decbed776e4bcbde﷬﷔1﷬﷭mlzqmyKTOqqSlOGb9Xv3sw==xk_G0uKQG1wQOerfYjm9w-70HdREjVk3DH5hxe_z﷮﷯</client_secret>
+        <client_type/>
         <client_uuid>b7e3af00dbed4e10d26fc359139619cc</client_uuid>
         <code_challenge_method>S256</code_challenge_method>
         <comments/>
         <default_grant_type>client_credentials</default_grant_type>
+        <extend_refresh_token_expiry>false</extend_refresh_token_expiry>
         <id_token_lifespan>0</id_token_lifespan>
         <jwt_provider/>
         <login_url/>

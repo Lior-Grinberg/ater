@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="default_sub_category" table="x_atern_incident_global_configurations" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>default_sub_category</element>
+            <name>x_atern_incident_global_configurations</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>default_sub_category</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_choice_x_atern_incident_global_configurations_default_sub_category</sys_update_name>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Antivirus</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>antivirus</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CPU</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>cpu</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DB2</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>db2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DHCP</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>dhcp</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Disk</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>disk</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DNS</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:20</sys_updated_on>
+            <value>dns</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Email</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>6</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>email</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Internal Application</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>7</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>internal application</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>IP Address</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>8</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>ip address</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Keyboard</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>9</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>keyboard</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Memory</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>10</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>memory</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Monitor</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>11</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>monitor</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Mouse</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>12</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>mouse</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>MS SQL Server</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>13</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>sql server</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Operating System</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>14</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>os</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Oracle</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>15</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>oracle</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>VPN</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>16</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>vpn</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>default_sub_category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Wireless</label>
+            <language>en</language>
+            <name>x_atern_incident_global_configurations</name>
+            <sequence>17</sequence>
+            <synonyms/>
+            <sys_created_by>jrassolov@aternity.com</sys_created_by>
+            <sys_created_on>2020-05-20 13:29:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-05-20 13:29:21</sys_updated_on>
+            <value>wireless</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

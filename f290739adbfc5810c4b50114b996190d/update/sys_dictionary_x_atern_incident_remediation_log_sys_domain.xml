@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="sys_domain" table="x_atern_incident_remediation_log">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -52,7 +52,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>liorg</sys_created_by>
         <sys_created_on>2022-03-11 23:03:12</sys_created_on>
-        <sys_id>5d3654b71b06c5102a67cbbf034bcb25</sys_id>
         <sys_name>Domain</sys_name>
         <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
         <sys_policy/>

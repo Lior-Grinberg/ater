@@ -8,7 +8,7 @@
             <sys_id>614da8cadbb99c109eacce46b9961991</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Aternity Section Formatter">c671178fdb341c109eacce46b9961908</sys_ui_formatter>
-            <sys_ui_section caption="Aternity" display_value="Aternity" name="incident" sys_domain="global" view="3db8640adbb99c109eacce46b99619dc">aa3de0cadbb99c109eacce46b996190f</sys_ui_section>
+            <sys_ui_section caption="Aternity" display_value="Aternity" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">aa3de0cadbb99c109eacce46b996190f</sys_ui_section>
             <sys_updated_by>iperry@aternity.com</sys_updated_by>
             <sys_updated_on>2020-07-05 15:25:08</sys_updated_on>
             <sys_user/>
@@ -36,7 +36,7 @@
             <sys_updated_on>2020-07-05 15:24:56</sys_updated_on>
             <sys_user/>
             <title>false</title>
-            <view display_value="Aternity" name="aternity">3db8640adbb99c109eacce46b99619dc</view>
+            <view display_value="Aternity" name="aternity">9aa308d18396221053d1f696feaad3d1</view>
             <view_name/>
         </sys_ui_section>
     </sys_ui_section>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="f881b79adbfc5810c4b50114b9961949" label="Global Configurations" max_length="40" name="x_atern_incident_global_configurations" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" max_length="32" name="company" reference="core_company" reference_qual="customer=true^EQ" reference_qual_condition="customer=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="contact_type" choice_table="task" label="Contact Type" max_length="40" name="contact_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Email" sequence="0" value="email"/>
+                <element inactive_on_update="false" label="Phone" sequence="1" value="phone"/>
+                <element inactive_on_update="false" label="Self-service" sequence="2" value="self-service"/>
+                <element inactive="true" inactive_on_update="true" label="Virtual Agent" sequence="0" value="virtual_agent"/>
+                <element inactive_on_update="false" label="Walk-in" sequence="3" value="walk-in"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Default Assignment group" max_length="32" name="default_assignment_group" reference="sys_user_group" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="category" choice_table="incident" label="Default Category" max_length="40" name="default_category" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Hardware" sequence="2" value="hardware"/>
+                <element inactive_on_update="false" label="Database" sequence="4" value="database"/>
+                <element inactive_on_update="false" label="Inquiry / Help" sequence="0" value="inquiry"/>
+                <element inactive_on_update="false" label="Software" sequence="1" value="software"/>
+                <element inactive_on_update="false" label="Network" sequence="3" value="network"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Domain" max_length="32" name="sys_domain" read_only="true" type="domain_id"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="subcategory" choice_table="incident" dependent="default_category" dependent_on_field="default_category" label="Default Sub Category" max_length="40" name="default_sub_category" type="choice" use_dependent_field="true">
+            <choice>
+                <element inactive_on_update="false" label="Antivirus" sequence="0" value="antivirus"/>
+                <element inactive_on_update="false" label="Internal Application" sequence="7" value="internal application"/>
+                <element inactive_on_update="false" label="Oracle" sequence="15" value="oracle"/>
+                <element inactive_on_update="false" label="DNS" sequence="5" value="dns"/>
+                <element inactive_on_update="false" label="MS SQL Server" sequence="13" value="sql server"/>
+                <element inactive_on_update="false" label="DHCP" sequence="3" value="dhcp"/>
+                <element inactive_on_update="false" label="Monitor" sequence="11" value="monitor"/>
+                <element inactive_on_update="false" label="CPU" sequence="1" value="cpu"/>
+                <element inactive_on_update="false" label="Keyboard" sequence="9" value="keyboard"/>
+                <element inactive_on_update="false" label="Wireless" sequence="17" value="wireless"/>
+                <element inactive_on_update="false" label="Email" sequence="6" value="email"/>
+                <element inactive_on_update="false" label="Operating System" sequence="14" value="os"/>
+                <element inactive_on_update="false" label="Disk" sequence="4" value="disk"/>
+                <element inactive_on_update="false" label="Mouse" sequence="12" value="mouse"/>
+                <element inactive_on_update="false" label="DB2" sequence="2" value="db2"/>
+                <element inactive_on_update="false" label="Memory" sequence="10" value="memory"/>
+                <element inactive_on_update="false" label="IP Address" sequence="8" value="ip address"/>
+                <element inactive_on_update="false" label="VPN" sequence="16" value="vpn"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Caller (If empty, integration user will be used)" max_length="32" name="caller" reference="sys_user" reference_qual="active=true^locked_out=false^EQ" reference_qual_condition="active=true^locked_out=false^EQ" type="reference"/>
+        <index name="index">
+            <element name="caller"/>
+        </index>
+        <index name="index2">
+            <element name="company"/>
+        </index>
+        <index name="index3">
+            <element name="default_assignment_group"/>
+        </index>
+        <index name="index4">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

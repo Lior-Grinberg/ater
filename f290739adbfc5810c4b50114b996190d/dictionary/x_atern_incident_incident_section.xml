@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="hasLabels=true" db_object_id="5702f46cdbc43010c4b50114b9961923" label="Incident section" max_length="40" name="x_atern_incident_incident_section" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
+        <element label="Name" max_length="40" name="technical_name" read_only="true" type="string"/>
+        <element display="true" label="Display name" mandatory="true" max_length="60" name="label" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Device Attribute" sequence="2" value="Device_Attribute"/>
+                <element inactive_on_update="false" label="Attribute" sequence="0" value="Attribute"/>
+                <element inactive_on_update="false" label="Category" sequence="1" value="Category"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Category" max_length="32" name="category" reference="x_atern_incident_incident_section" reference_qual="categoryISEMPTY^EQ" reference_qual_condition="categoryISEMPTY^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Visible" max_length="40" name="visible" type="boolean"/>
+        <element label="Field type" max_length="40" name="field_type" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="global" label="Domain" max_length="32" name="sys_domain" read_only="true" type="domain_id"/>
+        <index name="index">
+            <element name="category"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

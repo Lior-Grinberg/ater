@@ -21,4 +21,5 @@
         <table>interaction</table>
         <ui_action display_value="Device Data">0db67ead938a6610a1f4f65badba1039</ui_action>
     </sys_ux_form_action>
+    <sys_translated_text action="delete_multiple" query="documentkey=4c78fa6193ca6610a1f4f65badba105f"/>
 </record_update>

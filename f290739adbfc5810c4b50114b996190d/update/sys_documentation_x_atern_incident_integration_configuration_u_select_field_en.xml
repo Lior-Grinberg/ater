@@ -11,7 +11,6 @@
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>chiccom</sys_created_by>
             <sys_created_on>2022-11-08 20:06:42</sys_created_on>
-            <sys_id>88ae7da51b0b15102a67cbbf034bcb5a</sys_id>
             <sys_mod_count>1</sys_mod_count>
             <sys_name>Incident field in ServiceNow</sys_name>
             <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="e920e28bdbb01c109eacce46b996199e" label="Incident Additional Info" max_length="40" name="x_atern_incident_additional_info" type="collection">
+        <element label="Correlation ID" max_length="100" name="correlation_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" max_length="32" name="company" reference="core_company" reference_qual="customer=true^EQ" reference_qual_condition="customer=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Links" max_length="4000" name="links" type="simple_name_values"/>
+        <element label="Correlation display" max_length="40" name="correlation_display" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <index name="index">
+            <element name="company"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>
