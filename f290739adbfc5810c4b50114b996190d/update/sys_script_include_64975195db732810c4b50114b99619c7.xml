@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.Aternity</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>Aternity</name>
+        <sandbox_callable>true</sandbox_callable>
+        <script><![CDATA[var Aternity = Class.create();
+Aternity.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    show_button: function() {
+        var inc_sys_id = this.getParameter("sysparm_inc_sys_id");
+        var grincident = new GlideRecordSecure("incident");
+        grincident.addQuery("sys_id", inc_sys_id);
+        grincident.query();
+        if (grincident.next()) {
+            var domain = grincident.sys_domain;
+            var helper = new showDeviceDataButton();
+            var result = helper.shouldDisplayUIAction(inc_sys_id, domain, "tabs");
+            return result;
+        } else
+            return false;
+
+    },
+    get_device_overview: function() {
+
+        var obj = {};
+        var newhtml;
+        var inc_sys_id = this.getParameter("sysparm_inc_sys_id");
+        var section = this.getParameter("sysparm_section");
+        var tablename = this.getParameter("sysparm_tablename");
+        var grincident = new GlideRecordSecure(tablename);
+        grincident.addQuery("sys_id", inc_sys_id);
+        grincident.query();
+        if (grincident.next()) {
+
+            var content_html = new Aternity_meta("record", grincident.sys_domain);
+            obj.sections = content_html.get_sections();
+
+            obj.html_overview = content_html.get_html(inc_sys_id, section, tablename);
+
+            if ((obj.html_overview.html == "") || (obj.html_overview.html === null)) {
+                obj.html_overview.html = "none";
+            }
+            return JSON.stringify(obj);
+        }
+
+
+    },
+    get_device_health: function() {
+        var obj = {};
+        var newhtml = "";
+        var inc_sys_id = this.getParameter("sysparm_inc_sys_id");
+        var tablename = this.getParameter("sysparm_tablename");
+        var grincident = new GlideRecordSecure(tablename);
+        grincident.addQuery("sys_id", inc_sys_id);
+        grincident.query();
+        if (grincident.next()) {
+            var score = this.getParameter("sysparm_score");
+            var os_family = this.getParameter("sysparm_os_family");
+            var ci_name = this.getParameter("sysparm_ci_name");
+            var section = this.getParameter("sysparm_section");
+            var content_html = new Aternity_meta("record", grincident.sys_domain);
+            newhtml = content_html.get_html_device_events(inc_sys_id, os_family, score, ci_name, section, tablename);
+            if ((newhtml == "") || (newhtml === null)) {
+                newhtml = "none";
+            }
+            var returnJSON;
+            returnJSON = JSON.stringify({
+                resultData: newhtml
+            });
+            return returnJSON;
+        }
+
+    },
+    get_deviceArr: function() {
+        var inc_sys_id = this.getParameter("sysparm_inc_sys_id");
+        var tablename = this.getParameter("sysparm_tablename");
+        var grincident = new GlideRecordSecure(tablename);
+        grincident.addQuery("sys_id", inc_sys_id);
+        grincident.query();
+        if (grincident.next()) {
+            var device_from_user = new Aternity_meta("record", grincident.sys_domain);
+            var deviceArr = device_from_user.get_device_from_user(inc_sys_id, tablename);
+            return deviceArr;
+        }
+    },
+    type: 'Aternity'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-04-27 16:52:09</sys_created_on>
+        <sys_id>64975195db732810c4b50114b99619c7</sys_id>
+        <sys_mod_count>235</sys_mod_count>
+        <sys_name>Aternity</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_64975195db732810c4b50114b99619c7</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-07 06:17:11</sys_updated_on>
+    </sys_script_include>
+</record_update>

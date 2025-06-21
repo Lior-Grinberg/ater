@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="113bfeb61bd809102a67cbbf034bcba5" label="Remediation List Configuration" max_length="40" name="x_atern_incident_remediation_list_configuration" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Is Snooze Allowed" max_length="40" name="is_snooze_allowed" read_only="true" type="boolean"/>
+        <element label="Resolves" max_length="400" name="resolves" type="string"/>
+        <element label="Display Tooltip" mandatory="true" max_length="100" name="display_tooltip" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Group" max_length="32" name="group" reference="x_atern_incident_remediation_group_list" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Expiration time (hours)" max_length="10" name="expiration_time" read_only="true" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Is User Confirmation Required" max_length="40" name="is_user_confirmation_required" read_only="true" type="boolean"/>
+        <element label="Action Parameter Name" max_length="40" name="action_parameter_name" read_only="true" type="string"/>
+        <element label="Display Name" mandatory="true" max_length="100" name="display_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="10" name="order" type="integer"/>
+        <element label="Action Parameter Description" max_length="100" name="action_parameter_description" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Override Roles Required to trigger this Remediation" max_length="4000" name="override_roles_required" reference="sys_user_role" type="glide_list"/>
+        <element label="Action Parameter Sample" max_length="40" name="action_parameter_sample" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Windows Support" max_length="40" name="windows_support" read_only="true" type="boolean"/>
+        <element label="Action Description" max_length="400" name="action_description" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Action Parameter Is Used" max_length="40" name="action_parameter_is_used" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Action Parameter is Mandatory" max_length="40" name="action_parameter_is_mandatory" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Visible" max_length="40" name="visible" type="boolean"/>
+        <element label="Action Name" max_length="100" name="action_name" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Is Permitted for Service Desk" max_length="40" name="is_permitted_for_service_desk" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="macOS Support" max_length="40" name="macos_support" read_only="true" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <index name="index">
+            <element name="group"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

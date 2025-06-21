@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="remediation_status" label="Remediation Status" language="en" table="x_atern_incident_remediation_log">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>remediation_status</element>
+            <help/>
+            <hint/>
+            <label>Remediation Status</label>
+            <language>en</language>
+            <name>x_atern_incident_remediation_log</name>
+            <plural>Remediation Status</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2021-12-26 14:42:17</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Remediation Status</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_remediation_log_remediation_status_en</sys_update_name>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2021-12-26 14:42:17</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

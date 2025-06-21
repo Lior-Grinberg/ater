@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_atern_incident_integration_configuration</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_atern_incident_integration_configuration">urlENDSWITH\^ORurlENDSWITH/^EQ<item endquery="false" field="url" goto="false" newquery="false" operator="ENDSWITH" or="false" value="\"/>
+            <item endquery="false" field="url" goto="false" newquery="false" operator="ENDSWITH" or="true" value="/"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Slice last char in the URL</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    // Add your code here
+    var url = current.url.toString();
+    current.url = url.substring(0, url.length - 1);
+	
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2022-06-27 09:32:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1c48e95adbd41550dfee96e5b9961922</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Slice last char in the URL</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_1c48e95adbd41550dfee96e5b9961922</sys_update_name>
+        <sys_updated_by>chiccom</sys_updated_by>
+        <sys_updated_on>2022-12-21 17:21:32</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1c48e95adbd41550dfee96e5b9961922"/>
+</record_update>

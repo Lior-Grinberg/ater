@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:48:08</sys_created_on>
+        <sys_id>7a10530fdb341c109eacce46b99619dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Collect debug information.x_atern_incident.support_user</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_ui_action display_value="Collect debug information">4bcfcf0fdb341c109eacce46b99619a7</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_7a10530fdb341c109eacce46b99619dc</sys_update_name>
+        <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+        <sys_updated_on>2020-05-20 12:48:08</sys_updated_on>
+        <sys_user_role display_value="x_atern_incident.support_user" name="x_atern_incident.support_user">81e462cfdbb01c109eacce46b9961902</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="be64d3be1b1c09102a67cbbf034bcbbf" sys_domain="global" table="x_atern_incident_remediation_list_configuration" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>display_name</element>
+            <position>0</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9373ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_name</element>
+            <position>1</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1773ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>display_tooltip</element>
+            <position>2</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9773ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_description</element>
+            <position>3</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1b73ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>group</element>
+            <position>4</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9b73ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>order</element>
+            <position>5</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1f73ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_parameter_name</element>
+            <position>6</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9f73ca29db2dc550d203ac1b139619a9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_parameter_sample</element>
+            <position>7</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1373ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>8</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9373ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>visible</element>
+            <position>9</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1773ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>is_permitted_for_service_desk</element>
+            <position>10</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9773ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>is_user_confirmation_required</element>
+            <position>11</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1b73ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>is_snooze_allowed</element>
+            <position>12</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9b73ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>windows_support</element>
+            <position>13</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1f73ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>macos_support</element>
+            <position>14</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9f73ca29db2dc550d203ac1b139619aa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_parameter_is_used</element>
+            <position>15</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1373ca29db2dc550d203ac1b139619ab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_parameter_is_mandatory</element>
+            <position>16</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9373ca29db2dc550d203ac1b139619ab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>17</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1773ca29db2dc550d203ac1b139619ab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>action_parameter_description</element>
+            <position>18</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>9773ca29db2dc550d203ac1b139619ab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>domain</element>
+            <position>19</position>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2022-02-08 10:42:38</sys_created_on>
+            <sys_id>1b73ca29db2dc550d203ac1b139619ab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2022-02-08 10:42:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_domain</element>
+            <position>20</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-03-11 23:04:18</sys_created_on>
+            <sys_id>c68650b71b06c5102a67cbbf034bcb7d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-03-11 23:04:18</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>override_roles_required</element>
+            <position>21</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2024-03-26 17:55:07</sys_created_on>
+            <sys_id>9ac1c9ffdb490a50d26fc359139619fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_atern_incident_remediation_list_configuration" sys_domain="global" view="Default view">be64d3be1b1c09102a67cbbf034bcbbf</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2024-03-26 17:55:07</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_atern_incident_remediation_list_configuration</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>rank</sys_created_by>
+            <sys_created_on>2021-12-12 10:30:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>be64d3be1b1c09102a67cbbf034bcbbf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_atern_incident_remediation_list_configuration</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_be64d3be1b1c09102a67cbbf034bcbbf</sys_update_name>
+            <sys_updated_by>rank</sys_updated_by>
+            <sys_updated_on>2021-12-12 10:30:07</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

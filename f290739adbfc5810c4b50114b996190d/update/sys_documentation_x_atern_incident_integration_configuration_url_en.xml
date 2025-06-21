@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="url" label="URL" language="en" table="x_atern_incident_integration_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>url</element>
+            <help>Enter the URL of your Aternity REST API access. Copy it from the "REST API Access" screen from the Aternity User Menu (for example https://my-odata.aternity.com/aternity.odata/latest).</help>
+            <hint>Enter the URL of your Aternity REST API access. Copy it from the "REST API Access" screen from the Aternity User Menu (for example https://my-odata.aternity.com/aternity.odata/latest).</hint>
+            <label>URL</label>
+            <language>en</language>
+            <name>x_atern_incident_integration_configuration</name>
+            <plural>URLs</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2021-06-05 21:08:06</sys_created_on>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_name>URL</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_integration_configuration_url_en</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2021-06-05 21:15:27</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

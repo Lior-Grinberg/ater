@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="1952c3f9dba07c50c4b50114b9961965" label="Integration Configuration" max_length="40" name="x_atern_incident_integration_configuration" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Incident field in ServiceNow" max_length="32" name="u_select_field" reference="sys_dictionary" reference_qual="name=incident^ORname=task^internal_type=reference^reference=sys_user^active=true^EQ" reference_qual_condition="name=incident^ORname=task^internal_type=reference^reference=sys_user^active=true^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Show Remediation Action" max_length="40" name="show_remediation_action" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Remediation groups collapsed by default" max_length="40" name="remediation_groups_collapsed_by_default" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User attribute in ServiceNow" max_length="32" name="user_field_in_servicenow" reference="sys_dictionary" reference_qual="name=sys_user^internal_type=string^ORinternal_type=email^EQ" reference_qual_condition="name=sys_user^internal_type=string^ORinternal_type=email^EQ" type="reference"/>
+        <element label="Remediation User Name" max_length="40" name="remediation_user_name" type="string"/>
+        <element display="true" hint="Enter the ID of your Aternity account. Copy if from any URL while using Aternity console, as a numeric value that follows BACCT= (for example 21 in case of BACCT=21 without following characters)." label="Account ID" mandatory="true" max_length="40" name="account_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device Overview" max_length="40" name="device_overview" type="boolean"/>
+        <element hint="Enter the URL of your Aternity REST API access. Copy it from the &quot;REST API Access&quot; screen from the Aternity User Menu (for example https://my-odata.aternity.com/aternity.odata/latest)." label="URL" mandatory="true" max_length="1024" name="url" type="url"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="Basic" label="Authentication type" max_length="40" name="authentication_type_data" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Oauth 2.0" sequence="20" value="Oauth 2.0"/>
+                <element inactive_on_update="false" label="Basic" sequence="10" value="Basic"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="new_tab" dependent="ui_display_preferences" dependent_on_field="ui_display_preferences" label="Display Mode" mandatory="true" max_length="40" name="display_mode" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="native_incident" inactive_on_update="false" label="New Browser Tab" value="new_tab"/>
+                <element dependent_value="sow" inactive_on_update="false" label="New Browser Tab" value="new_tab"/>
+                <element dependent_value="native_incident" inactive_on_update="false" label="Embedded Tabs (Incident)" value="embedded_tabs"/>
+                <element dependent_value="both" inactive_on_update="false" label="New Browser Tab / Embedded Tabs (Incident)" value="sow_tab_inc_emb_tab"/>
+                <element dependent_value="sow" inactive_on_update="false" label="Popup Window" value="popup"/>
+                <element dependent_value="both" inactive_on_update="false" label="Popup Window / Embedded Tabs (Incident)" value="popup_sow_emb_tabs"/>
+                <element dependent_value="both" inactive_on_update="false" label="New Browser Tab" value="new_tab"/>
+                <element dependent_value="both" inactive_on_update="false" label="Popup Window (SOW)  / New Browser Tab (Classic View)" value="popup_sow_new_tab"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="OAuth profile" max_length="32" name="oauth_profile" reference="oauth_entity_profile" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="OAuth profile" max_length="32" name="oauth_profile_data" reference="oauth_entity_profile" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Match to user attribute in Aternity" max_length="40" name="match_by" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Username" value="1"/>
+                <element inactive_on_update="false" label="Custom user attribute" value="4"/>
+                <element inactive_on_update="false" label="User email address" value="2"/>
+                <element inactive_on_update="false" label="User full name" value="3"/>
+            </choice>
+        </element>
+        <element attributes="is_legacy_password2=true" label="Password" max_length="255" name="password" type="password2"/>
+        <element label="User name" max_length="40" name="user_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="1" hint="Use this setting to define how to identify the computer that is related to an incident and get its data from Aternity. Binding settings will not apply to incidents that are pushed by Aternity into ServiceNow because they already contain the alerted device name" label="Mapping type" max_length="40" name="select_connection" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="By User" value="2"/>
+                <element inactive_on_update="false" label="By Computer" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Debug mode" max_length="40" name="debug_mode" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Aternity tabs are needed" max_length="40" name="aternity_tabs_are_needed" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="User attribute number" max_length="40" name="user_attribute_number" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="6" sequence="6" value="6"/>
+                <element inactive_on_update="false" label="2" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="9" sequence="9" value="9"/>
+                <element inactive_on_update="false" label="8" sequence="8" value="8"/>
+                <element inactive_on_update="false" label="3" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="1" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="4" sequence="4" value="4"/>
+                <element inactive_on_update="false" label="5" sequence="5" value="5"/>
+                <element inactive_on_update="false" label="7" sequence="7" value="7"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User attribute in ServiceNow int" max_length="32" name="user_attribute_in_servicenow_int" reference="sys_dictionary" reference_qual="name=sys_user^internal_type=string^ORinternal_type=email^EQ" reference_qual_condition="name=sys_user^internal_type=string^ORinternal_type=email^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Software Changes Data" max_length="40" name="software_changes_data" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" default="javascript: new Aternity_meta().getcomputer_class(&quot;cmdb_ci_computer&quot;);" label="Computer CI types in ServiceNow" max_length="1024" name="computer_ci_types_in_servicenow" reference="sys_db_object" reference_qual="javascript:new ComputerDescendantTables().getTables()&#13;&#10;" type="glide_list" use_reference_qualifier="advanced"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="native_incident" label="Display Preferences" mandatory="true" max_length="40" name="ui_display_preferences" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Classic View and Service Operations Workspace" sequence="3" value="both"/>
+                <element inactive_on_update="false" label="Service Operations Workspace only" sequence="2" value="sow"/>
+                <element inactive_on_update="false" label="Classic View only" sequence="1" value="native_incident"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" hint="Enter the roles for which the Aternity tabs will be visible. If empty, the Aternity tabs will load for all users who view Incidents" label="Roles Required to View Aternity Tabs" max_length="4000" name="roles_required" reference="sys_user_role" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Match to user attribute in Aternity int" max_length="40" name="match_by_int" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Custom user attribute" value="4"/>
+                <element inactive_on_update="false" label="User email address" value="2"/>
+                <element inactive_on_update="false" label="User full name" value="3"/>
+                <element inactive_on_update="false" label="Username" value="1"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Device Health Data" max_length="40" name="device_health_data" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Incident field in ServiceNow" max_length="32" name="ci_select_field" reference="sys_dictionary" reference_qual="nameINtask, incident^internal_type=reference^reference=cmdb_ci^ORreference=cmdb_ci_computer^EQ" reference_qual_condition="nameINtask, incident^internal_type=reference^reference=cmdb_ci^ORreference=cmdb_ci_computer^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" default="global" label="Domain" max_length="32" name="sys_domain" read_only="true" type="domain_id"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="Basic" label="Authentication type" max_length="40" name="authentication_type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Basic" sequence="0" value="Basic"/>
+                <element inactive_on_update="false" label="Oauth 2.0" sequence="1" value="Oauth 2.0"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Select the computer field" max_length="32" name="select_the_computer_field" reference="sys_dictionary" reference_qual="name=cmdb_ci^internal_type=string^EQ" reference_qual_condition="name=cmdb_ci^internal_type=string^EQ" type="reference"/>
+        <element attributes="is_legacy_password2=true" label="Remediation Password" max_length="255" name="remediation_password" type="password2"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="User attribute number int" max_length="40" name="user_attribute_number_int" type="string">
+            <choice>
+                <element inactive_on_update="false" label="2" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="8" sequence="7" value="8"/>
+                <element inactive_on_update="false" label="6" sequence="5" value="6"/>
+                <element inactive_on_update="false" label="4" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="9" sequence="8" value="9"/>
+                <element inactive_on_update="false" label="7" sequence="6" value="7"/>
+                <element inactive_on_update="false" label="5" sequence="4" value="5"/>
+                <element inactive_on_update="false" label="1" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="3" sequence="2" value="3"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="state" choice_table="incident" hint="Specify the Incident state(s) in which Aternity data should not be included. If left empty, Aternity tabs will load in any incident state." label="State(s) excluded from Aternity Tabs" max_length="1024" name="state_relevant_with_aternity_tabs" type="glide_list">
+            <choice>
+                <element inactive_on_update="false" label="On Hold" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="Resolved" sequence="3" value="6"/>
+                <element inactive_on_update="false" label="Closed" sequence="4" value="7"/>
+                <element inactive_on_update="false" label="New" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="In Progress" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="Canceled" sequence="5" value="8"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" default="x_atern_incident.Remediation execution" label="Default Remediation Roles" max_length="4000" name="remediation_roles" reference="sys_user_role" type="glide_list"/>
+        <index name="index">
+            <element name="ci_select_field"/>
+        </index>
+        <index name="index2">
+            <element name="oauth_profile"/>
+        </index>
+        <index name="index3">
+            <element name="oauth_profile_data"/>
+        </index>
+        <index name="index4">
+            <element name="select_the_computer_field"/>
+        </index>
+        <index name="index5">
+            <element name="sys_domain"/>
+        </index>
+        <index name="index6">
+            <element name="u_select_field"/>
+        </index>
+        <index name="index7">
+            <element name="user_field_in_servicenow"/>
+        </index>
+    </element>
+</database>

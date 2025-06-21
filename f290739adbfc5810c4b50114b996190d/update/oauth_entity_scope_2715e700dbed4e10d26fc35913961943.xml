@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity_scope">
+    <oauth_entity_scope action="INSERT_OR_UPDATE">
+        <in_default_profile>true</in_default_profile>
+        <name>Aternity scope</name>
+        <oauth_entity display_value="Aternity remediation and odata">7be3af00dbed4e10d26fc359139619cc</oauth_entity>
+        <oauth_entity_scope>api://&lt;enter-data&gt;/.default</oauth_entity_scope>
+        <sys_class_name>oauth_entity_scope</sys_class_name>
+        <sys_created_by>rtalmor@aternity.com</sys_created_by>
+        <sys_created_on>2024-04-09 10:43:28</sys_created_on>
+        <sys_id>2715e700dbed4e10d26fc35913961943</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Aternity scope</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>oauth_entity_scope_2715e700dbed4e10d26fc35913961943</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-03-05 11:27:25</sys_updated_on>
+    </oauth_entity_scope>
+</record_update>

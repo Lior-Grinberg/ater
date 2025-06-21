@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2021-09-02 06:12:30</sys_created_on>
+        <sys_id>163016dedb5efc50c4b50114b996199b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Get all fields.x_atern_incident.global_configurations_user</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_ui_action display_value="Get all fields">2405b420db083010c4b50114b99619d3</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_163016dedb5efc50c4b50114b996199b</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2021-09-02 06:12:30</sys_updated_on>
+        <sys_user_role display_value="x_atern_incident.global_configurations_user" name="x_atern_incident.global_configurations_user">d9127792dbfc5810c4b50114b99619ef</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

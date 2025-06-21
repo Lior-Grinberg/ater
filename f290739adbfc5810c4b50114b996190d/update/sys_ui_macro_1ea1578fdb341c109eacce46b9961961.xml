@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Aternity_Section_UI</name>
+        <scoped_name>x_atern_incident_Aternity_Section_UI</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:56:03</sys_created_on>
+        <sys_id>1ea1578fdb341c109eacce46b9961961</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Aternity_Section_UI</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_macro_1ea1578fdb341c109eacce46b9961961</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2024-08-07 21:12:59</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null" xmlns:html="jelly:html">
+	<g2:evaluate var='jvar_corrId'>
+		var val = current.getValue('correlation_id');
+		val;
+	</g2:evaluate>
+	<g2:evaluate object="true" var="jvar_links">
+		var corr_id = current.getValue('correlation_id');
+		var corr_display = current.getValue('correlation_display')
+		var gr_additional_info = new GlideRecord("x_atern_incident_additional_info"); 
+		gr_additional_info.addQuery("correlation_id", corr_id);
+		gr_additional_info.addQuery("correlation_display", corr_display);
+		gr_additional_info.query();
+		var links = '<h4>See more details in Aternity:</h4>';
+		if (gr_additional_info.next()) {
+			var linkMap = gr_additional_info.links;
+			Object.keys(linkMap).forEach(function(key) {
+				value = linkMap[key];
+				links = links + '<p style="margin: 0;padding: 0;"><a rel="noopener noreferrer nofollow" href="' + value + '" target="_blank">' + key + '</a></p>';
+			});
+		} else {
+			links = links + '\r\nIncident has no Aternity dashboards associated with it';
+		}
+		links;
+	</g2:evaluate>	
+	<g2:no_escape>$[HTMLSAN:jvar_links]</g2:no_escape>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

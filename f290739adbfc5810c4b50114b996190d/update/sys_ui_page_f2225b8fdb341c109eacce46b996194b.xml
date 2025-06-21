@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_atern_incident_Contact_Support_Page.do</endpoint>
+        <html><![CDATA[<html lang="en">
+	<head>
+		<meta charset="utf-8"></meta>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+		<title>Riverbed Support</title>
+		<style>
+			*{ margin: 0; padding: 0;}
+			body{ font-family: Arial, sans-serif; font-weight: regular;}
+            .logo{-ms-interpolation-mode: bicubic;width: 260px; margin-left: 30px;height: 70px;display: block;}
+			img{padding: 10px 0 0 0;}
+			h1{font-weight: 500; font-size: 26px; padding-bottom: 14px; margin-left: 30px; color: #545b5b;}
+			p{font-size: 14px; color: #545b5b; line-height: 1.5;margin-left: 30px; }
+			.cc-accent-line {margin-bottom: 40px; height: 5px !important;width: 100%;-webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.75);box-shadow: 0 2px 3px 0 rgba(0,0,0,0.25);background: #FFF;}
+			a{color: #2980bf;}
+			a:hover{color:#4c638c;}
+		</style>
+	</head>
+	<body>
+		<div class="logo">
+			<img src="riverbed-support.svg" width="340px"/>
+		</div>
+		<div class="cc-accent-line"></div>
+		<h1>Need help?</h1>
+		<p>Contact&#160;<a rel="noopener noreferrer nofollow" href="https://support.riverbed.com" target="_blank">Riverbed support.</a></p>
+		<p>For more information on how to use the Riverbed support site, click<a rel="noopener noreferrer nofollow" href="https://support.riverbed.com/content/support/help.html" target="_blank">$[SP]here.</a></p>
+	</body>
+</html>	
+]]></html>
+        <name>Contact_Support_Page</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 13:00:54</sys_created_on>
+        <sys_id>f2225b8fdb341c109eacce46b996194b</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Contact_Support_Page</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_page_f2225b8fdb341c109eacce46b996194b</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2023-03-15 18:03:19</sys_updated_on>
+    </sys_ui_page>
+</record_update>

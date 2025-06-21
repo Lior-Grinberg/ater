@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>true</active>
+        <client>false</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <format_for_configurable_workspace>false</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Collect debug information</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[var syslog_app_scope = new GlideRecord("syslog_app_scope");
+var logsEncodedQuery = "sys_scope=f290739adbfc5810c4b50114b996190d^sys_created_on>javascript:gs.beginningOfLast7Days()";
+syslog_app_scope.addEncodedQuery(logsEncodedQuery);
+syslog_app_scope.orderByDesc("sys_created_on");
+syslog_app_scope.setLimit(30);
+syslog_app_scope.query();
+var data = {};
+var log = [];
+try {
+    while (syslog_app_scope.next()) {
+        var entry = {};
+        entry.sys_created_on = syslog_app_scope.getValue("sys_created_on");
+        entry.sys_created_by = syslog_app_scope.getValue("sys_created_by");
+        entry.level = syslog_app_scope.getValue("level");
+        if (syslog_app_scope.script_artifact_table) {
+            var script_artifact_table = new GlideRecord(syslog_app_scope.script_artifact_table);
+            script_artifact_table.addQuery("sys_id", syslog_app_scope.script_artifact);
+            script_artifact_table.query();
+            if (script_artifact_table.next()) {
+                entry.script_artifact = script_artifact_table.getValue("name");
+            } else {
+                entry.script_artifact = syslog_app_scope.getValue("script_artifact_table") + ": " + syslog_app_scope.getValue("script_artifact");
+            }
+        } else {
+            entry.script_artifact = syslog_app_scope.getValue("script_artifact_table") + ": " + syslog_app_scope.getValue("script_artifact");
+        }
+        entry.message = syslog_app_scope.getValue("message");
+        log.push(entry);
+    }
+} catch (err) {
+    gs.error("Error getting application log: " + err);
+}
+current.logs = JSON.stringify(log);
+
+// current.tables = getJsonForObjectType("sys_dictionary");
+// current.list_controls = getJsonForObjectType("sys_ui_list_control");
+// current.ui_pages = getJsonForObjectType("sys_ui_page");
+// current.ui_macros = getJsonForObjectType("sys_ui_macro");
+current.business_rules = getJsonForObjectType("sys_script");
+current.script_includes = getJsonForObjectType("sys_script_include");
+current.ui_actions = getJsonForObjectType("sys_ui_action");
+// current.roles = getJsonForObjectType("sys_user_role");
+// current.access_controls = getJsonForObjectType("sys_security_acl");
+// current.menus = getJsonForObjectType("sys_app_application");
+// current.modules = getJsonForObjectType("sys_app_module");
+current.scripted_rests = getJsonForObjectType("sys_ws_definition");
+current.rest_resources = getJsonForObjectType("sys_ws_operation");
+current.transform_maps = getJsonForObjectType("sys_transform_map");
+current.transform_entries = getJsonForObjectType("sys_transform_entry");
+
+current.update();
+
+function getJsonForObjectType(objectType) {
+    try {
+        var gr_objectType = new GlideRecord(objectType);
+        var encodedQuery = "sys_scope=f290739adbfc5810c4b50114b996190d";
+        gr_objectType.addEncodedQuery(encodedQuery);
+        gr_objectType.query();
+        var objects = [];
+        while (gr_objectType.next()) {
+            var entries = [];
+            for (var prop in gr_objectType) {
+                var entry = {};
+                entry.name = prop;
+                entry.value = gr_objectType.getValue(prop);
+                entries.push(entry);
+            }
+            objects.push(entries);
+        }
+        return JSON.stringify(objects);
+    } catch (err) {
+        gs.error("Error getting JSON for object type " + objectType + ": " + err);
+    }
+    return null;
+}]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 12:47:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4bcfcf0fdb341c109eacce46b99619a7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Collect debug information</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_action_4bcfcf0fdb341c109eacce46b99619a7</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2021-09-20 06:04:13</sys_updated_on>
+        <table>x_atern_incident_support</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

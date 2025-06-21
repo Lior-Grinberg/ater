@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_atern_incident.global_configurations_user" name="x_atern_incident.global_configurations_user">d9127792dbfc5810c4b50114b99619ef</contains>
+        <role display_value="x_atern_incident.aternity_user" name="x_atern_incident.aternity_user">99e6768bdbf01c109eacce46b9961946</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>jrassolov@aternity.com</sys_created_by>
+        <sys_created_on>2020-05-20 11:07:57</sys_created_on>
+        <sys_id>ca39f64fdbf01c109eacce46b99619af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_atern_incident.global_configurations_user.x_atern_incident.aternity_user</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_user_role_contains_ca39f64fdbf01c109eacce46b99619af</sys_update_name>
+        <sys_updated_by>jrassolov@aternity.com</sys_updated_by>
+        <sys_updated_on>2020-05-20 11:07:57</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

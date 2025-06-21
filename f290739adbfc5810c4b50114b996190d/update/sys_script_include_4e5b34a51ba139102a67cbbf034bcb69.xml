@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_atern_incident.DeviceDataButton</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>DeviceDataButton</name>
+        <sandbox_callable>true</sandbox_callable>
+        <script><![CDATA[var DeviceDataButton = Class.create();
+DeviceDataButton.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    getDisplay_mode: function() {
+        var inc_sys_id = this.getParameter("sysparm_sys_id");
+		var tablename = this.getdomain(tablename);
+        var domain = this.getdomain(inc_sys_id,tablename);
+        var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+        gr_account.addQuery("active", true);
+        gr_account.addQuery("sys_domain", domain);
+        gr_account.query();
+        if (gr_account.next()) {
+            var display_mode = gr_account.display_mode.toString();
+            if ((display_mode == "popup") || (display_mode == "popup_sow_new_tab") || (display_mode == "popup_sow_emb_tabs"))
+                return "popup";
+        } else {
+            return false;
+        }
+
+    },
+    getdomain: function(inc_sys_id,tablename) {
+        var grinc = new GlideRecordSecure(tablename);
+        grinc.addQuery("sys_id", inc_sys_id);
+        grinc.query();
+        if (grinc.next()) {
+            return grinc.sys_domain;
+        } else
+            return false;
+    },
+    show_user_device_field: function() {
+        var domain = this.getParameter("sysparm_domain");
+        var incId = this.getParameter("sysparm_incid");
+        if (domain == '') {
+            var grincident = new GlideRecordSecure("incident");
+            grincident.addQuery("sys_id", incId);
+            grincident.query();
+            if (grincident.next()) {
+                domain = grincident.sys_domain;
+            }
+        }
+        var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+        gr_account.addQuery("active", true);
+        gr_account.addQuery("sys_domain", domain);
+        gr_account.query();
+        if (gr_account.next()) {
+            var select_connection = gr_account.select_connection.toString();
+            if (select_connection == "2") {
+                //return true;
+                var data_from_user = new Aternity_meta("record", domain);
+                var HaveData = data_from_user.get_device_from_user(incId);
+                
+                if (HaveData == false) {
+                    return false;
+                } else {
+                    var deviceDataJSON = JSON.parse(HaveData);
+                    var first_device = deviceDataJSON[0];
+                    if (grincident.x_atern_incident_user_device == '') {
+                        grincident.setValue("x_atern_incident_user_device", first_device.DEVICE_NAME);
+                        grincident.update();
+                    }
+                    return first_device.DEVICE_NAME;
+                    //return true;
+                }
+            } else {
+                grincident.setValue("x_atern_incident_user_device", "");
+                grincident.update();
+                return false;
+            }
+        } else
+            return false;
+    },
+    show_user_device_msg: function() {
+        var domain = this.getParameter("sysparm_domain");
+        var incId = this.getParameter("sysparm_incid");
+        if (domain == '') {
+            var grincident = new GlideRecordSecure("incident");
+            grincident.addQuery("sys_id", incId);
+            grincident.query();
+            if (grincident.next()) {
+                domain = grincident.sys_domain;
+            }
+        }
+        var gr_account = new GlideRecord("x_atern_incident_integration_configuration");
+        gr_account.addQuery("active", true);
+        gr_account.addQuery("sys_domain", domain);
+        gr_account.query();
+        if (gr_account.next()) {
+            var select_connection = gr_account.select_connection.toString();
+            if (select_connection == "2") {
+                return true;
+            } else {
+                return false;
+            }
+        } else
+            return false;
+    },
+
+
+    type: 'DeviceDataButton'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>chiccom</sys_created_by>
+        <sys_created_on>2023-09-27 18:14:18</sys_created_on>
+        <sys_id>4e5b34a51ba139102a67cbbf034bcb69</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>DeviceDataButton</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_script_include_4e5b34a51ba139102a67cbbf034bcb69</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-12 13:14:47</sys_updated_on>
+    </sys_script_include>
+</record_update>

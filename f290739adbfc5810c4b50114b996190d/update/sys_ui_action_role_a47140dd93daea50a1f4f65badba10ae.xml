@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_action_role">
+    <sys_ui_action_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_ui_action_role</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-06-21 14:30:26</sys_created_on>
+        <sys_id>a47140dd93daea50a1f4f65badba10ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Device Data.itil</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_ui_action display_value="Device Data">f62d117493352690a1f4f65badba1066</sys_ui_action>
+        <sys_update_name>sys_ui_action_role_a47140dd93daea50a1f4f65badba10ae</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-21 14:30:26</sys_updated_on>
+        <sys_user_role display_value="itil" name="itil">282bf1fac6112285017366cb5f867469</sys_user_role>
+    </sys_ui_action_role>
+</record_update>

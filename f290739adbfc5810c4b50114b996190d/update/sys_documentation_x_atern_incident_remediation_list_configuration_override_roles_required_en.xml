@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="override_roles_required" label="Override Roles Required to trigger this Remediation" language="en" table="x_atern_incident_remediation_list_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>override_roles_required</element>
+            <help/>
+            <hint/>
+            <label>Override Roles Required to trigger this Remediation</label>
+            <language>en</language>
+            <name>x_atern_incident_remediation_list_configuration</name>
+            <plural>Override Roles Required to trigger this Remediations</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2024-03-26 17:55:07</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Override Roles Required to trigger this Remediation</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_remediation_list_configuration_override_roles_required_en</sys_update_name>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2024-03-26 17:55:07</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

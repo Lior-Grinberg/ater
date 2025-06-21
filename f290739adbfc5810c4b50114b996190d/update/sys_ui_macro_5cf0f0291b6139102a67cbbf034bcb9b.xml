@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Hide_form_action_container</name>
+        <scoped_name>x_atern_incident_Hide_form_action_container</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>chiccom</sys_created_by>
+        <sys_created_on>2023-09-27 17:15:58</sys_created_on>
+        <sys_id>5cf0f0291b6139102a67cbbf034bcb9b</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Hide_form_action_container</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_macro_5cf0f0291b6139102a67cbbf034bcb9b</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-01 12:19:34</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<style>
+
+    .form_action_button_container  {visibility: hidden}
+    .section_header_content_no_scroll {background-color: white;} 
+
+    .form_body {padding-block-end: 0!important;background-color: white;}
+    body.-polaris .section_header_content_no_scroll { background-color: white !important;} 
+
+    div#fa1459811bdf21105f45ed35624bcb2d {
+    margin-top: 28px;
+}
+.related-links-wrapper{
+    display : none;
+}
+
+.timingDiv {
+display: none!important;
+}
+</style>
+
+
+<script>
+
+    var gu = new GlideURL(); 
+    gu.setFromCurrent();   
+    var isUIPage = gu.getParam("sysparm_uipage");  
+
+    if(isUIPage=='true'){
+
+        document.getElementsByClassName("navbar-default")[0].style.display = "none";
+        document.getElementsByClassName("ui_action_container_overflow")[0].style.visibility = 'hidden';
+        document.getElementsByClassName("navbar_ui_actions")[0].style.visibility = 'hidden'; 
+        //document.getElementsByClassName("form_action_button_container")[0].style.visibility = 'hidden';
+
+    }
+    </script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

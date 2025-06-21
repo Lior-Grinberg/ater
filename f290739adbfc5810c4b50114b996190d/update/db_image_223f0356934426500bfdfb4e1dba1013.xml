@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <format/>
+        <height/>
+        <image>ff4f07d2934426500bfdfb4e1dba10d2</image>
+        <name>x_atern_incident.aternity-logo1.svg</name>
+        <size_bytes>15211</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-03-05 11:41:56</sys_created_on>
+        <sys_id>223f0356934426500bfdfb4e1dba1013</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_atern_incident.aternity-logo1.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_223f0356934426500bfdfb4e1dba1013</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-03-05 11:42:17</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>029f1f26042fede0d007a3df6996602c494115cb6bd8507c3800e7e6f9d59dbc</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>15211</size_bytes>
+        <size_compressed>2940</size_compressed>
+        <state>available</state>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-03-05 11:42:04</sys_created_on>
+        <sys_id>ff4f07d2934426500bfdfb4e1dba10d2</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2025-03-05 11:42:05</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>223f0356934426500bfdfb4e1dba1013</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="ff4f07d2934426500bfdfb4e1dba10d2">ff4f07d2934426500bfdfb4e1dba10d2</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-03-05 11:42:04</sys_created_on>
+        <sys_id>334f07d2934426500bfdfb4e1dba10d3</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>3908</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="ff4f07d2934426500bfdfb4e1dba10d2">ff4f07d2934426500bfdfb4e1dba10d2</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-03-05 11:42:04</sys_created_on>
+        <sys_id>b34f07d2934426500bfdfb4e1dba10d3</sys_id>
+    </sys_attachment_doc>
+</record_update>

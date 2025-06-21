@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="email_client=true,hasWorkflow=true,live_feed=true,all_tables.query_hints=true" audit="true" db_object_id="dd631e6cc891221055906c7518aa2dce" extends="task" label="Incident" max_length="40" name="incident" text_index="true" type="collection">
+        <element label="Remediation state notes" max_length="4000" name="x_atern_incident_remediation_state_notes" type="journal"/>
+        <element attributes="edge_encryption_enabled=true,ref_contributions=x_atern_incident_user_device_data" label="User Device" max_length="100" name="x_atern_incident_user_device" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>write</operation>
+        <source_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2025-06-07 06:19:51</sys_created_on>
+        <sys_id>5c0b4ea493c6e6100bfdfb4e1dba1089</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>interaction</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_scope_privilege_5c0b4ea493c6e6100bfdfb4e1dba1089</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-07 06:19:51</sys_updated_on>
+        <target_name>interaction</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>sys_db_object</target_type>
+    </sys_scope_privilege>
+</record_update>

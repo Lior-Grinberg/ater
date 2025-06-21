@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[choose_device();
+
+function choose_device() {
+    var inc_sys_id = g_form.getUniqueValue();
+    var ga = new GlideAjax('Aternity');
+    ga.addParam('sysparm_name', 'get_deviceArr');
+    ga.addParam('sysparm_inc_sys_id', inc_sys_id);
+	ga.addParam('sysparm_tablename', g_form.getTableName());
+    ga.getXML(setDeviceTable);
+
+
+    function setDeviceTable(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var deviceDataJSON = JSON.parse(answer);
+        var deviceTable = '<table style="border-collapse: collapse; width: 100%;">';
+        deviceTable += '<tr style="background-color: #333; color: #fff;">';
+        deviceTable += '<th style="padding: 10px;">Device Name</th>';
+        deviceTable += '<th style="padding: 10px;">Last Accessed</th>';
+        deviceTable += '<th style="padding: 10px;">Select</th>';
+        deviceTable += '</tr>';
+
+        // Loop through the array of device names and create table rows
+        for (var i = 0; i < deviceDataJSON.length; i++) {
+            var device = deviceDataJSON[i];
+            var bgColor = (i % 2 === 0) ? '#f9f9f9' : '#fff';
+
+            deviceTable += '<tr style="background-color: ' + bgColor + ';">';
+            deviceTable += '<td style="padding: 10px;">' + device.DEVICE_NAME + '</td>';
+            deviceTable += '<td style="padding: 10px;">' + device.TIME_LAST_ACCESSED + '</td>';
+            deviceTable += '<td style="padding: 10px;"><a href="#" style="color: #007bff;" onclick="populateDevice(\'' + device.DEVICE_NAME + '\')">Select</a></td>';
+            deviceTable += '</tr>';
+        }
+
+        deviceTable += '</table>';
+
+        var container = document.getElementById('deviceTableContainer');
+        container.innerHTML = deviceTable;
+    }
+}
+
+function populateDevice(selectedDeviceName) {
+    var inc_sys_id = g_form.getUniqueValue();
+    var ga_userdevice = new GlideAjax('Aternity_user_data');
+    ga_userdevice.addParam('sysparm_name', 'set_user_device');
+    ga_userdevice.addParam('sysparm_inc_sys_id', inc_sys_id);
+	ga_userdevice.addParam('sysparm_tablename', g_form.getTableName());
+    ga_userdevice.addParam('sysparm_inc_user_device', selectedDeviceName);
+    ga_userdevice.getXML(setselectedDeviceNamee);
+
+    function setselectedDeviceNamee(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        if (answer == "true") {
+            getHtml();
+            closeDialog();
+        }
+    }
+}
+
+function closeDialog() {
+    GlideDialogWindow.get().destroy();
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_atern_incident_user_devices.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        .popup-content {    
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+		.btn {
+			margin-right: 5px;
+		}
+		/* #customCloseButton {
+            display: flex;
+            justify-content: center;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ddd;
+        }
+        #customCloseButton button {
+            font-size: 1em; 
+            padding: 5px 15px; 
+            color: #333; 
+            background-color: #e7e7e7;
+            border: 1px solid #ccc;
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        #customCloseButton button:hover {
+            background-color: #d4d4d4; 
+        } */
+		#customCloseButton button {         
+        	display: flex;
+        	justify-content: flex-end; 
+        	padding: 10px;
+        	border-top: 1px solid #ddd;
+			margin-left: auto;
+    		margin-right: 10px;
+    		margin-bottom: 5px;
+			/* margin-top: 5px; */
+        }
+
+	
+
+    </style>
+<div style="border: 1px solid #ddd; background-color: #f9f9f9;">
+    <div class="popup-content"></div>	
+        <div id="deviceTableContainer" style="padding: 10px; background-color: #f9f9f9;"></div>  
+	
+	<div id="customCloseButton">
+            <button onclick="closeDialog()" type="button" class="btn btn-primary">Close</button> 
+    </div>
+<!-- style="font-size: 1.2em; color: #000; background: transparent; border: none;" type="button"-->
+</div>
+
+   
+
+</j:jelly>
+]]></html>
+        <name>user_devices</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-10-30 06:26:38</sys_created_on>
+        <sys_id>4cc89cc41bd2f9102a67cbbf034bcb38</sys_id>
+        <sys_mod_count>96</sys_mod_count>
+        <sys_name>user_devices</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>sys_ui_page_4cc89cc41bd2f9102a67cbbf034bcb38</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2025-06-07 06:19:11</sys_updated_on>
+    </sys_ui_page>
+</record_update>

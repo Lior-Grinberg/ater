@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="state_relevant_with_aternity_tabs" label="State(s) excluded from Aternity Tabs" language="en" table="x_atern_incident_integration_configuration">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>state_relevant_with_aternity_tabs</element>
+            <help/>
+            <hint>Specify the Incident state(s) in which Aternity data should not be included. If left empty, Aternity tabs will load in any incident state.</hint>
+            <label>State(s) excluded from Aternity Tabs</label>
+            <language>en</language>
+            <name>x_atern_incident_integration_configuration</name>
+            <plural>State(s) excluded from Aternity Tabs</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2024-06-12 19:43:19</sys_created_on>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_name>State(s) excluded from Aternity Tabs</sys_name>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_documentation_x_atern_incident_integration_configuration_state_relevant_with_aternity_tabs_en</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2024-06-13 19:25:06</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

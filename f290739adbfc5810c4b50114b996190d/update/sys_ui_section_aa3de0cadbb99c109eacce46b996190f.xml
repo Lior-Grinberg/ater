@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Aternity" section_id="aa3de0cadbb99c109eacce46b996190f" sys_domain="global" table="incident" version="3" view="aternity">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_atern_incident_Aternity_Section_UI.xml</element>
+            <position>0</position>
+            <sys_created_by>iperry@aternity.com</sys_created_by>
+            <sys_created_on>2020-07-05 15:25:08</sys_created_on>
+            <sys_id>614da8cadbb99c109eacce46b9961991</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter display_value="Aternity Section Formatter">c671178fdb341c109eacce46b9961908</sys_ui_formatter>
+            <sys_ui_section caption="Aternity" display_value="Aternity" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">aa3de0cadbb99c109eacce46b996190f</sys_ui_section>
+            <sys_updated_by>iperry@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-07-05 15:25:08</sys_updated_on>
+            <sys_user/>
+            <type>formatter</type>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Aternity</caption>
+            <header>false</header>
+            <name>incident</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>iperry@aternity.com</sys_created_by>
+            <sys_created_on>2020-07-05 15:24:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aa3de0cadbb99c109eacce46b996190f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>incident</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_aa3de0cadbb99c109eacce46b996190f</sys_update_name>
+            <sys_updated_by>iperry@aternity.com</sys_updated_by>
+            <sys_updated_on>2020-07-05 15:24:56</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Aternity" name="aternity">9aa308d18396221053d1f696feaad3d1</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

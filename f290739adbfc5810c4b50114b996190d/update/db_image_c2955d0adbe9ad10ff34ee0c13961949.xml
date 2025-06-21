@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <format/>
+        <height/>
+        <image>6434da9e1b21e5102a67cbbf034bcb78</image>
+        <name>poweredby-alluvio_aternity.svg</name>
+        <size_bytes>7065</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-03-14 13:01:30</sys_created_on>
+        <sys_id>c2955d0adbe9ad10ff34ee0c13961949</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>poweredby-alluvio_aternity.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_c2955d0adbe9ad10ff34ee0c13961949</sys_update_name>
+        <sys_updated_by>liorg</sys_updated_by>
+        <sys_updated_on>2023-03-15 12:13:23</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>e66bbfc21882cc658cd7057249a64cfe1ab35f752d63e43abe12b07778a38c8c</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>7065</size_bytes>
+        <size_compressed>2474</size_compressed>
+        <state>available</state>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-03-15 12:13:22</sys_created_on>
+        <sys_id>6434da9e1b21e5102a67cbbf034bcb78</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-03-15 12:13:23</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>c2955d0adbe9ad10ff34ee0c13961949</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="6434da9e1b21e5102a67cbbf034bcb78">6434da9e1b21e5102a67cbbf034bcb78</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-03-15 12:13:22</sys_created_on>
+        <sys_id>a434da9e1b21e5102a67cbbf034bcb78</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>3288</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="6434da9e1b21e5102a67cbbf034bcb78">6434da9e1b21e5102a67cbbf034bcb78</sys_attachment>
+        <sys_created_by>liorg</sys_created_by>
+        <sys_created_on>2023-03-15 12:13:22</sys_created_on>
+        <sys_id>e8349e921b61e5102a67cbbf034bcb90</sys_id>
+    </sys_attachment_doc>
+</record_update>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image>de8a02cddb8f3010c4b50114b99619ed</image>
+        <name>macOS.svg</name>
+        <size_bytes>1472</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 15:19:20</sys_created_on>
+        <sys_id>867a8e8ddb8f3010c4b50114b9961902</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>macOS.svg</sys_name>
+        <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+        <sys_update_name>db_image_867a8e8ddb8f3010c4b50114b9961902</sys_update_name>
+        <sys_updated_by>moran</sys_updated_by>
+        <sys_updated_on>2021-10-05 15:19:28</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>997c9eb9772e26b394fe15ada367f3f03f0ac496dc470d9389608eb7569c2afc</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1472</size_bytes>
+        <size_compressed>825</size_compressed>
+        <state>available</state>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 15:19:28</sys_created_on>
+        <sys_id>de8a02cddb8f3010c4b50114b99619ed</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-10-05 15:19:28</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>867a8e8ddb8f3010c4b50114b9961902</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="de8a02cddb8f3010c4b50114b99619ed">de8a02cddb8f3010c4b50114b99619ed</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 15:19:28</sys_created_on>
+        <sys_id>128a02cddb8f3010c4b50114b99619ee</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>nVTbittIEH12IP/Q2/sU6C71RZIlx94wM1kygQQCAb8GT1uxRLSykeTLZNl/31Mtz7Ab8pQXVau6LuecKnr55vJXK05VPzT7biUtGSmqLuy3TbdbyeP4VRfyzR8vXyx/01q8q7qq34z7fiFutvuHSrxv2+MwRpdwngx5JT6v34k/L4d9P4pP7XGn33eConM9NVmInIwRt8em3QrzSgituf5w2v0XhpWi2a7kh81j1X/BD1B2w0rW43hYJMn5fKazp32/S5wxJkHyNWRxaZvu288CbVmWSbxF6Eqaw0WKx8m+fDETp6Y63+75QhiROZGlUgzjY1utZNVtHtpKP2zCt12/P3bbRVedxXPc69h6MRw2AcGHvhqq/lTJSIoLiPHxgIuxuoxJGAa+mNEwmr+/Nm27+D27m6e3xet/Jq+9em/dzc3b9Mnrrl7jTWYy9i6TWJub7Ljg8rAZaxHazQCVUFwKqPfRFZiILykP2tBcGW0pV4asdvDDBl1O7pzm2lOu7RyXnsrWUIngIiCIA1WhUnxtQanylKHhLBgE8qXXGWWwuc6prHURsy2ybbDktDXkkOy5dqq4vnPk7i3NT0DmazcnfweguUoRpSLkFK3VM/jv4qP1yLUIJnfKyHL/GiTc2vrvMvmJAPYqQAlo6BsQXEQUubIWhrE4S+m9t61mhIAaTNSGlfIAznZOWfBU4MzQ5yCVcj6LlbbQg4oohY7Ikcs0ONe6eMijfpPYYMVaU4lCrrYl2TVA3DNCEPQ5EiCvY1p2HanCwPHEL475R5puopkyO59R0Wobx6Z5Wk7DqRkuoKQMJeIEr0h/slnLE7TcGJMLjlJtS+ZYakwGFF203HuG6jE2u/MujjxTjsmVyhnFRFhKVsXWBYOYdE01B2KpYHOFHQm8E9PGgKBnLfmQ4hArFE+6YsciTscj5AqK95MPIa4zF8fXxWHZMC0aBqTKqH6mbEqutXF+Ja+AZwF4bbH3bEEGzWOrO49YrJvyce3maPas6nUEs2VfhZEfD86Kr4f18n/DODfbsV5JIJKirppdPa5khp8f8tHrF/KXCe/A0xdvHuy/DiySecAFAAA=</data>
+        <length>1088</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="de8a02cddb8f3010c4b50114b99619ed">de8a02cddb8f3010c4b50114b99619ed</sys_attachment>
+        <sys_created_by>moran</sys_created_by>
+        <sys_created_on>2021-10-05 15:19:28</sys_created_on>
+        <sys_id>928a02cddb8f3010c4b50114b99619ee</sys_id>
+    </sys_attachment_doc>
+</record_update>

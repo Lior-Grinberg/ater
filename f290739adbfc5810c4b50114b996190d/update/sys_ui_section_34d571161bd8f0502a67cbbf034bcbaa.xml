@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Device Overview" section_id="34d571161bd8f0502a67cbbf034bcbaa" sys_domain="global" table="incident" version="3" view="aternity">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>x_atern_incident_Aternity_IncidentSection_UI.xml</element>
+            <position>0</position>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2021-05-25 18:09:11</sys_created_on>
+            <sys_id>e3e5fd161bd8f0502a67cbbf034bcb8a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter display_value="Aternity Incident Section Formatter">d731c5d1db332810c4b50114b996195c</sys_ui_formatter>
+            <sys_ui_section caption="Device Overview" display_value="Device Overview" name="incident" sys_domain="global" view="9aa308d18396221053d1f696feaad3d1">34d571161bd8f0502a67cbbf034bcbaa</sys_ui_section>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2021-05-25 18:09:11</sys_updated_on>
+            <sys_user/>
+            <type>formatter</type>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Device Overview</caption>
+            <header>false</header>
+            <name>incident</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2021-05-25 18:08:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>34d571161bd8f0502a67cbbf034bcbaa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>incident</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_34d571161bd8f0502a67cbbf034bcbaa</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2021-05-25 18:08:44</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Aternity" name="aternity">9aa308d18396221053d1f696feaad3d1</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

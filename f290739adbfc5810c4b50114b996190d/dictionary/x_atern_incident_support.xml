@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b6946acfdbb01c109eacce46b996197c" label="Support" max_length="40" name="x_atern_incident_support" type="collection">
+        <element label="Business Rules" max_length="65000" name="business_rules" type="string"/>
+        <element label="Roles" max_length="16000" name="roles" type="string"/>
+        <element label="Logs" max_length="65000" name="logs" type="string"/>
+        <element label="Tables" max_length="65000" name="tables" type="string"/>
+        <element label="UI Macros" max_length="4000" name="ui_macros" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Remediation Actions Inventory" max_length="4000" name="remediation_actions_inventory" type="string"/>
+        <element label="User data in Aternity" max_length="4000" name="user_data_in_aternity" type="string"/>
+        <element label="Modules" max_length="16000" name="modules" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Company" mandatory="true" max_length="32" name="company" reference="core_company" reference_qual="customer=true^EQ" reference_qual_condition="customer=true^EQ" type="reference"/>
+        <element label="Scripted RESTs" max_length="4000" name="scripted_rests" type="string"/>
+        <element label="Menus" max_length="8000" name="menus" type="string"/>
+        <element label="Transform Entries" max_length="65000" name="transform_entries" type="string"/>
+        <element label="UI Pages" max_length="65000" name="ui_pages" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Software data" max_length="4000" name="software_data" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device Inventory" max_length="4000" name="device_inventory" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Meta data" max_length="4000" name="meta_data" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Health data" max_length="4000" name="health_data" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element label="Description" max_length="1000" name="description" type="string"/>
+        <element label="Script Includes" max_length="16000" name="script_includes" type="string"/>
+        <element label="Transform Maps" max_length="8000" name="transform_maps" type="string"/>
+        <element active="false" label="Access Controls" max_length="65000" name="access_controls" type="string"/>
+        <element label="REST resources" max_length="16000" name="rest_resources" type="string"/>
+        <element label="List Controls" max_length="8000" name="list_controls" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <element label="UI Actions" max_length="32000" name="ui_actions" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device name" max_length="100" name="device_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Connection test" max_length="1000" name="connection_test" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Remediation connection test" max_length="1000" name="remediation_connection_test" type="string"/>
+        <index name="index">
+            <element name="company"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

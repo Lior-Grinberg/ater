@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="API Log" section_id="a82abcb3dbfd8910dfee96e5b99619d2" sys_domain="global" table="x_atern_incident_support" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>device_name</element>
+            <position>0</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>ba955ff91b6751102a67cbbf034bcb7c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>user_data_in_aternity</element>
+            <position>1</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>3e955ff91b6751102a67cbbf034bcb7c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>health_data</element>
+            <position>2</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>be955ff91b6751102a67cbbf034bcb7c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>software_data</element>
+            <position>3</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>32955ff91b6751102a67cbbf034bcb7d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>device_inventory</element>
+            <position>4</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>b2955ff91b6751102a67cbbf034bcb7d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>meta_data</element>
+            <position>5</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>36955ff91b6751102a67cbbf034bcb7d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>remediation_actions_inventory</element>
+            <position>6</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>be95933d1b6751102a67cbbf034bcb8a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>remediation_connection_test</element>
+            <position>7</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>3295933d1b6751102a67cbbf034bcb8b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>connection_test</element>
+            <position>8</position>
+            <sys_created_by>chiccom</sys_created_by>
+            <sys_created_on>2022-12-04 17:36:36</sys_created_on>
+            <sys_id>b295933d1b6751102a67cbbf034bcb8b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="API Log" display_value="API Log" name="x_atern_incident_support" sys_domain="global" view="Default view">a82abcb3dbfd8910dfee96e5b99619d2</sys_ui_section>
+            <sys_updated_by>chiccom</sys_updated_by>
+            <sys_updated_on>2022-12-04 17:36:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>API Log</caption>
+            <header>false</header>
+            <name>x_atern_incident_support</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>liorg</sys_created_by>
+            <sys_created_on>2022-02-27 15:24:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a82abcb3dbfd8910dfee96e5b99619d2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_atern_incident_support</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Aternity Incident Integration" source="x_atern_incident">f290739adbfc5810c4b50114b996190d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Aternity Incident Integration">f290739adbfc5810c4b50114b996190d</sys_scope>
+            <sys_update_name>sys_ui_section_a82abcb3dbfd8910dfee96e5b99619d2</sys_update_name>
+            <sys_updated_by>liorg</sys_updated_by>
+            <sys_updated_on>2022-02-27 15:24:09</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>
